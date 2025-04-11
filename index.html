@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merch Amazon Research Tool</title>
+    <style>
+        :root {
+            --primary-color: #232f3e;
+            --secondary-color: #ff9900;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 0.5rem;
+        }
+        
+        .logo-highlight {
+            color: var(--secondary-color);
+        }
+        
+        .search-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .search-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .search-form {
+                flex-direction: row;
+            }
+        }
+        
+        .search-input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .search-button {
+            padding: 0.8rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .search-button:hover {
+            background-color: #e68a00;
+        }
+        
+        .results-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .results-count {
+            font-weight: bold;
+            color: var(--dark-color);
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .filter-btn {
+            padding: 0.4rem 0.8rem;
+            background-color: #eee;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #f5f5f5;
+        }
+        
+        .product-info {
+            padding: 1rem;
+        }
+        
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .product-bsr {
+            font-weight: 500;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+        
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .page-btn:hover, .page-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--secondary-color);
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        footer {
+            text-align: center;
+            padding: 1.5rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>Merch <span class="logo-highlight">Research</span> Tool</h1>
+            </div>
+            <p>Find the best Merch By Amazon opportunities</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="search-container">
+            <form id="searchForm" class="search-form">
+                <input type="text" id="searchInput" class="search-input" placeholder="Enter keywords or leave blank to see all Merch By Amazon shirts...">
+                <button type="submit" class="search-button">Search Merch</button>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading results...</p>
+        </div>
+        
+        <div class="results-container" id="resultsContainer" style="display: none;">
+            <div class="results-header">
+                <h2>Search Results</h2>
+                <span class="results-count" id="resultsCount">0 items found</span>
+            </div>
+            
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="premium">Premium</button>
+                <button class="filter-btn" data-filter="standard">Standard</button>
+                <button class="filter-btn" data-filter="bestseller">Best Sellers</button>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be added here dynamically -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">5</button>
+                <button class="page-btn">Next →</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>© 2025 Merch Research Tool. Created for personal research purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const loading = document.getElementById('loading');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const resultsCount = document.getElementById('resultsCount');
+            const productsGrid = document.getElementById('productsGrid');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const paginationButtons = document.querySelectorAll('.page-btn');
+            
+            // Sample data - in a real app, this would come from an API
+            const sampleProducts = [
+                {
+                    id: 1,
+                    title: "Funny Cat T-Shirt Design",
+                    price: 19.99,
+                    bsr: 45689,
+                    tier: "premium",
+                    rating: 4.5,
+                    reviews: 127
+                },
+                {
+                    id: 2,
+                    title: "Dog Lover Shirt",
+                    price: 17.99,
+                    bsr: 23451,
+                    tier: "standard",
+                    rating: 4.7,
+                    reviews: 89
+                },
+                {
+                    id: 3,
+                    title: "Funny Saying Tee for Men",
+                    price: 18.99,
+                    bsr: 12345,
+                    tier: "premium",
+                    rating: 4.2,
+                    reviews: 56
+                },
+                {
+                    id: 4,
+                    title: "Mother's Day Special T-Shirt",
+                    price: 21.99,
+                    bsr: 5678,
+                    tier: "premium",
+                    rating: 4.8,
+                    reviews: 209
+                },
+                {
+                    id: 5,
+                    title: "Father's Day Tee",
+                    price: 20.99,
+                    bsr: 8956,
+                    tier: "standard",
+                    rating: 4.6,
+                    reviews: 167
+                },
+                {
+                    id: 6,
+                    title: "Cute Animal Design Shirt",
+                    price: 16.99,
+                    bsr: 34567,
+                    tier: "standard",
+                    rating: 4.3,
+                    reviews: 78
+                },
+                {
+                    id: 7,
+                    title: "Gym Motivation T-Shirt",
+                    price: 19.99,
+                    bsr: 15678,
+                    tier: "premium",
+                    rating: 4.4,
+                    reviews: 92
+                },
+                {
+                    id: 8,
+                    title: "Funny Programmer Shirt",
+                    price: 18.99,
+                    bsr: 28976,
+                    tier: "standard",
+                    rating: 4.6,
+                    reviews: 105
+                }
+            ];
+            
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const searchTerm = searchInput.value.trim();
+                
+                // Show loading
+                loading.style.display = 'block';
+                resultsContainer.style.display = 'none';
+                
+                // Simulate API call
+                setTimeout(function() {
+                    displayResults(searchTerm);
+                    loading.style.display = 'none';
+                    resultsContainer.style.display = 'block';
+                }, 800);
+            });
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Update active state
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Filter products
+                    const filter = this.dataset.filter;
+                    filterProducts(filter);
+                });
+            });
+            
+            paginationButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    paginationButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // In a real app, you would fetch the next page of results
+                    // Here we just show the same results
+                    window.scrollTo({ top: resultsContainer.offsetTop - 20, behavior: 'smooth' });
+                });
+            });
+            
+            function displayResults(searchTerm) {
+                // Clear previous results
+                productsGrid.innerHTML = '';
+                
+                // In a real app, you would filter based on the search term
+                // Here we just show all sample products
+                let filteredProducts = sampleProducts;
+                if (searchTerm) {
+                    filteredProducts = sampleProducts.filter(product => 
+                        product.title.toLowerCase().includes(searchTerm.toLowerCase())
+                    );
+                }
+                
+                // Update result count
+                resultsCount.textContent = `${filteredProducts.length} items found`;
+                
+                // Generate product cards
+                filteredProducts.forEach(product => {
+                    const card = createProductCard(product);
+                    productsGrid.appendChild(card);
+                });
+            }
+            
+            function createProductCard(product) {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.dataset.tier = product.tier;
+                card.dataset.bsr = product.bsr;
+                
+                card.innerHTML = `
+                    <img src="/api/placeholder/250/200" alt="${product.title}" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-price">$${product.price.toFixed(2)}</p>
+                        <div class="product-meta">
+                            <span class="product-bsr">BSR: #${product.bsr.toLocaleString()}</span>
+                            <span class="product-rating">★ ${product.rating} (${product.reviews})</span>
+                        </div>
+                    </div>
+                `;
+                
+                return card;
+            }
+            
+            function filterProducts(filter) {
+                const cards = document.querySelectorAll('.product-card');
+                
+                cards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                    } else if (filter === 'bestseller') {
+                        const bsr = parseInt(card.dataset.bsr);
+                        card.style.display = bsr < 20000 ? 'block' : 'none';
+                    } else {
+                        card.style.display = card.dataset.tier === filter ? 'block' : 'none';
+                    }
+                });
+                
+                // Update count
+                const visibleCards = document.querySelectorAll('.product-card[style="display: block"]');
+                resultsCount.textContent = `${visibleCards.length} items found`;
+            }
+            
+            // Display all products on initial load
+            setTimeout(function() {
+                displayResults('');
+                loading.style.display = 'none';
+                resultsContainer.style.display = 'block';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
