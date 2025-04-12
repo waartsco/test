@@ -19,19 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
     
-    // Define Amazon categories structure
-    const amazonCategories = {
-        'fashion': [
-            { value: '7141123011', text: 'Men\'s Clothing' },
-            { value: '1040660', text: 'Women\'s Clothing' },
-            { value: '9056922011', text: 'Women\'s Novelty Tops & Tees' },
-            { value: '12035955011', text: 'Men\'s Novelty T-Shirts' },
-            { value: '1040658', text: 'Boys\' Clothing' },
-            { value: '1040664', text: 'Girls\' Clothing' }
-        ],
-        'fashion-novelty': [] // No specific categories for Novelty & More
-    };
-    
     // Product type hidden keyword mappings
     const productTypeKeywords = {
         'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
@@ -126,6 +113,19 @@ const marketplaceConfig = {
         reviewsFilter: 'p_72%3A11192170011'
     }
 };
+
+    // Define Amazon categories structure
+    const amazonCategories = {
+        'fashion': [
+            { value: '7141123011', text: 'Men\'s Clothing' },
+            { value: '1040660', text: 'Women\'s Clothing' },
+            { value: '9056922011', text: 'Women\'s Novelty Tops & Tees' },
+            { value: '12035955011', text: 'Men\'s Novelty T-Shirts' },
+            { value: '1040658', text: 'Boys\' Clothing' },
+            { value: '1040664', text: 'Girls\' Clothing' }
+        ],
+        'fashion-novelty': [] // No specific categories for Novelty & More
+    };
 
 // Update time filter radio values based on marketplace
 function updateMarketplaceFilters() {
