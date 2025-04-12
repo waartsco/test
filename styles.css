@@ -63,34 +63,47 @@ body {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-button:hover {
-    background-color: var(--hover-color);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    height: 50px; /* Fixed height for more presence */
+    font-size: 1rem;
 }
 
 .plz_hinweis {
     margin-top: 10px;
-    padding: 10px 15px;
+    padding: 8px 15px;
     background-color: var(--light-color);
     border: 1px solid var(--border-color);
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     transition: all 0.2s ease;
-}
-
-.plz_hinweis:hover {
-    background-color: #e9ecef;
+    display: inline-block;
+    float: right;
+    max-width: 100%;
 }
 
 .copy_area {
     cursor: pointer;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 2px 0;
+    white-space: nowrap;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Make sure the ZIP info is readable on small screens */
+@media (max-width: 768px) {
+    .plz_hinweis {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+    
+    .copy_area {
+        justify-content: space-between;
+    }
 }
 
 .copy_me {
@@ -104,6 +117,15 @@ body {
     font-weight: bold;
     margin-left: 10px;
     animation: fadeIn 0.3s ease;
+}
+
+.plz_hinweis:hover {
+    background-color: #e9ecef;
+}
+.search-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 @keyframes fadeIn {
