@@ -9,10 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const copyZipBtn = document.querySelector('.copy_area');
     const copyMessage = document.querySelector('.copied-message');
     const productTypeSelect = document.getElementById('productTypeSelect');
-    const departmentCategoryBox = document.getElementById('departmentCategoryBox');
     const departmentSelect = document.getElementById('department');
     const categorySelect = document.getElementById('category');
     const basicTeesCheckbox = document.getElementById('filterBasicTees');
+    const cottonCheckbox = document.getElementById('filterCotton');
+    const hiddenKeywordsContainer = document.getElementById('hiddenKeywordsContainer');
+    const filterBasicTeesContainer = document.getElementById('filterBasicTeesContainer');
+    const filterCottonContainer = document.getElementById('filterCottonContainer');
+    const minPriceInput = document.getElementById('minPrice');
+    const maxPriceInput = document.getElementById('maxPrice');
     
     // Define Amazon categories structure
     const amazonCategories = {
@@ -28,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
     };
     
     // Product type hidden keyword mappings
-    // You can add more product type specific filters here
     const productTypeKeywords = {
         'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
         'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
@@ -41,7 +45,6 @@ document.addEventListener('DOMContentLoaded', function() {
         'case': 'Slim-Fitting+Protective+Case+for+Phone',
         'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
         'totebag': 'Tote+Bag%2C+Double-sided+print'
-        // Add more as needed
     };
     
     // ZIP codes for different marketplaces
@@ -69,8 +72,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Initialize product type specific settings
         updateProductTypeSettings();
         
-        // Initialize department/category box visibility
-        toggleDepartmentCategoryBox();
+        // Set up department/category box visibility and state
+        updateDepartmentCategoryState();
+        
+        // Set up price input constraints
+        setupPriceInputs();
+        
+        // Hide specific hidden keywords checkboxes
+        hideProductSpecificFilters();
     }
     
     function setupEventListeners() {
@@ -89,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Product type change
         productTypeSelect.addEventListener('change', function() {
             updateProductTypeSettings();
-            toggleDepartmentCategoryBox();
+            updateDepartmentCategoryState();
         });
         
         // Department change
@@ -99,6 +108,33 @@ document.addEventListener('DOMContentLoaded', function() {
         const formElements = document.querySelectorAll('input, select');
         formElements.forEach(element => {
             element.addEventListener('change', updateUrlIfVisible);
+        });
+    }
+    
+    function hideProductSpecificFilters() {
+        // Hide the Basic Tees and Cotton filter options
+        if (filterBasicTeesContainer) {
+            filterBasicTeesContainer.style.display = 'none';
+        }
+        
+        if (filterCottonContainer) {
+            filterCottonContainer.style.display = 'none';
+        }
+    }
+    
+    function setupPriceInputs() {
+        // Add input constraints for price fields
+        [minPriceInput, maxPriceInput].forEach(input => {
+            // Only allow digits and limit to 2 characters
+            input.addEventListener('input', function(e) {
+                // Remove any non-digit characters
+                this.value = this.value.replace(/\D/g, '');
+                
+                // Limit to 2 digits
+                if (this.value.length > 2) {
+                    this.value = this.value.slice(0, 2);
+                }
+            });
         });
     }
     
@@ -153,15 +189,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    function toggleDepartmentCategoryBox() {
+    function updateDepartmentCategoryState() {
         const isCustom = productTypeSelect.value === 'custom';
-        departmentCategoryBox.style.display = isCustom ? 'block' : 'none';
         
-        // Reset and disable category select if not custom
-        if (!isCustom) {
-            departmentSelect.value = "";
-            categorySelect.innerHTML = '<option value="">No Category Filter</option>';
-            categorySelect.disabled = true;
+        // Make fields disabled but not hidden when "Custom" is not selected
+        departmentSelect.disabled = !isCustom;
+        categorySelect.disabled = !isCustom || departmentSelect.value === "";
+        
+        // Apply visual indication of disabled state
+        const departmentCategoryBox = document.getElementById('departmentCategoryBox');
+        if (isCustom) {
+            departmentCategoryBox.classList.remove('disabled-filter-box');
+        } else {
+            departmentCategoryBox.classList.add('disabled-filter-box');
         }
     }
     
@@ -178,7 +218,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Enable category and add options based on department
-        categorySelect.disabled = false;
+        const isCustom = productTypeSelect.value === 'custom';
+        categorySelect.disabled = !isCustom;
+        
         const categories = amazonCategories[department] || [];
         
         categories.forEach(category => {
@@ -192,20 +234,22 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateProductTypeSettings() {
         const productType = productTypeSelect.value;
         
-        // Auto-check "Basic Tees Only" for t-shirts
+        // Automatically handle product type specific settings based on selection
+        // These are now hidden from UI but still functional in the logic
+        
+        // Basic Tees filter is auto-checked for t-shirts
         if (productType === 'tshirt') {
             basicTeesCheckbox.checked = true;
         } else {
             basicTeesCheckbox.checked = false;
         }
         
-        // Set custom hidden keywords based on product type
-        const customHiddenKeywordsField = document.getElementById('customHiddenKeywords');
-        // Clear existing custom hidden keywords
-        customHiddenKeywordsField.value = '';
-        
-        // Set product-type specific keywords if needed
-        // You could implement additional logic here
+        // 100% Cotton filter is auto-checked for specific product types
+        if (['tshirt', 'longsleeve', 'vneck', 'raglan', 'tanktop'].includes(productType)) {
+            cottonCheckbox.checked = true;
+        } else {
+            cottonCheckbox.checked = false;
+        }
     }
     
     function generateAmazonUrl() {
@@ -263,7 +307,13 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add hidden keywords filters
         let hiddenKeywords = [];
         
-        // Product type specific keywords (for t-shirt, auto-select "Basic Tees Only")
+        // First add any custom user-specified hidden keywords (priority #1)
+        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
+        if (customKeywords) {
+            hiddenKeywords.push(customKeywords);
+        }
+        
+        // Product type specific keywords (applied based on product selection)
         const productType = productTypeSelect.value;
         if (productType !== 'custom' && productTypeKeywords[productType]) {
             if (productType === 'tshirt' && basicTeesCheckbox.checked) {
@@ -271,18 +321,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Get all checked preset hidden keywords
-        document.querySelectorAll('.hidden-keyword-preset:checked').forEach(checkbox => {
-            // Skip filterBasicTees if already added product specific keywords for tshirt
-            if (!(checkbox.id === 'filterBasicTees' && productType === 'tshirt')) {
-                hiddenKeywords.push(checkbox.value);
-            }
-        });
-        
-        // Add custom hidden keywords if provided
-        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
-        if (customKeywords) {
-            hiddenKeywords.push(customKeywords);
+        // Add 100% Cotton filter if applicable
+        if (cottonCheckbox.checked) {
+            hiddenKeywords.push(cottonCheckbox.value);
         }
         
         // Add exclude brands filter - always add this at the end if selected
