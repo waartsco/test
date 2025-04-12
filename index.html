@@ -154,31 +154,15 @@
             <div class="filter-box">
                 <div class="filter-title">Sort Order</div>
                 <select id="sortOrder" class="form-control">
-                    <option value="">Default</option>
-                    <option value="most-purchased-rank">Most Purchased (Best Sellers)</option>
-                    <option value="exact-aware-popularity-rank">Best Seller Sort</option>
-                    <option value="date-desc-rank">Newest Arrivals</option>
-                    <option value="date-asc-rank">Oldest First</option>
-                    <option value="review-rank">Top Rated</option>
-                    <option value="price-desc-rank">Price High to Low</option>
-                    <option value="price-asc-rank">Price Low to High</option>
-                    <option value="relevancerank">Relevance</option>
-                    <option value="relevanceblender">Relevance Blender</option>
-                    <option value="featured-rank">Featured</option>
-                    <option value="most-wished-for-rank">Most Wished For</option>
+                    <!-- Options will be dynamically populated based on marketplace -->
                 </select>
             </div>
             
             <div class="filter-box" id="departmentCategoryBox">
     <div class="filter-title">Department & Category</div>
     <select id="department" class="form-control mb-2">
-        <option value="">All Departments</option>
-        <option value="fashion-novelty">Novelty & More</option>
-        <option value="fashion">Clothing, Shoes & Jewelry</option>
-        <!-- 
-        You can add more departments here later. 
-        Format: <option value="department-code">Department Name</option>
-        -->
+    <option value="">All Departments</option>
+        <!-- Additional departments will be populated dynamically -->
     </select>
     <select id="category" class="form-control" disabled>
         <option value="">No Category Filter</option>
