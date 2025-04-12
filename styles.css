@@ -46,7 +46,7 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-    padding: 1.5rem;
+    padding: 0.5rem 15px;
     margin-bottom: 1rem;
     border: 1px solid var(--border-color);
 }
@@ -145,7 +145,7 @@ body {
     background-color: white;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-    padding: 15px;
+    padding: 0.5rem 15px;
     border: 1px solid var(--border-color);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -205,7 +205,7 @@ select.form-control {
     background-color: white;
     border-radius: 10px;
     box-shadow: var(--box-shadow);
-    padding: 1.5rem;
+    padding: 0.5rem 15px;
     margin-top: 1rem;
     border: 1px solid var(--border-color);
     animation: slideUp 0.3s ease;
