@@ -18,6 +18,43 @@ document.addEventListener('DOMContentLoaded', function() {
     const filterCottonContainer = document.getElementById('filterCottonContainer');
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
+
+    // Add this function to script.js
+function populateDepartments() {
+    const marketplace = marketplaceSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
+    
+    // Clear current options
+    departmentSelect.innerHTML = '<option value="">All Departments</option>';
+    
+    // Add 'fashion' department which is common across all marketplaces
+    const fashionOption = document.createElement('option');
+    fashionOption.value = 'fashion';
+    fashionOption.textContent = 'Fashion';
+    departmentSelect.appendChild(fashionOption);
+    
+    // Other departments could be added similarly if needed
+}
+
+    function updateProductTypeSpecificFilters() {
+    const productType = productTypeSelect.value;
+    const marketplace = marketplaceSelect.value;
+    
+    // Hide all product-specific filters initially
+    hideProductSpecificFilters();
+    
+    // Only show relevant product-specific filters based on product type
+    if (['tshirt', 'premtshirt', 'longsleeve', 'raglan', 'tanktop'].includes(productType)) {
+        // Show t-shirt related filters
+        if (filterBasicTeesContainer) {
+            filterBasicTeesContainer.style.display = productType === 'tshirt' ? 'block' : 'none';
+        }
+        
+        if (filterCottonContainer) {
+            filterCottonContainer.style.display = 'block';
+        }
+    }
+}
     
     // ZIP codes for different marketplaces
     const zipCodes = {
@@ -320,6 +357,25 @@ function updateMarketplaceFilters() {
     updateCategoryOptions();
 }
 
+    function updateSortOrderOptions() {
+    const marketplace = marketplaceSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
+    const sortOrderSelect = document.getElementById('sortOrder');
+    
+    // Clear existing options
+    sortOrderSelect.innerHTML = '';
+    
+    // Add new options based on marketplace
+    if (config.sortOrders) {
+        config.sortOrders.forEach(option => {
+            const optionEl = document.createElement('option');
+            optionEl.value = option.value;
+            optionEl.textContent = option.text;
+            sortOrderSelect.appendChild(optionEl);
+        });
+    }
+}
+
     // Ensure the result URL container is visible
     resultUrlContainer.style.display = 'block';
     
@@ -331,11 +387,17 @@ function updateMarketplaceFilters() {
     
 // Make sure the URL container is visible by default
 function init() {
+    // Populate departments first
+    populateDepartments();
+    
     // Update ZIP code display
     updateZipCode();
     
     // Update marketplace-specific filters
     updateMarketplaceFilters();
+    
+    // Update sort order options
+    updateSortOrderOptions();
     
     // Set up event listeners
     setupEventListeners();
@@ -387,9 +449,11 @@ function setupEventListeners() {
     
     // Selects
     marketplaceSelect.addEventListener('change', function() {
-        updateZipCode();
-        updateMarketplaceFilters(); // This now includes sortOrder updates
-        updateGeneratedUrl();
+    updateZipCode();
+    updateMarketplaceFilters();
+    populateDepartments(); // Add this line
+    updateSortOrderOptions(); // Add this line
+    updateGeneratedUrl();
     });
     
     productTypeSelect.addEventListener('change', function() {
