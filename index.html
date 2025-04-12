@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Merch Amazon Research Tool</title>
+    <title>Advanced Merch Amazon Research Tool</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/css/bootstrap.min.css">
     <style>
         :root {
             --primary-color: #232f3e;
@@ -12,44 +13,19 @@
             --dark-color: #343a40;
         }
         
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-        
         body {
             background-color: #f5f5f5;
             color: #333;
             line-height: 1.6;
+            padding-bottom: 50px;
         }
         
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
-        }
-        
-        header {
+        .header-section {
             background-color: var(--primary-color);
             color: white;
-            padding: 1rem 0;
-            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .logo h1 {
-            font-size: 1.8rem;
-            margin-left: 0.5rem;
         }
         
         .logo-highlight {
@@ -61,185 +37,105 @@
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-        
-        .search-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        @media (min-width: 768px) {
-            .search-form {
-                flex-direction: row;
-            }
-        }
-        
-        .search-input {
-            flex: 1;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+            margin-bottom: 2rem;
         }
         
         .search-button {
-            padding: 0.8rem 1.5rem;
             background-color: var(--secondary-color);
             color: var(--dark-color);
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
             font-weight: bold;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.2s;
+            width: 100%;
+            margin-top: 10px;
         }
         
         .search-button:hover {
             background-color: #e68a00;
         }
         
-        .results-container {
+        .advanced-options {
             background-color: white;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
         
-        .results-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .options-section {
             margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
             border-bottom: 1px solid #eee;
         }
         
-        .results-count {
-            font-weight: bold;
-            color: var(--dark-color);
+        .options-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
         
-        .filters {
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .option-group {
+            margin-bottom: 0.5rem;
+        }
+        
+        .checkbox-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.5rem 1rem;
+        }
+        
+        .form-check-label {
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .result-url {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .url-box {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+            overflow-x: auto;
+            font-family: monospace;
             margin-bottom: 1rem;
         }
         
-        .filter-btn {
-            padding: 0.4rem 0.8rem;
-            background-color: #eee;
-            border: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .filter-btn:hover, .filter-btn.active {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .product-card {
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.2s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .product-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #f5f5f5;
-        }
-        
-        .product-info {
-            padding: 1rem;
-        }
-        
-        .product-title {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .product-price {
-            font-weight: bold;
-            color: var(--dark-color);
-            margin-bottom: 0.5rem;
-        }
-        
-        .product-meta {
+        .action-buttons {
             display: flex;
-            justify-content: space-between;
-            font-size: 0.85rem;
-            color: #666;
-        }
-        
-        .product-bsr {
-            font-weight: 500;
-        }
-        
-        .pagination {
-            display: flex;
-            justify-content: center;
             gap: 0.5rem;
-            margin-top: 2rem;
         }
         
-        .page-btn {
-            padding: 0.5rem 1rem;
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-        
-        .page-btn:hover, .page-btn.active {
-            background-color: var(--secondary-color);
+        .btn-copy {
+            background-color: var(--primary-color);
             color: white;
-            border-color: var(--secondary-color);
         }
         
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-radius: 50%;
-            border-top: 4px solid var(--secondary-color);
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .btn-visit {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+            font-weight: bold;
         }
         
         footer {
@@ -248,58 +144,193 @@
             color: #666;
             font-size: 0.9rem;
         }
+        
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .checkbox-group {
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>
+    <div class="header-section">
         <div class="container">
-            <div class="logo">
-                <h1>Merch <span class="logo-highlight">Research</span> Tool</h1>
-            </div>
-            <p>Find the best Merch By Amazon opportunities</p>
+            <h1 class="text-center">Merch <span class="logo-highlight">Research</span> Tool</h1>
+            <p class="text-center mb-0">Find the best Merch By Amazon opportunities with advanced search parameters</p>
         </div>
-    </header>
+    </div>
     
-    <main class="container">
+    <div class="container">
         <div class="search-container">
-            <form id="searchForm" class="search-form">
-                <input type="text" id="searchInput" class="search-input" placeholder="Enter keywords or leave blank to see all Merch By Amazon shirts...">
-                <button type="submit" class="search-button">Search Merch</button>
+            <form id="searchForm">
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <label for="marketplaceSelect">Marketplace</label>
+                        <select id="marketplaceSelect" class="form-control">
+                            <option value="com">US</option>
+                            <option value="co.uk">UK</option>
+                            <option value="de">DE</option>
+                            <option value="fr">FR</option>
+                            <option value="it">IT</option>
+                            <option value="es">ES</option>
+                            <option value="jp">JP</option>
+                            <option value="ca">CA</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <label for="productTypeSelect">Product Type</label>
+                        <select id="productTypeSelect" class="form-control">
+                            <option value="tshirt">T-SHIRT</option>
+                            <option value="longsleeve">LONG SLEEVE</option>
+                            <option value="sweatshirt">SWEATSHIRT</option>
+                            <option value="hoodie">HOODIE</option>
+                            <option value="vneck">V-NECK</option>
+                            <option value="raglan">RAGLAN</option>
+                            <option value="tanktop">TANK TOP</option>
+                            <option value="popsocket">POPSOCKET</option>
+                            <option value="case">CASE</option>
+                            <option value="throwpillow">THROW PILLOW</option>
+                            <option value="totebag">TOTE BAG</option>
+                        </select>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="searchInput">Search Term</label>
+                        <input id="searchInput" type="text" class="form-control" placeholder="Enter keyword or search term (leave blank to see all)">
+                    </div>
+                    <div class="col-12">
+                        <button type="submit" class="search-button">SEARCH AMAZON MERCH</button>
+                    </div>
+                </div>
             </form>
         </div>
         
-        <div class="loading" id="loading">
-            <div class="spinner"></div>
-            <p>Loading results...</p>
+        <div class="advanced-options">
+            <h3 class="mb-4">Advanced Search Options</h3>
+            
+            <div class="options-section">
+                <div class="section-title">Time Filters</div>
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilterNone" value="" checked>
+                        <label class="form-check-label" for="timeFilterNone">None</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter30Days" value="p_n_date_first_available_absolute%3A15196852011">
+                        <label class="form-check-label" for="timeFilter30Days">Last 30 days</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter90Days" value="p_n_date_first_available_absolute%3A15196853011">
+                        <label class="form-check-label" for="timeFilter90Days">Last 90 days</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Seller Filters</div>
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER">
+                        <label class="form-check-label" for="sellerAmazon">Seller is Amazon</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="reviewsFilter" value="p_72%3A2661618011">
+                        <label class="form-check-label" for="reviewsFilter">Reviews 4+</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Price Range</div>
+                <div class="row">
+                    <div class="col-6">
+                        <label for="minPrice">Min Price ($)</label>
+                        <input type="number" class="form-control" id="minPrice" min="0" step="0.01">
+                    </div>
+                    <div class="col-6">
+                        <label for="maxPrice">Max Price ($)</label>
+                        <input type="number" class="form-control" id="maxPrice" min="0" step="0.01">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Hidden Keywords Filters</div>
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="filterBasicTees" value="Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop">
+                        <label class="form-check-label" for="filterBasicTees">Basic Tees Only (No Longsleeve, Raglan, Vneck, Tanktop)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="filterCotton" value="100%25+Cotton+-Sweatshirt">
+                        <label class="form-check-label" for="filterCotton">100% Cotton (No Sweatshirts)</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="filterExcludeBrands" value="-LyricLyfe+-Disney+-Marvel+-Star Wars+-Mademark+-Harry Potter+-Pixar+-SANRIO+-Elite Authentics+-Barbie+-BATMAN+-Jeff Dunham+-CJ Grips+-BreakingT+-Spongebob SquarePants+-Ballpark MVP+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-STAR TREK+-Stranger Things+-Fallout+-MTV+-Beetlejuice+-South Park+-Peanuts+-Hello Kitty+-Miraculous+-Jeep+-Gypsy Queen+-The Rolling Stones+-Transformers+-NEW LINE CINEMA+-Sagittarius Gallery+-Scooby-Doo+-Official High School Fan Gear+-Pink Floyd+-Nickelodeon+-Care Bears">
+                        <label class="form-check-label" for="filterExcludeBrands">Exclude Major Brands</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Original Query</div>
+                <div class="form-group">
+                    <textarea id="originalQuery" class="form-control" rows="2" placeholder="Advanced query text (fabric composition, color details, etc.)"></textarea>
+                    <small class="form-text text-muted">This will be added as &oq= parameter.</small>
+                </div>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Sort Order</div>
+                <select id="sortOrder" class="form-control">
+                    <option value="">Default</option>
+                    <option value="most-purchased-rank">Most Purchased (Best Sellers)</option>
+                    <option value="exact-aware-popularity-rank">Best Seller Sort</option>
+                    <option value="date-desc-rank">Newest Arrivals</option>
+                    <option value="date-asc-rank">Oldest First</option>
+                    <option value="review-rank">Top Rated</option>
+                    <option value="price-desc-rank">Price High to Low</option>
+                    <option value="price-asc-rank">Price Low to High</option>
+                    <option value="relevancerank">Relevance</option>
+                    <option value="relevanceblender">Relevance Blender</option>
+                    <option value="featured-rank">Featured</option>
+                    <option value="most-wished-for-rank">Most Wished For</option>
+                </select>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Department</div>
+                <select id="department" class="form-control">
+                    <option value="">All Departments</option>
+                    <option value="fashion-novelty">Novelty & More</option>
+                    <option value="fashion">Clothing, Shoes & Jewelry</option>
+                </select>
+            </div>
+            
+            <div class="options-section">
+                <div class="section-title">Category</div>
+                <select id="category" class="form-control">
+                    <option value="">None</option>
+                    <option value="7141123011">Men's Clothing</option>
+                    <option value="1040660">Women's Clothing</option>
+                    <option value="9056922011">Women's Novelty Tops & Tees</option>
+                    <option value="12035955011">Men's Novelty T-Shirts</option>
+                    <option value="1040658">Boys' Clothing</option>
+                    <option value="1040664">Girls' Clothing</option>
+                </select>
+            </div>
         </div>
         
-        <div class="results-container" id="resultsContainer" style="display: none;">
-            <div class="results-header">
-                <h2>Search Results</h2>
-                <span class="results-count" id="resultsCount">0 items found</span>
-            </div>
-            
-            <div class="filters">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="premium">Premium</button>
-                <button class="filter-btn" data-filter="standard">Standard</button>
-                <button class="filter-btn" data-filter="bestseller">Best Sellers</button>
-            </div>
-            
-            <div class="products-grid" id="productsGrid">
-                <!-- Products will be added here dynamically -->
-            </div>
-            
-            <div class="pagination" id="pagination">
-                <button class="page-btn active">1</button>
-                <button class="page-btn">2</button>
-                <button class="page-btn">3</button>
-                <button class="page-btn">4</button>
-                <button class="page-btn">5</button>
-                <button class="page-btn">Next →</button>
+        <div class="result-url" id="resultUrlContainer" style="display: none;">
+            <h3 class="mb-3">Generated Amazon URL</h3>
+            <div class="url-box" id="generatedUrl"></div>
+            <div class="action-buttons">
+                <button id="copyUrlBtn" class="btn btn-copy">Copy URL</button>
+                <a id="visitUrlBtn" href="#" target="_blank" class="btn btn-visit">Visit Amazon</a>
             </div>
         </div>
-    </main>
+    </div>
     
     <footer>
         <div class="container">
@@ -307,201 +338,166 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const searchForm = document.getElementById('searchForm');
-            const searchInput = document.getElementById('searchInput');
-            const loading = document.getElementById('loading');
-            const resultsContainer = document.getElementById('resultsContainer');
-            const resultsCount = document.getElementById('resultsCount');
-            const productsGrid = document.getElementById('productsGrid');
-            const filterButtons = document.querySelectorAll('.filter-btn');
-            const paginationButtons = document.querySelectorAll('.page-btn');
+            const copyUrlBtn = document.getElementById('copyUrlBtn');
+            const resultUrlContainer = document.getElementById('resultUrlContainer');
+            const generatedUrlEl = document.getElementById('generatedUrl');
+            const visitUrlBtn = document.getElementById('visitUrlBtn');
             
-            // Sample data - in a real app, this would come from an API
-            const sampleProducts = [
-                {
-                    id: 1,
-                    title: "Funny Cat T-Shirt Design",
-                    price: 19.99,
-                    bsr: 45689,
-                    tier: "premium",
-                    rating: 4.5,
-                    reviews: 127
-                },
-                {
-                    id: 2,
-                    title: "Dog Lover Shirt",
-                    price: 17.99,
-                    bsr: 23451,
-                    tier: "standard",
-                    rating: 4.7,
-                    reviews: 89
-                },
-                {
-                    id: 3,
-                    title: "Funny Saying Tee for Men",
-                    price: 18.99,
-                    bsr: 12345,
-                    tier: "premium",
-                    rating: 4.2,
-                    reviews: 56
-                },
-                {
-                    id: 4,
-                    title: "Mother's Day Special T-Shirt",
-                    price: 21.99,
-                    bsr: 5678,
-                    tier: "premium",
-                    rating: 4.8,
-                    reviews: 209
-                },
-                {
-                    id: 5,
-                    title: "Father's Day Tee",
-                    price: 20.99,
-                    bsr: 8956,
-                    tier: "standard",
-                    rating: 4.6,
-                    reviews: 167
-                },
-                {
-                    id: 6,
-                    title: "Cute Animal Design Shirt",
-                    price: 16.99,
-                    bsr: 34567,
-                    tier: "standard",
-                    rating: 4.3,
-                    reviews: 78
-                },
-                {
-                    id: 7,
-                    title: "Gym Motivation T-Shirt",
-                    price: 19.99,
-                    bsr: 15678,
-                    tier: "premium",
-                    rating: 4.4,
-                    reviews: 92
-                },
-                {
-                    id: 8,
-                    title: "Funny Programmer Shirt",
-                    price: 18.99,
-                    bsr: 28976,
-                    tier: "standard",
-                    rating: 4.6,
-                    reviews: 105
+            // Function to generate the Amazon URL based on form values
+            function generateAmazonUrl() {
+                // Get base marketplace
+                const marketplace = document.getElementById('marketplaceSelect').value;
+                let baseUrl = `https://amazon.${marketplace}`;
+                
+                // Get search query
+                const searchQuery = document.getElementById('searchInput').value.trim();
+                
+                // Initialize parameters
+                let params = new URLSearchParams();
+                
+                // Add search term if provided
+                if (searchQuery) {
+                    params.append('k', searchQuery);
                 }
-            ];
+                
+                // Collection for rh parameters
+                let rhParams = [];
+                
+                // Add time filter
+                const timeFilter = document.querySelector('input[name="timeFilter"]:checked').value;
+                if (timeFilter) {
+                    rhParams.push(timeFilter);
+                }
+                
+                // Add seller filter
+                const sellerAmazon = document.getElementById('sellerAmazon').checked;
+                if (sellerAmazon) {
+                    rhParams.push(document.getElementById('sellerAmazon').value);
+                }
+                
+                // Add reviews filter
+                const reviewsFilter = document.getElementById('reviewsFilter').checked;
+                if (reviewsFilter) {
+                    rhParams.push(document.getElementById('reviewsFilter').value);
+                }
+                
+                // Add price filter
+                const minPrice = document.getElementById('minPrice').value;
+                const maxPrice = document.getElementById('maxPrice').value;
+                if (minPrice && maxPrice) {
+                    // Can use either format depending on preference
+                    rhParams.push(`p_36%3A${minPrice}00-${maxPrice}00`);
+                    // Alternative: params.append('low-price', minPrice);
+                    // Alternative: params.append('high-price', maxPrice);
+                }
+                
+                // Add hidden keywords filters
+                let hiddenKeywords = [];
+                
+                const filterTees = document.getElementById('filterBasicTees').checked;
+                if (filterTees) {
+                    hiddenKeywords.push(document.getElementById('filterBasicTees').value);
+                }
+                
+                const filterCotton = document.getElementById('filterCotton').checked;
+                if (filterCotton) {
+                    hiddenKeywords.push(document.getElementById('filterCotton').value);
+                }
+                
+                const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
+                if (filterExcludeBrands) {
+                    hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
+                }
+                
+                if (hiddenKeywords.length > 0) {
+                    params.append('hidden-keywords', hiddenKeywords.join('+'));
+                }
+                
+                // Add original query
+                const originalQuery = document.getElementById('originalQuery').value.trim();
+                if (originalQuery) {
+                    params.append('oq', originalQuery);
+                }
+                
+                // Add sort order
+                const sortOrder = document.getElementById('sortOrder').value;
+                if (sortOrder) {
+                    params.append('s', sortOrder);
+                }
+                
+                // Add department
+                const department = document.getElementById('department').value;
+                if (department) {
+                    params.append('i', department);
+                }
+                
+                // Add category
+                const category = document.getElementById('category').value;
+                if (category) {
+                    // Can use either format
+                    // params.append('bbn', category);
+                    rhParams.push(`n%3A${category}`);
+                }
+                
+                // Combine all rh parameters with comma (%2C)
+                if (rhParams.length > 0) {
+                    params.append('rh', rhParams.join('%2C'));
+                }
+                
+                // Build the final URL
+                let url = baseUrl;
+                if (searchQuery || rhParams.length > 0) {
+                    url += '/s';
+                }
+                const paramsString = params.toString();
+                if (paramsString) {
+                    url += '?' + paramsString;
+                }
+                
+                return url;
+            }
             
+            // Handle form submission
             searchForm.addEventListener('submit', function(e) {
                 e.preventDefault();
-                const searchTerm = searchInput.value.trim();
                 
-                // Show loading
-                loading.style.display = 'block';
-                resultsContainer.style.display = 'none';
+                // Generate and display the URL
+                const amazonUrl = generateAmazonUrl();
+                generatedUrlEl.textContent = amazonUrl;
+                resultUrlContainer.style.display = 'block';
+                visitUrlBtn.href = amazonUrl;
                 
-                // Simulate API call
-                setTimeout(function() {
-                    displayResults(searchTerm);
-                    loading.style.display = 'none';
-                    resultsContainer.style.display = 'block';
-                }, 800);
+                // Scroll to the result
+                resultUrlContainer.scrollIntoView({ behavior: 'smooth' });
             });
             
-            filterButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    // Update active state
-                    filterButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Filter products
-                    const filter = this.dataset.filter;
-                    filterProducts(filter);
+            // Handle copy button
+            copyUrlBtn.addEventListener('click', function() {
+                const urlText = generatedUrlEl.textContent;
+                navigator.clipboard.writeText(urlText).then(function() {
+                    copyUrlBtn.textContent = 'Copied!';
+                    setTimeout(function() {
+                        copyUrlBtn.textContent = 'Copy URL';
+                    }, 2000);
                 });
             });
             
-            paginationButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    paginationButtons.forEach(btn => btn.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // In a real app, you would fetch the next page of results
-                    // Here we just show the same results
-                    window.scrollTo({ top: resultsContainer.offsetTop - 20, behavior: 'smooth' });
-                });
-            });
-            
-            function displayResults(searchTerm) {
-                // Clear previous results
-                productsGrid.innerHTML = '';
-                
-                // In a real app, you would filter based on the search term
-                // Here we just show all sample products
-                let filteredProducts = sampleProducts;
-                if (searchTerm) {
-                    filteredProducts = sampleProducts.filter(product => 
-                        product.title.toLowerCase().includes(searchTerm.toLowerCase())
-                    );
-                }
-                
-                // Update result count
-                resultsCount.textContent = `${filteredProducts.length} items found`;
-                
-                // Generate product cards
-                filteredProducts.forEach(product => {
-                    const card = createProductCard(product);
-                    productsGrid.appendChild(card);
-                });
-            }
-            
-            function createProductCard(product) {
-                const card = document.createElement('div');
-                card.className = 'product-card';
-                card.dataset.tier = product.tier;
-                card.dataset.bsr = product.bsr;
-                
-                card.innerHTML = `
-                    <img src="/api/placeholder/250/200" alt="${product.title}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-title">${product.title}</h3>
-                        <p class="product-price">$${product.price.toFixed(2)}</p>
-                        <div class="product-meta">
-                            <span class="product-bsr">BSR: #${product.bsr.toLocaleString()}</span>
-                            <span class="product-rating">★ ${product.rating} (${product.reviews})</span>
-                        </div>
-                    </div>
-                `;
-                
-                return card;
-            }
-            
-            function filterProducts(filter) {
-                const cards = document.querySelectorAll('.product-card');
-                
-                cards.forEach(card => {
-                    if (filter === 'all') {
-                        card.style.display = 'block';
-                    } else if (filter === 'bestseller') {
-                        const bsr = parseInt(card.dataset.bsr);
-                        card.style.display = bsr < 20000 ? 'block' : 'none';
-                    } else {
-                        card.style.display = card.dataset.tier === filter ? 'block' : 'none';
+            // Update URL when any form field changes
+            const formElements = document.querySelectorAll('input, select, textarea');
+            formElements.forEach(element => {
+                element.addEventListener('change', function() {
+                    if (resultUrlContainer.style.display !== 'none') {
+                        const amazonUrl = generateAmazonUrl();
+                        generatedUrlEl.textContent = amazonUrl;
+                        visitUrlBtn.href = amazonUrl;
                     }
                 });
-                
-                // Update count
-                const visibleCards = document.querySelectorAll('.product-card[style="display: block"]');
-                resultsCount.textContent = `${visibleCards.length} items found`;
-            }
-            
-            // Display all products on initial load
-            setTimeout(function() {
-                displayResults('');
-                loading.style.display = 'none';
-                resultsContainer.style.display = 'block';
-            }, 500);
+            });
         });
     </script>
 </body>
