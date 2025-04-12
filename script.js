@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxPriceInput = document.getElementById('maxPrice');
     
     // Product type hidden keyword mappings
-    const productTypeKeywords = {
+    /*const productTypeKeywords = {
         'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
         'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
         'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'case': 'Slim-Fitting+Protective+Case+for+Phone',
         'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
         'totebag': 'Tote+Bag%2C+Double-sided+print'
-    };
+    };*/
     
     // ZIP codes for different marketplaces
     const zipCodes = {
@@ -54,7 +54,10 @@ const marketplaceConfig = {
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AATVPDKIKX0DER',
-        reviewsFilter: 'p_72%3A2661618011'
+        reviewsFilter: 'p_72%3A2661618011',
+        productTypeKeywords: {
+        'tshirt': 'US',
+        };
     },
     'co.uk': { // UK
         timeFilters: {
@@ -63,6 +66,9 @@ const marketplaceConfig = {
         },
         sellerFilter: 'p_6%3AA3P5ROKL5A1OLE',
         reviewsFilter: 'p_72%3A419153031'
+        productTypeKeywords: {
+        'tshirt': 'CO.UK',
+        };
     },
     'de': { // Germany
         timeFilters: {
