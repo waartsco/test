@@ -208,6 +208,8 @@ select.form-control {
     margin-top: 1.5rem;
     border: 1px solid var(--border-color);
     animation: slideUp 0.3s ease;
+    /* Ensure it's visible by default */
+    display: block;
 }
 
 @keyframes slideUp {
