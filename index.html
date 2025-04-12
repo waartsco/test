@@ -8,323 +8,319 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         :root {
-            --primary-color: #232f3e;
-            --secondary-color: #ff9900;
-            --light-color: #f8f9fa;
-            --dark-color: #343a40;
-            --accent-color: #37475a;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        body {
-            background-color: #f5f5f5;
-            color: #333;
-            line-height: 1.6;
-            padding-bottom: 30px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        .header-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            color: white;
-            padding: 1.5rem 0;
-            margin-bottom: 2rem;
-            box-shadow: var(--box-shadow);
-        }
-        
-        .header-title {
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 0.2rem;
-            letter-spacing: 0.5px;
-        }
-        
-        .header-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-        
-        .logo-highlight {
-            color: var(--secondary-color);
-            font-weight: 800;
-        }
-        
-        .search-section {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            transition: all 0.3s ease;
-        }
-        
-        .search-section:hover {
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-        }
-        
-        .search-button {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-            font-weight: bold;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-        
-        .search-button:hover {
-            background-color: #e68a00;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-        
-        .search-button:active {
-            transform: translateY(0);
-        }
-        
-        .plz_hinweis {
-            margin-top: 10px;
-            padding: 12px 16px;
-            background-color: #f8f9fa;
-            border: 1px solid #dee2e6;
-            border-radius: 4px;
-            font-size: 0.95rem;
-        }
-        
-        .copy_area {
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 2px 4px;
-            transition: background-color 0.2s;
-            border-radius: 3px;
-        }
-        
-        .copy_area:hover {
-            background-color: #e9ecef;
-        }
-        
-        .copy_me {
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-        
-        .copied-message {
-            display: none;
-            color: #28a745;
-            font-weight: bold;
-            margin-left: 10px;
-            animation: fadeIn 0.3s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .filters-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 2rem;
-        }
-        
-        .filter-box {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.2rem;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-        
-        .filter-box:hover {
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-            transform: translateY(-2px);
-        }
-        
-        .filter-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .filter-title i {
-            margin-right: 8px;
-        }
-        
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        
-        .form-check-label {
-            font-size: 0.9rem;
-            font-weight: 400;
-            cursor: pointer;
-        }
-        
-        .form-control {
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            font-size: 0.95rem;
-            padding: 10px 12px;
-            transition: all 0.2s;
-        }
-        
-        .form-control:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
-        }
-        
-        select.form-control {
-            height: calc(1.5em + 0.75rem + 2px);
-            padding: 0.375rem 0.75rem;
-            cursor: pointer;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 16px 12px;
-            appearance: none;
-        }
-        
-        .form-row > .col, .form-row > [class*="col-"] {
-            padding-right: 8px;
-            padding-left: 8px;
-        }
-        
-        .result-url {
-            background-color: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            padding: 1.5rem;
-            margin-top: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .result-url:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .url-box {
-            background-color: #f8f9fa;
-            padding: 1rem;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-            white-space: nowrap;
-            overflow-x: auto;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .btn-copy, .btn-visit {
-            padding: 0.5rem 1.2rem;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
-            transition: all 0.2s;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        
-        .btn-copy {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-copy:hover {
-            background-color: #344c66;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            color: white;
-        }
-        
-        .btn-visit {
-            background-color: var(--secondary-color);
-            color: var(--dark-color);
-        }
-        
-        .btn-visit:hover {
-            background-color: #e68a00;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-            color: var(--dark-color);
-        }
-        
-        .custom-hidden-keywords {
-            font-size: 0.9rem;
-        }
-        
-        .form-check {
-            padding-left: 1.8rem;
-        }
-        
-        .form-check-input {
-            margin-top: 0.25rem;
-            margin-left: -1.8rem;
-            cursor: pointer;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 1.5rem 0;
-            margin-top: 2rem;
-            color: #666;
-            font-size: 0.9rem;
-            background-color: #f8f9fa;
-            border-top: 1px solid #eee;
-        }
-        
-        .disabled {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 1.8rem;
-            }
-            
-            .header-subtitle {
-                font-size: 1rem;
-            }
-            
-            .search-section, .filter-box, .result-url {
-                padding: 1rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                gap: 0.5rem;
-            }
-            
-            .filters-container {
-                grid-template-columns: 1fr;
-            }
-        }
+    --primary-color: #232f3e;
+    --secondary-color: #ff9900;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --border-color: #ddd;
+    --hover-color: #e68a00;
+    --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+    padding-bottom: 30px;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.header-section {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.header-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.logo-highlight {
+    color: var(--secondary-color);
+    font-weight: 800;
+}
+
+.search-section {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.search-button {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+    font-weight: bold;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.plz_hinweis {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.plz_hinweis:hover {
+    background-color: #e9ecef;
+}
+
+.copy_area {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2px 0;
+}
+
+.copy_me {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.copied-message {
+    display: none;
+    color: #28a745;
+    font-weight: bold;
+    margin-left: 10px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.filters-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.filter-box {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.filter-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-check-label {
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.form-control {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.2rem rgba(255, 153, 0, 0.25);
+}
+
+select.form-control {
+    height: calc(1.5em + 0.75rem + 2px);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8.825l-4.762-4.762L2.175 3.15 6 6.975l3.825-3.825 1.062.913L6 8.825z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+.result-url {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border: 1px solid var(--border-color);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.url-box {
+    background-color: var(--light-color);
+    padding: 0.85rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    color: #495057;
+    line-height: 1.5;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn-copy, .btn-visit {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.btn-copy {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-copy:hover {
+    background-color: #1a2532;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-visit {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.btn-visit:hover {
+    background-color: var(--hover-color);
+    color: var(--dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.custom-hidden-keywords {
+    font-size: 0.85rem;
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    color: #6c757d;
+    font-size: 0.85rem;
+    margin-top: 2rem;
+    border-top: 1px solid #eee;
+    background-color: var(--light-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .filters-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .filters-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .header-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-section, .filter-box, .result-url {
+        padding: 1rem;
+    }
+    
+    .header-title {
+        font-size: 1.5rem;
+    }
+    
+    .header-subtitle {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .filters-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+}
     </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="header-section">
@@ -334,12 +330,12 @@
         </div>
     </div>
     
-    <div class="container px-3">
+    <div class="container-fluid px-4">
         <div class="search-section">
             <form id="searchForm">
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <label for="marketplaceSelect" class="small mb-1"><i class="fas fa-globe-americas mr-1"></i>Marketplace</label>
+                    <div class="col-md-4 mb-2">
+                        <label for="marketplaceSelect" class="small mb-1">Marketplace</label>
                         <select id="marketplaceSelect" class="form-control">
                             <option value="com">US</option>
                             <option value="co.uk">UK</option>
@@ -351,8 +347,8 @@
                             <option value="ca">CA</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="productTypeSelect" class="small mb-1"><i class="fas fa-tshirt mr-1"></i>Product Type</label>
+                    <div class="col-md-4 mb-2">
+                        <label for="productTypeSelect" class="small mb-1">Product Type</label>
                         <select id="productTypeSelect" class="form-control">
                             <option value="tshirt">T-SHIRT</option>
                             <option value="longsleeve">LONG SLEEVE</option>
@@ -368,8 +364,8 @@
                             <option value="custom">CUSTOM</option>
                         </select>
                     </div>
-                    <div class="col-md-4 mb-3">
-                        <label for="searchInput" class="small mb-1"><i class="fas fa-search mr-1"></i>Search Term</label>
+                    <div class="col-md-4 mb-2">
+                        <label for="searchInput" class="small mb-1">Search Term</label>
                         <input id="searchInput" type="text" class="form-control" placeholder="Enter keyword or leave blank to see all">
                     </div>
                 </div>
@@ -387,16 +383,16 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <button type="submit" class="search-button"><i class="fas fa-search mr-2"></i>SEARCH AMAZON MERCH</button>
+                        <button type="submit" class="search-button">SEARCH AMAZON MERCH</button>
                     </div>
                 </div>
             </form>
         </div>
         
-        <!-- All filters in a grid layout -->
+        <!-- All filters in a horizontal layout -->
         <div class="filters-container">
             <div class="filter-box">
-                <div class="filter-title"><i class="far fa-clock"></i> Time Filters</div>
+                <div class="filter-title">Time Filters</div>
                 <div class="checkbox-group">
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="timeFilter" id="timeFilterNone" value="" checked>
@@ -414,7 +410,7 @@
             </div>
             
             <div class="filter-box">
-                <div class="filter-title"><i class="fas fa-store"></i> Seller Filters</div>
+                <div class="filter-title">Seller Filters</div>
                 <div class="checkbox-group">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER">
@@ -428,7 +424,7 @@
             </div>
             
             <div class="filter-box">
-                <div class="filter-title"><i class="fas fa-dollar-sign"></i> Price Range</div>
+                <div class="filter-title">Price Range</div>
                 <div class="row">
                     <div class="col-6 pr-1">
                         <input type="number" class="form-control" id="minPrice" min="0" step="1" placeholder="Min $">
@@ -440,7 +436,7 @@
             </div>
             
             <div class="filter-box">
-                <div class="filter-title"><i class="fas fa-sort"></i> Sort Order</div>
+                <div class="filter-title">Sort Order</div>
                 <select id="sortOrder" class="form-control">
                     <option value="">Default</option>
                     <option value="most-purchased-rank">Most Purchased (Best Sellers)</option>
@@ -457,27 +453,25 @@
                 </select>
             </div>
             
-            <div class="filter-box" id="categoryFilterBox">
-                <div class="filter-title"><i class="fas fa-tags"></i> Department & Category</div>
-                <select id="department" class="form-control mb-3">
+            <div class="filter-box" id="departmentCategoryBox" style="display: none;">
+                <div class="filter-title">Department & Category</div>
+                <select id="department" class="form-control mb-2">
                     <option value="">All Departments</option>
                     <option value="fashion-novelty">Novelty & More</option>
                     <option value="fashion">Clothing, Shoes & Jewelry</option>
                     <!-- 
-                    You can add more departments here manually, for example:
-                    <option value="home-garden">Home & Garden</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="toys-games">Toys & Games</option>
+                    You can add more departments here later. 
+                    Format: <option value="department-code">Department Name</option>
                     -->
                 </select>
                 <select id="category" class="form-control" disabled>
                     <option value="">No Category Filter</option>
-                    <!-- Categories will be populated based on the selected department -->
+                    <!-- Categories will be populated by JavaScript based on department selection -->
                 </select>
             </div>
             
             <div class="filter-box">
-                <div class="filter-title"><i class="fas fa-filter"></i> Hidden Keywords</div>
+                <div class="filter-title">Hidden Keywords</div>
                 <div class="checkbox-group">
                     <div class="form-check">
                         <input class="form-check-input hidden-keyword-preset" type="checkbox" id="filterBasicTees" value="Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop">
@@ -491,20 +485,20 @@
                         <input class="form-check-input" type="checkbox" id="filterExcludeBrands" value="-LyricLyfe+-Disney+-Marvel+-Star Wars+-Mademark+-Harry Potter+-Pixar+-SANRIO+-Elite Authentics+-Barbie+-BATMAN+-Jeff Dunham+-CJ Grips+-BreakingT+-Spongebob SquarePants+-Ballpark MVP+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-STAR TREK+-Stranger Things+-Fallout+-MTV+-Beetlejuice+-South Park+-Peanuts+-Hello Kitty+-Miraculous+-Jeep+-Gypsy Queen+-The Rolling Stones+-Transformers+-NEW LINE CINEMA+-Sagittarius Gallery+-Scooby-Doo+-Official High School Fan Gear+-Pink Floyd+-Nickelodeon+-Care Bears">
                         <label class="form-check-label" for="filterExcludeBrands">Exclude Major Brands</label>
                     </div>
-                    <div class="mt-2">
+                    <div class="mt-1">
                         <input type="text" class="form-control custom-hidden-keywords" id="customHiddenKeywords" placeholder="Custom hidden keywords">
-                        <small class="form-text text-muted" style="font-size: 0.8rem;">Add + before each word to exclude</small>
+                        <small class="form-text text-muted" style="font-size: 0.75rem;">Add + before each word to exclude</small>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="result-url" id="resultUrlContainer" style="display: none;">
-            <h5 class="mb-3"><i class="fas fa-link mr-2"></i>Generated Amazon URL</h5>
+            <h5 class="mb-2">Generated Amazon URL</h5>
             <div class="url-box" id="generatedUrl"></div>
             <div class="action-buttons">
-                <button id="copyUrlBtn" class="btn btn-copy"><i class="fas fa-copy mr-1"></i>Copy URL</button>
-                <a id="visitUrlBtn" href="#" target="_blank" class="btn btn-visit"><i class="fas fa-external-link-alt mr-1"></i>Visit Amazon</a>
+                <button id="copyUrlBtn" class="btn btn-copy">Copy URL</button>
+                <a id="visitUrlBtn" href="#" target="_blank" class="btn btn-visit">Visit Amazon</a>
             </div>
         </div>
     </div>
@@ -515,174 +509,226 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const searchForm = document.getElementById('searchForm');
-            const copyUrlBtn = document.getElementById('copyUrlBtn');
-            const resultUrlContainer = document.getElementById('resultUrlContainer');
-            const generatedUrlEl = document.getElementById('generatedUrl');
-            const visitUrlBtn = document.getElementById('visitUrlBtn');
-            const marketplaceSelect = document.getElementById('marketplaceSelect');
-            const copyZipBtn = document.querySelector('.copy_area');
-            const copyMessage = document.querySelector('.copied-message');
-            const productTypeSelect = document.getElementById('productTypeSelect');
-            const categoryFilterBox = document.getElementById('categoryFilterBox');
-            const departmentSelect = document.getElementById('department');
-            const categorySelect = document.getElementById('category');
-            const filterBasicTees = document.getElementById('filterBasicTees');
-            
-            // Hide category & department filters by default (only show for custom product type)
-            categoryFilterBox.style.display = 'none';
-            
-            // Object to store hidden-keywords filters for different product types
-            const productTypeFilters = {
-                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'longsleeve': 'Classic+fit%2C+Long-sleeve+cotton+tee+featuring+ribbed+crew+neckline',
-                'sweatshirt': 'Classic+crew+neck+sweatshirt+with+soft+fleece+interior',
-                'hoodie': 'Pullover+hoodie+in+midweight+cotton-blend+fleece',
-                'vneck': 'Lightweight+v-neck+tee+with+short+sleeves',
-                'raglan': 'Lightweight+baseball+style+tee+with+contrast+sleeves',
-                'tanktop': 'Lightweight+sleeveless+tank+top+with+round+neck',
-                'popsocket': 'PopSockets+grip+provides+a+secure+hold+for+easier+texting',
-                'case': 'Slim+durable+protective+snap+case',
-                'throwpillow': 'Cushion+cover+with+hidden+zipper',
-                'totebag': 'Reusable+shopping+tote+made+of+durable+material'
-                // Add more product types and their specific filters as needed
-            };
-            
-            /**
-             * This is where you can add more departments and their categories.
-             * The structure is a nested object where:
-             * - Keys at the top level are department values
-             * - Each department contains an object with category values as keys and display names as values
-             * 
-             * To add a new department with categories:
-             * 1. Add a new option to the department select in HTML
-             * 2. Add the department with its categories to this object
-             */
-            const departmentCategories = {
-                'fashion': {
-                    '7141123011': "Men's Clothing",
-                    '1040660': "Women's Clothing",
-                    '9056922011': "Women's Novelty Tops & Tees",
-                    '12035955011': "Men's Novelty T-Shirts",
-                    '1040658': "Boys' Clothing",
-                    '1040664': "Girls' Clothing"
-                },
-                'fashion-novelty': {
-                    // No specific categories for Novelty & More
-                },
-                // Example of how to add more departments and categories:
-                /*
-                'home-garden': {
-                    '1063252': 'Home & Kitchen',
-                    '1063498': 'Bedding & Bath',
-                    '284507': 'Kitchen & Dining'
-                },
-                'electronics': {
-                    '172282': 'Electronics',
-                    '172623': 'Computers & Accessories',
-                    '2335752011': 'Cell Phones & Accessories'
-                }
-                */
-            };
-            
-            // ZIP codes for different marketplaces
-            const zipCodes = {
-                'com': { zip: '90210', location: 'Beverly Hills, CA' },
-                'co.uk': { zip: 'E1 6AN', location: 'London' },
-                'de': { zip: '10115', location: 'Berlin' },
-                'fr': { zip: '75001', location: 'Paris' },
-                'it': { zip: '00100', location: 'Rome' },
-                'es': { zip: '28001', location: 'Madrid' },
-                'jp': { zip: '100-0001', location: 'Tokyo' },
-                'ca': { zip: 'M5V 2A8', location: 'Toronto, ON' }
-            };
-            
-            // Update ZIP code when marketplace changes
-            marketplaceSelect.addEventListener('change', updateZipCode);
-            
-            function updateZipCode() {
-                const marketplace = marketplaceSelect.value;
-                const zipInfo = zipCodes[marketplace];
-                const zipHelper = document.querySelector('.plz_helper');
-                
-                if (zipInfo) {
-                    zipHelper.innerHTML = `.${marketplace.toUpperCase()}: <span class="copy_me">${zipInfo.zip}</span> (${zipInfo.location})`;
-                }
-            }
-            
-            // Toggle department & category filters based on product type
-            productTypeSelect.addEventListener('change', function() {
-                const isCustom = this.value === 'custom';
-                
-                // Show/hide category filters section
-                categoryFilterBox.style.display = isCustom ? 'block' : 'none';
-                
-                // Auto-check "Basic Tees Only" for t-shirts
-                if (this.value === 'tshirt') {
-                    filterBasicTees.checked = true;
-                } else {
-                    filterBasicTees.checked = false;
-                }
-            });
-            
-            // Update categories when department changes
-            departmentSelect.addEventListener('change', function() {
-                updateCategoryOptions();
-            });
-            
-            // Function to update categories based on selected department
-            function updateCategoryOptions() {
-                const department = departmentSelect.value;
-                const categories = departmentCategories[department] || {};
-                
-                // Clear existing options, keeping only the default
-                while (categorySelect.options.length > 1) {
-                    categorySelect.remove(1);
-                }
-                
-                // Enable/disable the category select based on department
-                if (department === '') {
-                    // If "All Departments" is selected, disable category select
-                    categorySelect.disabled = true;
-                    categorySelect.selectedIndex = 0; // Reset to default
-                } else if (Object.keys(categories).length === 0) {
-                    // If department has no categories, disable category select
-                    categorySelect.disabled = true;
-                    categorySelect.selectedIndex = 0; // Reset to default
-                } else {
-                    // Otherwise, enable and populate category select
-                    categorySelect.disabled = false;
-                    
-                    // Add new options
-                    for (const [value, text] of Object.entries(categories)) {
-                        const option = new Option(text, value);
-                        categorySelect.add(option);
-                    }
-                }
-            }
-            
-            // Copy ZIP code to clipboard
-            copyZipBtn.addEventListener('click', function() {
-                const zipCode = document.querySelector('.copy_me').textContent;
-                navigator.clipboard.writeText(zipCode).then(function() {
-                    copyMessage.style.display = 'inline';
-                    setTimeout(() => {
-                        copyMessage.style.display = 'none';
-                    }, 2000);
-                });
-            });
-            
-            // Function to generate the Amazon URL based on form values
-            function generateAmazonUrl() {
-                // Get base marketplace
-                const marketplace = marketplaceSelect.value;
-                let baseUrl = `https://amazon.${marketplace}`;
-                
-                // Get search query
-                const searchQuery = document.getElementById('searchInput').value.trim();
-                
-                // Initialize parameters array to
+    // Cache DOM elements
+    const searchForm = document.getElementById('searchForm');
+    const copyUrlBtn = document.getElementById('copyUrlBtn');
+    const resultUrlContainer = document.getElementById('resultUrlContainer');
+    const generatedUrlEl = document.getElementById('generatedUrl');
+    const visitUrlBtn = document.getElementById('visitUrlBtn');
+    const marketplaceSelect = document.getElementById('marketplaceSelect');
+    const copyZipBtn = document.querySelector('.copy_area');
+    const copyMessage = document.querySelector('.copied-message');
+    const productTypeSelect = document.getElementById('productTypeSelect');
+    const departmentCategoryBox = document.getElementById('departmentCategoryBox');
+    const departmentSelect = document.getElementById('department');
+    const categorySelect = document.getElementById('category');
+    const basicTeesCheckbox = document.getElementById('filterBasicTees');
+    
+    // Define Amazon categories structure
+    const amazonCategories = {
+        'fashion': [
+            { value: '7141123011', text: 'Men\'s Clothing' },
+            { value: '1040660', text: 'Women\'s Clothing' },
+            { value: '9056922011', text: 'Women\'s Novelty Tops & Tees' },
+            { value: '12035955011', text: 'Men\'s Novelty T-Shirts' },
+            { value: '1040658', text: 'Boys\' Clothing' },
+            { value: '1040664', text: 'Girls\' Clothing' }
+        ],
+        'fashion-novelty': [] // No specific categories for Novelty & More
+    };
+    
+    // Product type hidden keyword mappings
+    // You can add more product type specific filters here
+    const productTypeKeywords = {
+        'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+        'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+        'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+        'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+        // Add more product type specific filters as needed
+        // 'product_type': 'corresponding hidden keywords',
+    };
+    
+    // ZIP codes for different marketplaces
+    const zipCodes = {
+        'com': { zip: '90210', location: 'Beverly Hills, CA' },
+        'co.uk': { zip: 'E1 6AN', location: 'London' },
+        'de': { zip: '10115', location: 'Berlin' },
+        'fr': { zip: '75001', location: 'Paris' },
+        'it': { zip: '00100', location: 'Rome' },
+        'es': { zip: '28001', location: 'Madrid' },
+        'jp': { zip: '100-0001', location: 'Tokyo' },
+        'ca': { zip: 'M5V 2A8', location: 'Toronto, ON' }
+    };
+    
+    // Initialize the UI
+    init();
+    
+    function init() {
+        // Update ZIP code display
+        updateZipCode();
+        
+        // Set up event listeners
+        setupEventListeners();
+        
+        // Initialize product type specific settings
+        updateProductTypeSettings();
+    }
+    
+    function setupEventListeners() {
+        // Form submission
+        searchForm.addEventListener('submit', handleFormSubmit);
+        
+        // Copy URL button
+        copyUrlBtn.addEventListener('click', handleCopyUrl);
+        
+        // Copy ZIP code
+        copyZipBtn.addEventListener('click', handleCopyZip);
+        
+        // Marketplace change
+        marketplaceSelect.addEventListener('change', updateZipCode);
+        
+        // Product type change
+        productTypeSelect.addEventListener('change', function() {
+            updateProductTypeSettings();
+            toggleDepartmentCategoryBox();
+        });
+        
+        // Department change
+        departmentSelect.addEventListener('change', updateCategoryOptions);
+        
+        // Listen for changes on all form elements
+        const formElements = document.querySelectorAll('input, select');
+        formElements.forEach(element => {
+            element.addEventListener('change', updateUrlIfVisible);
+        });
+    }
+    
+    function updateZipCode() {
+        const marketplace = marketplaceSelect.value;
+        const zipInfo = zipCodes[marketplace];
+        const zipHelper = document.querySelector('.plz_helper');
+        
+        if (zipInfo) {
+            zipHelper.innerHTML = `.${marketplace.toUpperCase()}: <span class="copy_me">${zipInfo.zip}</span> (${zipInfo.location})`;
+        }
+    }
+    
+    function handleCopyZip() {
+        const zipCode = document.querySelector('.copy_me').textContent;
+        navigator.clipboard.writeText(zipCode).then(function() {
+            copyMessage.style.display = 'inline';
+            setTimeout(() => {
+                copyMessage.style.display = 'none';
+            }, 2000);
+        });
+    }
+    
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        
+        // Generate and display the URL
+        const amazonUrl = generateAmazonUrl();
+        generatedUrlEl.textContent = amazonUrl;
+        resultUrlContainer.style.display = 'block';
+        visitUrlBtn.href = amazonUrl;
+        
+        // Scroll to the result
+        resultUrlContainer.scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    function handleCopyUrl() {
+        const urlText = generatedUrlEl.textContent;
+        navigator.clipboard.writeText(urlText).then(function() {
+            copyUrlBtn.textContent = 'Copied!';
+            setTimeout(function() {
+                copyUrlBtn.textContent = 'Copy URL';
+            }, 2000);
+        });
+    }
+    
+    function updateUrlIfVisible() {
+        if (resultUrlContainer.style.display !== 'none') {
+            const amazonUrl = generateAmazonUrl();
+            generatedUrlEl.textContent = amazonUrl;
+            visitUrlBtn.href = amazonUrl;
+        }
+    }
+    
+    function toggleDepartmentCategoryBox() {
+        const isCustom = productTypeSelect.value === 'custom';
+        departmentCategoryBox.style.display = isCustom ? 'block' : 'none';
+    }
+    
+    function updateCategoryOptions() {
+        const department = departmentSelect.value;
+        
+        // Clear current options
+        categorySelect.innerHTML = '<option value="">No Category Filter</option>';
+        
+        // Disable category if "All Departments" is selected
+        if (!department) {
+            categorySelect.disabled = true;
+            return;
+        }
+        
+        // Enable category and add options based on department
+        categorySelect.disabled = false;
+        const categories = amazonCategories[department] || [];
+        
+        categories.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.value;
+            option.textContent = category.text;
+            categorySelect.appendChild(option);
+        });
+    }
+    
+    function updateProductTypeSettings() {
+        const productType = productTypeSelect.value;
+        
+        // Auto-check "Basic Tees Only" for t-shirts
+        if (productType === 'tshirt') {
+            basicTeesCheckbox.checked = true;
+        }
+        
+        // You could set other product type specific settings here
+    }
+    
+    function generateAmazonUrl() {
+        // Get base marketplace
+        const marketplace = marketplaceSelect.value;
+        let baseUrl = `https://amazon.${marketplace}`;
+        
+        // Get search query
+        const searchQuery = document.getElementById('searchInput').value.trim();
+        
+        // Initialize parameters array to join with & later
+        let paramParts = [];
+        
+        // Add search term if provided
+        if (searchQuery) {
+            paramParts.push(`k=${encodeURIComponent(searchQuery)}`);
+        }
+        
+        // Collection for rh parameters
+        let rhParams = [];
+        
+        // Add time filter
+        const timeFilter = document.querySelector('input[name="timeFilter"]:checked').value;
+        if (timeFilter) {
+            rhParams.push(timeFilter);
+        }
+        
+        // Add seller filter
+        const sellerAmazon = document.getElementById('sellerAmazon').checked;
+        if (sellerAmazon) {
+            rhParams.push(document.getElementById('sellerAmazon').value);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.2/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
