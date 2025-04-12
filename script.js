@@ -34,8 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
         'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
         'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
         'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-        // Add more product type specific filters as needed
-        // 'product_type': 'corresponding hidden keywords',
+        'vneck': 'V-Neck%2C+Classic+fit%2C+Lightweight',
+        'raglan': 'Raglan+sleeve%2C+Classic+fit',
+        'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
+        'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
+        'case': 'Slim-Fitting+Protective+Case+for+Phone',
+        'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
+        'totebag': 'Tote+Bag%2C+Double-sided+print'
+        // Add more as needed
     };
     
     // ZIP codes for different marketplaces
@@ -62,6 +68,9 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Initialize product type specific settings
         updateProductTypeSettings();
+        
+        // Initialize department/category box visibility
+        toggleDepartmentCategoryBox();
     }
     
     function setupEventListeners() {
@@ -147,6 +156,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function toggleDepartmentCategoryBox() {
         const isCustom = productTypeSelect.value === 'custom';
         departmentCategoryBox.style.display = isCustom ? 'block' : 'none';
+        
+        // Reset and disable category select if not custom
+        if (!isCustom) {
+            departmentSelect.value = "";
+            categorySelect.innerHTML = '<option value="">No Category Filter</option>';
+            categorySelect.disabled = true;
+        }
     }
     
     function updateCategoryOptions() {
@@ -179,9 +195,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Auto-check "Basic Tees Only" for t-shirts
         if (productType === 'tshirt') {
             basicTeesCheckbox.checked = true;
+        } else {
+            basicTeesCheckbox.checked = false;
         }
         
-        // You could set other product type specific settings here
+        // Set custom hidden keywords based on product type
+        const customHiddenKeywordsField = document.getElementById('customHiddenKeywords');
+        // Clear existing custom hidden keywords
+        customHiddenKeywordsField.value = '';
+        
+        // Set product-type specific keywords if needed
+        // You could implement additional logic here
     }
     
     function generateAmazonUrl() {
@@ -214,3 +238,94 @@ document.addEventListener('DOMContentLoaded', function() {
         if (sellerAmazon) {
             rhParams.push(document.getElementById('sellerAmazon').value);
         }
+        
+        // Add reviews filter
+        const reviewsFilter = document.getElementById('reviewsFilter').checked;
+        if (reviewsFilter) {
+            rhParams.push(document.getElementById('reviewsFilter').value);
+        }
+        
+        // Add price filter
+        const minPrice = document.getElementById('minPrice').value;
+        const maxPrice = document.getElementById('maxPrice').value;
+        if (minPrice && maxPrice) {
+            rhParams.push(`p_36%3A${minPrice}00-${maxPrice}00`);
+        }
+        
+        // Add category filter if Custom product type and category is selected
+        if (productTypeSelect.value === 'custom') {
+            const category = document.getElementById('category').value;
+            if (category) {
+                rhParams.push(`n%3A${category}`);
+            }
+        }
+        
+        // Add hidden keywords filters
+        let hiddenKeywords = [];
+        
+        // Product type specific keywords (for t-shirt, auto-select "Basic Tees Only")
+        const productType = productTypeSelect.value;
+        if (productType !== 'custom' && productTypeKeywords[productType]) {
+            if (productType === 'tshirt' && basicTeesCheckbox.checked) {
+                hiddenKeywords.push(productTypeKeywords[productType]);
+            }
+        }
+        
+        // Get all checked preset hidden keywords
+        document.querySelectorAll('.hidden-keyword-preset:checked').forEach(checkbox => {
+            // Skip filterBasicTees if already added product specific keywords for tshirt
+            if (!(checkbox.id === 'filterBasicTees' && productType === 'tshirt')) {
+                hiddenKeywords.push(checkbox.value);
+            }
+        });
+        
+        // Add custom hidden keywords if provided
+        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
+        if (customKeywords) {
+            hiddenKeywords.push(customKeywords);
+        }
+        
+        // Add exclude brands filter - always add this at the end if selected
+        const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
+        if (filterExcludeBrands) {
+            hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
+        }
+        
+        // Add hidden-keywords parameter if we have any
+        if (hiddenKeywords.length > 0) {
+            paramParts.push(`hidden-keywords=${hiddenKeywords.join('+')}`);
+        }
+        
+        // Add sort order
+        const sortOrder = document.getElementById('sortOrder').value;
+        if (sortOrder) {
+            paramParts.push(`s=${sortOrder}`);
+        }
+        
+        // Add department only if custom product type is selected
+        if (productTypeSelect.value === 'custom') {
+            const department = document.getElementById('department').value;
+            if (department) {
+                paramParts.push(`i=${department}`);
+            }
+        }
+        
+        // Combine all rh parameters with comma (%2C)
+        if (rhParams.length > 0) {
+            paramParts.push(`rh=${rhParams.join('%2C')}`);
+        }
+        
+        // Build the final URL
+        let url = baseUrl;
+        
+        // Always add /s for search
+        url += '/s';
+        
+        // Add parameters if we have any
+        if (paramParts.length > 0) {
+            url += '?' + paramParts.join('&');
+        }
+        
+        return url;
+    }
+});
