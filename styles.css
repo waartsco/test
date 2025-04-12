@@ -310,3 +310,25 @@ footer {
         flex-direction: column;
     }
 }
+
+.disabled-filter-box {
+    opacity: 0.7;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.disabled-filter-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(240, 240, 240, 0.1);
+    pointer-events: none;
+}
+
+.disabled-filter-box select,
+.disabled-filter-box input {
+    cursor: not-allowed;
+}
