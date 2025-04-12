@@ -143,14 +143,14 @@ body {
     flex: 1;
     border: none;
     border-radius: 0;
-    padding-right: 110px; /* Make room for the button and marketplace selector */
+    padding-right: 50px; /* Make room for the button */
     height: 50px;
     font-size: 1rem;
 }
 
 .search-input-group .search-button {
     position: absolute;
-    right: 50px; /* Position to the right of the input but before marketplace selector */
+    right: 0;
     top: 0;
     height: 100%;
     width: 50px;
@@ -169,34 +169,6 @@ body {
     box-shadow: none;
 }
 
-.search-input-group .marketplace-selector {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 50px;
-    height: 100%;
-}
-
-.search-input-group .marketplace-selector select {
-    height: 100%;
-    width: 100%;
-    border: none;
-    border-radius: 0;
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: bold;
-    padding: 0;
-    text-align: center;
-    appearance: none;
-    background-image: none;
-}
-
-.search-input-group .marketplace-selector select:focus {
-    box-shadow: none;
-    border: none;
-}
-
-/* Update the search button icon styling */
 .search-button i {
     color: var(--dark-color);
     font-size: 1.2rem;
