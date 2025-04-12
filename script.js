@@ -142,6 +142,13 @@ function updateMarketplaceFilters() {
     // Update reviews filter value
     document.getElementById('reviewsFilter').value = config.reviewsFilter;
 }
+
+    // Ensure the result URL container is visible
+    resultUrlContainer.style.display = 'block';
+    
+    // Generate initial URL
+    updateGeneratedUrl();
+    
     // Initialize the UI
     init();
     
@@ -180,7 +187,7 @@ function updateGeneratedUrl() {
     generatedUrlEl.textContent = amazonUrl;
 }
 
-// Function to setup event listeners for all filter elements
+// Completely revised event listener setup
 function setupEventListeners() {
     // Form submission
     searchForm.addEventListener('submit', handleFormSubmit);
@@ -191,44 +198,49 @@ function setupEventListeners() {
     // Copy ZIP code
     copyZipBtn.addEventListener('click', handleCopyZip);
     
-    // Add input and change event listeners to ALL form elements
-    const allFormInputs = searchForm.querySelectorAll('input, select');
-    allFormInputs.forEach(element => {
-        element.addEventListener('input', updateGeneratedUrl);
-        element.addEventListener('change', updateGeneratedUrl);
-    });
+    // Direct listeners for all form controls
     
-    // Special handling for radio buttons and checkboxes
-    const radioButtons = searchForm.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(radio => {
-        radio.addEventListener('click', updateGeneratedUrl);
-    });
+    // Text inputs
+    document.getElementById('searchInput').addEventListener('input', updateGeneratedUrl);
+    document.getElementById('customHiddenKeywords').addEventListener('input', updateGeneratedUrl);
     
-    const checkboxes = searchForm.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.addEventListener('click', updateGeneratedUrl);
-    });
+    // Price inputs
+    document.getElementById('minPrice').addEventListener('input', updateGeneratedUrl);
+    document.getElementById('maxPrice').addEventListener('input', updateGeneratedUrl);
     
-    // Marketplace change - needs special handling for related updates
+    // Selects
     marketplaceSelect.addEventListener('change', function() {
         updateZipCode();
         updateMarketplaceFilters();
         updateGeneratedUrl();
     });
     
-    // Product type change - needs special handling for related updates
     productTypeSelect.addEventListener('change', function() {
         updateProductTypeSettings();
         updateDepartmentCategoryState();
         updateGeneratedUrl();
     });
     
-    // Department change - needs special handling for category updates
     departmentSelect.addEventListener('change', function() {
         updateCategoryOptions();
-        updateDepartmentCategoryState(); // Update the state again
         updateGeneratedUrl();
     });
+    
+    categorySelect.addEventListener('change', updateGeneratedUrl);
+    document.getElementById('sortOrder').addEventListener('change', updateGeneratedUrl);
+    
+    // Radio buttons
+    const timeFilters = document.querySelectorAll('input[name="timeFilter"]');
+    timeFilters.forEach(radio => {
+        radio.addEventListener('click', updateGeneratedUrl);
+    });
+    
+    // Checkboxes
+    document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
+    document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
+    document.getElementById('filterBasicTees').addEventListener('click', updateGeneratedUrl);
+    document.getElementById('filterCotton').addEventListener('click', updateGeneratedUrl);
+    document.getElementById('filterExcludeBrands').addEventListener('click', updateGeneratedUrl);
 }
     
     function hideProductSpecificFilters() {
@@ -325,7 +337,7 @@ function updateDepartmentCategoryState() {
     departmentCategoryBox.classList.remove('disabled-filter-box');
 }
     
-// Update the category options when department changes
+// Ensure category properly updates URL
 function updateCategoryOptions() {
     const department = departmentSelect.value;
     
@@ -349,6 +361,9 @@ function updateCategoryOptions() {
         option.textContent = category.text;
         categorySelect.appendChild(option);
     });
+    
+    // Make sure URL updates
+    updateGeneratedUrl();
 }
     
     function updateProductTypeSettings() {
