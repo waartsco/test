@@ -256,8 +256,8 @@ function setupEventListeners() {
                 this.value = this.value.replace(/\D/g, '');
                 
                 // Limit to 2 digits
-                if (this.value.length > 6) {
-                    this.value = this.value.slice(0, 6);
+                if (this.value.length > 2) {
+                    this.value = this.value.slice(0, 2);
                 }
             });
         });
