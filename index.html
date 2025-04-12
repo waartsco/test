@@ -140,22 +140,22 @@
                 </select>
             </div>
             
-            <div class="filter-box" id="departmentCategoryBox" style="display: none;">
-                <div class="filter-title">Department & Category</div>
-                <select id="department" class="form-control mb-2">
-                    <option value="">All Departments</option>
-                    <option value="fashion-novelty">Novelty & More</option>
-                    <option value="fashion">Clothing, Shoes & Jewelry</option>
-                    <!-- 
-                    You can add more departments here later. 
-                    Format: <option value="department-code">Department Name</option>
-                    -->
-                </select>
-                <select id="category" class="form-control" disabled>
-                    <option value="">No Category Filter</option>
-                    <!-- Categories will be populated by JavaScript based on department selection -->
-                </select>
-            </div>
+            <div class="filter-box" id="departmentCategoryBox">
+    <div class="filter-title">Department & Category</div>
+    <select id="department" class="form-control mb-2">
+        <option value="">All Departments</option>
+        <option value="fashion-novelty">Novelty & More</option>
+        <option value="fashion">Clothing, Shoes & Jewelry</option>
+        <!-- 
+        You can add more departments here later. 
+        Format: <option value="department-code">Department Name</option>
+        -->
+    </select>
+    <select id="category" class="form-control" disabled>
+        <option value="">No Category Filter</option>
+        <!-- Categories will be populated by JavaScript based on department selection -->
+    </select>
+</div>
             
 <div class="filter-box">
     <div class="filter-title">Hidden Keywords</div>
@@ -182,13 +182,12 @@
         </div>
         
         <div class="result-url" id="resultUrlContainer" style="display: none;">
-            <h5 class="mb-2">Generated Amazon URL</h5>
-            <div class="url-box" id="generatedUrl"></div>
-            <div class="action-buttons">
-                <button id="copyUrlBtn" class="btn btn-copy">Copy URL</button>
-                <a id="visitUrlBtn" href="#" target="_blank" class="btn btn-visit">Visit Amazon</a>
-            </div>
-        </div>
+    <h5 class="mb-2">Generated Amazon URL</h5>
+    <div class="url-copy-container">
+        <div class="url-box" id="generatedUrl"></div>
+        <button id="copyUrlBtn" class="btn-url-copy"><i class="fas fa-clipboard"></i></button>
+    </div>
+</div>
     </div>
     
     <footer>
