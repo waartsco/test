@@ -19,23 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
     
-    // Product type hidden keyword mappings
-    const productTypeKeywords = {
-        'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-        'premtshirt': 'Premium+shirt',
-        'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
-        'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
-        'raglan': 'Raglan+sleeve%2C+Classic+fit',
-        'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-        'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-        'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-        'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
-        'case': 'Slim-Fitting+Protective+Case+for+Phone',
-        'totebag': 'Tote+Bag%2C+Double-sided+print',
-        'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
-        'tumbler': 'tumbler+Cover%2C+Decorative'
-    };
-    
     // ZIP codes for different marketplaces
     const zipCodes = {
         'com': { zip: '90210', location: 'Beverly Hills, CA' },
@@ -48,14 +31,60 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Define marketplace-specific parameters
-    const marketplaceConfig = {
+// Replace the current marketplaceConfig object with this expanded version
+const marketplaceConfig = {
     'com': { // USA
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AATVPDKIKX0DER',
-        reviewsFilter: 'p_72%3A2661618011'
+        reviewsFilter: 'p_72%3A2661618011',
+        // Add product type keywords specific to USA
+        productTypeKeywords: {
+            'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'Premium+shirt',
+            'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
+            'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+            'raglan': 'Raglan+sleeve%2C+Classic+fit',
+            'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
+            'case': 'Slim-Fitting+Protective+Case+for+Phone',
+            'totebag': 'Tote+Bag%2C+Double-sided+print',
+            'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
+            'tumbler': 'tumbler+Cover%2C+Decorative'
+        },
+        // Add supported sort orders for USA
+        sortOrders: [
+            { value: '', text: 'Default' },
+            { value: 'most-purchased-rank', text: 'Most Purchased (Best Sellers)' },
+            { value: 'exact-aware-popularity-rank', text: 'Best Seller Sort' },
+            { value: 'date-desc-rank', text: 'Newest Arrivals' },
+            { value: 'date-asc-rank', text: 'Oldest First' },
+            { value: 'review-rank', text: 'Top Rated' },
+            { value: 'price-desc-rank', text: 'Price High to Low' },
+            { value: 'price-asc-rank', text: 'Price Low to High' },
+            { value: 'relevancerank', text: 'Relevance' },
+            { value: 'relevanceblender', text: 'Relevance Blender' },
+            { value: 'featured-rank', text: 'Featured' },
+            { value: 'most-wished-for-rank', text: 'Most Wished For' }
+        ],
+        // Departments and categories for USA
+        categories: {
+            'fashion': [
+                { value: '7141123011', text: 'Men\'s Clothing' },
+                { value: '1040660', text: 'Women\'s Clothing' },
+                { value: '9056922011', text: 'Women\'s Novelty Tops & Tees' },
+                { value: '12035955011', text: 'Men\'s Novelty T-Shirts' },
+                { value: '1040658', text: 'Boys\' Clothing' },
+                { value: '1040664', text: 'Girls\' Clothing' }
+            ],
+            'fashion-novelty': []
+        },
+        // Brands to exclude for USA
+        excludeBrands: '-LyricLyfe+-Disney+-Marvel+-Star Wars+-Mademark+-Harry Potter+-Pixar+-SANRIO+-Elite Authentics+-Barbie+-BATMAN+-Jeff Dunham+-CJ Grips+-BreakingT+-Spongebob SquarePants+-Ballpark MVP+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-STAR TREK+-Stranger Things+-Fallout+-MTV+-Beetlejuice+-South Park+-Peanuts+-Hello Kitty+-Miraculous+-Jeep+-Gypsy Queen+-The Rolling Stones+-Transformers+-NEW LINE CINEMA+-Sagittarius Gallery+-Scooby-Doo+-Official High School Fan Gear+-Pink Floyd+-Nickelodeon+-Care Bears'
     },
     'co.uk': { // UK
         timeFilters: {
@@ -63,62 +92,205 @@ document.addEventListener('DOMContentLoaded', function() {
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AA3P5ROKL5A1OLE',
-        reviewsFilter: 'p_72%3A419153031'
+        reviewsFilter: 'p_72%3A419153031',
+        // UK-specific product keywords
+        productTypeKeywords: {
+            'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'Premium+shirt',
+            'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
+            'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+            'raglan': 'Raglan+sleeve%2C+Classic+fit',
+            'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+            'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
+            'case': 'Slim-Fitting+Protective+Case+for+Phone',
+            'totebag': 'Tote+Bag%2C+Double-sided+print',
+            'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
+            'tumbler': 'tumbler+Cover%2C+Decorative'
+        },
+        // UK-specific sort orders
+        sortOrders: [
+            { value: '', text: 'Default' },
+            { value: 'popularity-rank', text: 'Most Popular' },
+            { value: 'date-desc-rank', text: 'Newest Arrivals' },
+            { value: 'review-rank', text: 'Top Rated' },
+            { value: 'price-desc-rank', text: 'Price High to Low' },
+            { value: 'price-asc-rank', text: 'Price Low to High' }
+        ],
+        // UK-specific categories
+        categories: {
+            'fashion': [
+                { value: '83450031', text: 'Men\'s Clothing' },
+                { value: '1731296031', text: 'Women\'s Clothing' },
+                { value: '1730986031', text: 'Boys\' Clothing' },
+                { value: '1730985031', text: 'Girls\' Clothing' }
+            ],
+            'fashion-novelty': []
+        },
+        // Brands to exclude for UK
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-SANRIO+-Barbie+-BATMAN+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-BBC+-ITV+-Channel 4'
     },
-    'de': { // Germany
+    // Repeat for other marketplaces with their specific values
+    'de': {
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AA3JWKAKR8XB7XF',
-        reviewsFilter: 'p_72%3A419117031'
+        reviewsFilter: 'p_72%3A419117031',
+        productTypeKeywords: {
+            'tshirt': 'Leichtes%2C+Klassisch+geschnitten%2C+Doppelt+genähter+Saum+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'Premium+shirt',
+            'tanktop': 'Tank+Top%2C+Leicht%2C+Klassische+Passform',
+            'longsleeve': 'Langarm%2C+Klassische+Passform',
+            'hoodie': 'Kapuzenpullover%2C+Fleece%2C+Klassische+Passform',
+            'sweatshirt': 'Sweatshirt%2C+Fleece%2C+Klassische+Passform',
+            'case': 'Schutzhülle+für+Handy',
+            'totebag': 'Tragetasche%2C+Beidseitiger+Druck'
+        },
+        sortOrders: [
+            { value: '', text: 'Standard' },
+            { value: 'popularity-rank', text: 'Beliebtheit' },
+            { value: 'date-desc-rank', text: 'Neueste Zuerst' },
+            { value: 'review-rank', text: 'Durchschnittliche Kundenbewertung' },
+            { value: 'price-desc-rank', text: 'Preis: Hoch zu Niedrig' },
+            { value: 'price-asc-rank', text: 'Preis: Niedrig zu Hoch' }
+        ],
+        categories: {
+            'fashion': [
+                { value: '1981604031', text: 'Herren Bekleidung' },
+                { value: '1981603031', text: 'Damen Bekleidung' }
+            ],
+            'fashion-novelty': []
+        },
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-ARD+-ZDF+-RTL'
     },
-    'fr': { // France
+    // Add the other marketplaces in the same format
+    'fr': {
+        // French marketplace config with French-specific values
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AA1X6FK5RDHNB96',
-        reviewsFilter: 'p_72%3A437873031'
+        reviewsFilter: 'p_72%3A437873031',
+        productTypeKeywords: {
+            'tshirt': 'Léger%2C+Coupe+classique%2C+Manches+à+double+couture+et+ourlet+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'T-shirt+Premium',
+            'longsleeve': 'Manches+Longues%2C+Coupe+Classique',
+            'hoodie': 'Sweat+à+Capuche%2C+Coupe+Classique',
+            'case': 'Coque+de+Protection+pour+Téléphone'
+        },
+        sortOrders: [
+            { value: '', text: 'Par défaut' },
+            { value: 'popularity-rank', text: 'Popularité' },
+            { value: 'date-desc-rank', text: 'Nouveautés' },
+            { value: 'review-rank', text: 'Meilleures évaluations' },
+            { value: 'price-desc-rank', text: 'Prix: décroissant' },
+            { value: 'price-asc-rank', text: 'Prix: croissant' }
+        ],
+        categories: {
+            'fashion': [
+                { value: '1765333031', text: 'Vêtements Homme' },
+                { value: '1765334031', text: 'Vêtements Femme' }
+            ],
+            'fashion-novelty': []
+        },
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-TF1+-France Télévisions+-Canal+'
     },
-    'it': { // Italy
+    // Complete the other marketplaces similarly
+    'it': {
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AA11IL2PNWYJU7H',
-        reviewsFilter: 'p_72%3A490298031'
+        reviewsFilter: 'p_72%3A490298031',
+        productTypeKeywords: {
+            'tshirt': 'Leggero%2C+Vestibilità+classica%2C+Manica+doppia+cucita+e+orlo+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'Premium+shirt',
+            'hoodie': 'Felpa+con+Cappuccio%2C+Vestibilità+Classica',
+            'case': 'Cover+Protettiva+per+Telefono'
+        },
+        sortOrders: [
+            { value: '', text: 'Predefinito' },
+            { value: 'popularity-rank', text: 'Più popolari' },
+            { value: 'date-desc-rank', text: 'Novità' },
+            { value: 'review-rank', text: 'Recensioni migliori' },
+            { value: 'price-desc-rank', text: 'Prezzo: da alto a basso' },
+            { value: 'price-asc-rank', text: 'Prezzo: da basso ad alto' }
+        ],
+        categories: {
+            'fashion': [
+                { value: '5515768031', text: 'Abbigliamento uomo' },
+                { value: '5515767031', text: 'Abbigliamento donna' }
+            ],
+            'fashion-novelty': []
+        },
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Mediaset+-RAI'
     },
-    'es': { // Spain
+    'es': {
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AA1AT7YVPFBWXBL',
-        reviewsFilter: 'p_72%3A831271031'
+        reviewsFilter: 'p_72%3A831271031',
+        productTypeKeywords: {
+            'tshirt': 'Ligero%2C+Corte+clásico%2C+Manga+de+doble+costura+y+dobladillo+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'Camiseta+Premium',
+            'hoodie': 'Sudadera+con+Capucha%2C+Corte+Clásico',
+            'case': 'Funda+Protectora+para+Teléfono'
+        },
+        sortOrders: [
+            { value: '', text: 'Predeterminado' },
+            { value: 'popularity-rank', text: 'Más populares' },
+            { value: 'date-desc-rank', text: 'Novedades' },
+            { value: 'review-rank', text: 'Mejor valorados' },
+            { value: 'price-desc-rank', text: 'Precio: de mayor a menor' },
+            { value: 'price-asc-rank', text: 'Precio: de menor a mayor' }
+        ],
+        categories: {
+            'fashion': [
+                { value: '2846227031', text: 'Ropa de hombre' },
+                { value: '2846226031', text: 'Ropa de mujer' }
+            ],
+            'fashion-novelty': []
+        },
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Telecinco+-Antena 3'
     },
-    'jp': { // Japan
+    'jp': {
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
             '90days': 'p_n_date_first_available_absolute%3A15196853011'
         },
         sellerFilter: 'p_6%3AAN1VRQENFRJN5',
-        reviewsFilter: 'p_72%3A2240292051'
+        reviewsFilter: 'p_72%3A2240292051',
+        productTypeKeywords: {
+            'tshirt': '軽量%2C+クラシックフィット%2C+ダブルニードル袖と裾+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+            'premtshirt': 'プレミアムシャツ',
+            'hoodie': 'パーカー%2C+クラシックフィット',
+            'case': 'スマートフォン用保護ケース'
+        },
+        sortOrders: [
+            { value: '', text: 'デフォルト' },
+            { value: 'popularity-rank', text: '人気順' },
+            { value: 'date-desc-rank', text: '新着順' },
+            { value: 'review-rank', text: '評価の高い順' },
+            { value: 'price-desc-rank', text: '価格が高い順' },
+            { value: 'price-asc-rank', text: '価格が安い順' }
+        ],
+        categories: {
+            'fashion': [
+                { value: '2230006051', text: 'メンズ衣類' },
+                { value: '2230005051', text: 'レディース衣類' }
+            ],
+            'fashion-novelty': []
+        },
+        excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-ドラゴンボール+-ワンピース+-鬼滅の刃'
     }
 };
-
-    // Define Amazon categories structure
-    const amazonCategories = {
-        'fashion': [
-            { value: '7141123011', text: 'Men\'s Clothing' },
-            { value: '1040660', text: 'Women\'s Clothing' },
-            { value: '9056922011', text: 'Women\'s Novelty Tops & Tees' },
-            { value: '12035955011', text: 'Men\'s Novelty T-Shirts' },
-            { value: '1040658', text: 'Boys\' Clothing' },
-            { value: '1040664', text: 'Girls\' Clothing' }
-        ],
-        'fashion-novelty': [] // No specific categories for Novelty & More
-    };
 
 // Update time filter radio values based on marketplace
 function updateMarketplaceFilters() {
@@ -134,6 +306,18 @@ function updateMarketplaceFilters() {
     
     // Update reviews filter value
     document.getElementById('reviewsFilter').value = config.reviewsFilter;
+    
+    // Update excluded brands filter value
+    const filterExcludeBrands = document.getElementById('filterExcludeBrands');
+    if (filterExcludeBrands && config.excludeBrands) {
+        filterExcludeBrands.value = config.excludeBrands;
+    }
+    
+    // Update sort order options
+    updateSortOrderOptions();
+    
+    // Update departments/categories
+    updateCategoryOptions();
 }
 
     // Ensure the result URL container is visible
@@ -204,7 +388,7 @@ function setupEventListeners() {
     // Selects
     marketplaceSelect.addEventListener('change', function() {
         updateZipCode();
-        updateMarketplaceFilters();
+        updateMarketplaceFilters(); // This now includes sortOrder updates
         updateGeneratedUrl();
     });
     
@@ -332,7 +516,9 @@ function updateDepartmentCategoryState() {
     
 // Ensure category properly updates URL
 function updateCategoryOptions() {
+    const marketplace = marketplaceSelect.value;
     const department = departmentSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
     
     // Clear current options
     categorySelect.innerHTML = '<option value="">No Category Filter</option>';
@@ -343,10 +529,10 @@ function updateCategoryOptions() {
         return;
     }
     
-    // Enable category and add options based on department
+    // Enable category and add options based on department and marketplace
     categorySelect.disabled = false;
     
-    const categories = amazonCategories[department] || [];
+    const categories = config.categories && config.categories[department] ? config.categories[department] : [];
     
     categories.forEach(category => {
         const option = document.createElement('option');
@@ -450,13 +636,13 @@ function updateCategoryOptions() {
     
     // Product type specific keywords (only apply if not "custom")
     const productType = productTypeSelect.value;
-    if (productType !== 'custom' && productTypeKeywords[productType]) {
-        hiddenKeywords.push(productTypeKeywords[productType]);
+    if (productType !== 'custom' && config.productTypeKeywords && config.productTypeKeywords[productType]) {
+        hiddenKeywords.push(config.productTypeKeywords[productType]);
     }
     
     // Add 100% Cotton filter if applicable and not "custom"
-    if (cottonCheckbox.checked && productType !== 'custom') {
-        hiddenKeywords.push(cottonCheckbox.value);
+    if (document.getElementById('filterCotton').checked && productType !== 'custom') {
+        hiddenKeywords.push(document.getElementById('filterCotton').value);
     }
     
     // Add exclude brands filter - always add this at the end if selected
