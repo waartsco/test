@@ -9,13 +9,36 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- CSS will be loaded externally -->
     <link rel="stylesheet" href="styles.css">
+            <style>
+            .logo-container {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+.logo-image {
+    max-height: 40px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.logo-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+        </style>
 </head>
 <body>
     <div class="header-section">
         <div class="container">
-            <h1 class="text-center header-title">Merch <span class="logo-highlight">Research</span> Tool</h1>
-            <p class="text-center header-subtitle mb-0">Find the best Merch By Amazon opportunities with advanced search parameters</p>
+    <h1 class="text-center header-title">
+        <div class="logo-container">
+            <img src="icon.png" alt="MerchScope Logo" class="logo-image">
+            <span class="logo-text">Merch<span class="logo-highlight">Scope</span></span>
         </div>
+    </h1>
+    <p class="text-center header-subtitle mb-0">Discover your niche. Design with insight.</p>
+</div>
     </div>
     
     <div class="container-fluid px-4">
@@ -104,7 +127,7 @@
                 <div class="filter-title">Seller Filters</div>
                 <div class="checkbox-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER">
+                        <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER" checked>
                         <label class="form-check-label" for="sellerAmazon">Seller is Amazon</label>
                     </div>
                     <div class="form-check">
@@ -160,16 +183,17 @@
         <!-- Categories will be populated by JavaScript based on department selection -->
     </select>
 </div>
-            
-<div class="filter-box">
+        </div>
+
+        <div class="filter-box">
     <div class="filter-title">Hidden Keywords</div>
     <div class="checkbox-group" id="hiddenKeywordsContainer">
         <!-- Hide these in a container that we can toggle visibility on -->
-        <div id="filterBasicTeesContainer" class="form-check">
+        <div id="filterBasicTeesContainer" class="form-check" style="display:none">
             <input class="form-check-input hidden-keyword-preset" type="checkbox" id="filterBasicTees" value="Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop">
             <label class="form-check-label" for="filterBasicTees">Basic Tees Only</label>
         </div>
-        <div id="filterCottonContainer" class="form-check">
+        <div id="filterCottonContainer" class="form-check" style="display:none">
             <input class="form-check-input hidden-keyword-preset" type="checkbox" id="filterCotton" value="100%25+Cotton+-Sweatshirt">
             <label class="form-check-label" for="filterCotton">100% Cotton (No Sweatshirts)</label>
         </div>
@@ -183,7 +207,6 @@
         </div>
     </div>
 </div>
-        </div>
         
         <div class="result-url" id="resultUrlContainer">
     <h5 class="mb-2">Generated Amazon URL</h5>
