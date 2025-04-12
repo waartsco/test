@@ -20,19 +20,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const maxPriceInput = document.getElementById('maxPrice');
     
     // Product type hidden keyword mappings
-    /*const productTypeKeywords = {
+    const productTypeKeywords = {
         'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+        'premtshirt': 'Premium+shirt',
+        'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
         'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+        'raglan': 'Raglan+sleeve%2C+Classic+fit',
         'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
         'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-        'vneck': 'V-Neck%2C+Classic+fit%2C+Lightweight',
-        'raglan': 'Raglan+sleeve%2C+Classic+fit',
-        'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
+        'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
         'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
         'case': 'Slim-Fitting+Protective+Case+for+Phone',
-        'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
         'totebag': 'Tote+Bag%2C+Double-sided+print'
-    };*/
+        'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
+        'tumbler': 'tumbler+Cover%2C+Decorative'
+    };
     
     // ZIP codes for different marketplaces
     const zipCodes = {
@@ -42,12 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
         'fr': { zip: '75001', location: 'Paris' },
         'it': { zip: '00100', location: 'Rome' },
         'es': { zip: '28001', location: 'Madrid' },
-        'jp': { zip: '100-0001', location: 'Tokyo' },
-        'ca': { zip: 'M5V 2A8', location: 'Toronto, ON' }
+        'jp': { zip: '100-0001', location: 'Tokyo' }
     };
 
     // Define marketplace-specific parameters
-const marketplaceConfig = {
+    const marketplaceConfig = {
     'com': { // USA
         timeFilters: {
             '30days': 'p_n_date_first_available_absolute%3A15196852011',
@@ -109,14 +110,6 @@ const marketplaceConfig = {
         },
         sellerFilter: 'p_6%3AAN1VRQENFRJN5',
         reviewsFilter: 'p_72%3A2240292051'
-    },
-    'ca': { // Canada
-        timeFilters: {
-            '30days': 'p_n_date_first_available_absolute%3A15196852011',
-            '90days': 'p_n_date_first_available_absolute%3A15196853011'
-        },
-        sellerFilter: 'p_6%3AA3DWYIK6Y9EEQB',
-        reviewsFilter: 'p_72%3A11192170011'
     }
 };
 
