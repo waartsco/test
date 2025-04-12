@@ -182,22 +182,26 @@ function setupEventListeners() {
     marketplaceSelect.addEventListener('change', function() {
         updateZipCode();
         updateMarketplaceFilters();
+        updateUrlIfVisible(); // Add this to ensure URL updates
     });
     
     // Product type change
     productTypeSelect.addEventListener('change', function() {
         updateProductTypeSettings();
         updateDepartmentCategoryState();
+        updateUrlIfVisible(); // Add this to ensure URL updates
     });
     
     // Department change
-    departmentSelect.addEventListener('change', updateCategoryOptions);
-    
-    // Listen for changes on all form elements
-    const formElements = document.querySelectorAll('input, select');
-    formElements.forEach(element => {
-        element.addEventListener('change', updateUrlIfVisible);
+    departmentSelect.addEventListener('change', function() {
+        updateCategoryOptions();
+        updateUrlIfVisible(); // Add this to ensure URL updates
     });
+    
+    // More direct approach for real-time updates
+    // Listen for all input changes on the form
+    searchForm.addEventListener('input', updateUrlIfVisible);
+    searchForm.addEventListener('change', updateUrlIfVisible);
 }
     
     function hideProductSpecificFilters() {
@@ -274,12 +278,12 @@ function setupEventListeners() {
 }
     
     function updateUrlIfVisible() {
-        if (resultUrlContainer.style.display !== 'none') {
-            const amazonUrl = generateAmazonUrl();
-            generatedUrlEl.textContent = amazonUrl;
-            visitUrlBtn.href = amazonUrl;
-        }
+    // Always update the URL if the result container is visible
+    if (resultUrlContainer.style.display !== 'none') {
+        const amazonUrl = generateAmazonUrl();
+        generatedUrlEl.textContent = amazonUrl;
     }
+}
     
     function updateDepartmentCategoryState() {
     const productType = productTypeSelect.value;
