@@ -129,6 +129,79 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.search-input-group {
+    display: flex;
+    position: relative;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+}
+
+.search-input-group input {
+    flex: 1;
+    border: none;
+    border-radius: 0;
+    padding-right: 110px; /* Make room for the button and marketplace selector */
+    height: 50px;
+    font-size: 1rem;
+}
+
+.search-input-group .search-button {
+    position: absolute;
+    right: 50px; /* Position to the right of the input but before marketplace selector */
+    top: 0;
+    height: 100%;
+    width: 50px;
+    border-radius: 0;
+    background-color: var(--secondary-color);
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-input-group .search-button:hover {
+    background-color: var(--hover-color);
+    transform: none;
+    box-shadow: none;
+}
+
+.search-input-group .marketplace-selector {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50px;
+    height: 100%;
+}
+
+.search-input-group .marketplace-selector select {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 0;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    padding: 0;
+    text-align: center;
+    appearance: none;
+    background-image: none;
+}
+
+.search-input-group .marketplace-selector select:focus {
+    box-shadow: none;
+    border: none;
+}
+
+/* Update the search button icon styling */
+.search-button i {
+    color: var(--dark-color);
+    font-size: 1.2rem;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
