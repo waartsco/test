@@ -176,7 +176,7 @@ body {
 
 @media (min-width: 425px) {
     .search-input-group .search-button {
-        width: 50px;
+        width: 33%;
     }
     .search-button:after {
     content: '\00a0 Search';
