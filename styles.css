@@ -103,7 +103,7 @@ body {
     }
     
     .copy_area {
-        justify-content: space-between;
+        font-size:0.7rem;
     }
 }
 
