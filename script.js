@@ -145,7 +145,7 @@ function updateMarketplaceFilters() {
     // Initialize the UI
     init();
     
-    function init() {
+function init() {
     // Update ZIP code display
     updateZipCode();
     
@@ -166,8 +166,17 @@ function updateMarketplaceFilters() {
     
     // Initialize hidden keywords checkboxes
     updateProductTypeSpecificFilters();
+    
+    // Generate and display the initial URL
+    updateGeneratedUrl();
+}
+    // Function to update the generated URL display
+function updateGeneratedUrl() {
+    const amazonUrl = generateAmazonUrl();
+    generatedUrlEl.textContent = amazonUrl;
 }
 
+// Modify the event listeners to update the URL in real-time
 function setupEventListeners() {
     // Form submission
     searchForm.addEventListener('submit', handleFormSubmit);
@@ -178,30 +187,29 @@ function setupEventListeners() {
     // Copy ZIP code
     copyZipBtn.addEventListener('click', handleCopyZip);
     
-    // Marketplace change
+    // Add input and change event listeners to the form
+    searchForm.addEventListener('input', updateGeneratedUrl);
+    searchForm.addEventListener('change', updateGeneratedUrl);
+    
+    // Marketplace change - needs special handling for related updates
     marketplaceSelect.addEventListener('change', function() {
         updateZipCode();
         updateMarketplaceFilters();
-        updateUrlIfVisible(); // Add this to ensure URL updates
+        updateGeneratedUrl();
     });
     
-    // Product type change
+    // Product type change - needs special handling for related updates
     productTypeSelect.addEventListener('change', function() {
         updateProductTypeSettings();
         updateDepartmentCategoryState();
-        updateUrlIfVisible(); // Add this to ensure URL updates
+        updateGeneratedUrl();
     });
     
-    // Department change
+    // Department change - needs special handling for category updates
     departmentSelect.addEventListener('change', function() {
         updateCategoryOptions();
-        updateUrlIfVisible(); // Add this to ensure URL updates
+        updateGeneratedUrl();
     });
-    
-    // More direct approach for real-time updates
-    // Listen for all input changes on the form
-    searchForm.addEventListener('input', updateUrlIfVisible);
-    searchForm.addEventListener('change', updateUrlIfVisible);
 }
     
     function hideProductSpecificFilters() {
@@ -251,16 +259,12 @@ function setupEventListeners() {
         });
     }
     
-    function handleFormSubmit(e) {
+// Update the form submit handler to only open the URL
+function handleFormSubmit(e) {
     e.preventDefault();
     
     // Generate the URL
     const amazonUrl = generateAmazonUrl();
-    generatedUrlEl.textContent = amazonUrl;
-    resultUrlContainer.style.display = 'block';
-    
-    // Scroll to the result
-    resultUrlContainer.scrollIntoView({ behavior: 'smooth' });
     
     // Open the URL in a new tab
     window.open(amazonUrl, '_blank');
