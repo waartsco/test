@@ -145,6 +145,7 @@ function updateMarketplaceFilters() {
     // Initialize the UI
     init();
     
+// Make sure the URL container is visible by default
 function init() {
     // Update ZIP code display
     updateZipCode();
@@ -169,6 +170,9 @@ function init() {
     
     // Generate and display the initial URL
     updateGeneratedUrl();
+    
+    // Make sure the result URL container is visible
+    resultUrlContainer.style.display = 'block';
 }
     // Function to update the generated URL display
 function updateGeneratedUrl() {
@@ -176,7 +180,7 @@ function updateGeneratedUrl() {
     generatedUrlEl.textContent = amazonUrl;
 }
 
-// Modify the event listeners to update the URL in real-time
+// Function to setup event listeners for all filter elements
 function setupEventListeners() {
     // Form submission
     searchForm.addEventListener('submit', handleFormSubmit);
@@ -187,9 +191,23 @@ function setupEventListeners() {
     // Copy ZIP code
     copyZipBtn.addEventListener('click', handleCopyZip);
     
-    // Add input and change event listeners to the form
-    searchForm.addEventListener('input', updateGeneratedUrl);
-    searchForm.addEventListener('change', updateGeneratedUrl);
+    // Add input and change event listeners to ALL form elements
+    const allFormInputs = searchForm.querySelectorAll('input, select');
+    allFormInputs.forEach(element => {
+        element.addEventListener('input', updateGeneratedUrl);
+        element.addEventListener('change', updateGeneratedUrl);
+    });
+    
+    // Special handling for radio buttons and checkboxes
+    const radioButtons = searchForm.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => {
+        radio.addEventListener('click', updateGeneratedUrl);
+    });
+    
+    const checkboxes = searchForm.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('click', updateGeneratedUrl);
+    });
     
     // Marketplace change - needs special handling for related updates
     marketplaceSelect.addEventListener('change', function() {
@@ -208,6 +226,7 @@ function setupEventListeners() {
     // Department change - needs special handling for category updates
     departmentSelect.addEventListener('change', function() {
         updateCategoryOptions();
+        updateDepartmentCategoryState(); // Update the state again
         updateGeneratedUrl();
     });
 }
@@ -289,42 +308,48 @@ function handleFormSubmit(e) {
     }
 }
     
-    function updateDepartmentCategoryState() {
-    const productType = productTypeSelect.value;
+    // Fix for Department & Category issue
+function updateDepartmentCategoryState() {
+    const department = departmentSelect.value;
     
-    // Keep fields enabled always, but clear category when department changes
-    categorySelect.disabled = departmentSelect.value === "";
+    // Only disable category if no department is selected
+    categorySelect.disabled = department === "";
     
-    // Update visual state of the filter box (no longer adding disabled class)
+    // If a department is selected, enable the category select
+    if (department) {
+        categorySelect.disabled = false;
+    }
+    
+    // Update visual state of the filter box
     const departmentCategoryBox = document.getElementById('departmentCategoryBox');
     departmentCategoryBox.classList.remove('disabled-filter-box');
 }
     
-    function updateCategoryOptions() {
-        const department = departmentSelect.value;
-        
-        // Clear current options
-        categorySelect.innerHTML = '<option value="">No Category Filter</option>';
-        
-        // Disable category if "All Departments" is selected
-        if (!department) {
-            categorySelect.disabled = true;
-            return;
-        }
-        
-        // Enable category and add options based on department
-        const isCustom = productTypeSelect.value === 'custom';
-        categorySelect.disabled = !isCustom;
-        
-        const categories = amazonCategories[department] || [];
-        
-        categories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category.value;
-            option.textContent = category.text;
-            categorySelect.appendChild(option);
-        });
+// Update the category options when department changes
+function updateCategoryOptions() {
+    const department = departmentSelect.value;
+    
+    // Clear current options
+    categorySelect.innerHTML = '<option value="">No Category Filter</option>';
+    
+    // Disable category if "All Departments" is selected
+    if (!department) {
+        categorySelect.disabled = true;
+        return;
     }
+    
+    // Enable category and add options based on department
+    categorySelect.disabled = false;
+    
+    const categories = amazonCategories[department] || [];
+    
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.value;
+        option.textContent = category.text;
+        categorySelect.appendChild(option);
+    });
+}
     
     function updateProductTypeSettings() {
         const productType = productTypeSelect.value;
