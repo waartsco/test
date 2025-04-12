@@ -58,58 +58,147 @@ document.addEventListener('DOMContentLoaded', function() {
         'jp': { zip: '100-0001', location: 'Tokyo' },
         'ca': { zip: 'M5V 2A8', location: 'Toronto, ON' }
     };
+
+    // Define marketplace-specific parameters
+const marketplaceConfig = {
+    'com': { // USA
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AATVPDKIKX0DER',
+        reviewsFilter: 'p_72%3A2661618011'
+    },
+    'co.uk': { // UK
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA3P5ROKL5A1OLE',
+        reviewsFilter: 'p_72%3A419153031'
+    },
+    'de': { // Germany
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA3JWKAKR8XB7XF',
+        reviewsFilter: 'p_72%3A419117031'
+    },
+    'fr': { // France
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA1X6FK5RDHNB96',
+        reviewsFilter: 'p_72%3A437873031'
+    },
+    'it': { // Italy
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA11IL2PNWYJU7H',
+        reviewsFilter: 'p_72%3A490298031'
+    },
+    'es': { // Spain
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA1AT7YVPFBWXBL',
+        reviewsFilter: 'p_72%3A831271031'
+    },
+    'jp': { // Japan
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AAN1VRQENFRJN5',
+        reviewsFilter: 'p_72%3A2240292051'
+    },
+    'ca': { // Canada
+        timeFilters: {
+            '30days': 'p_n_date_first_available_absolute%3A15196852011',
+            '90days': 'p_n_date_first_available_absolute%3A15196853011'
+        },
+        sellerFilter: 'p_6%3AA3DWYIK6Y9EEQB',
+        reviewsFilter: 'p_72%3A11192170011'
+    }
+};
+
+// Update time filter radio values based on marketplace
+function updateMarketplaceFilters() {
+    const marketplace = marketplaceSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
     
+    // Update time filter values
+    document.getElementById('timeFilter30Days').value = config.timeFilters['30days'];
+    document.getElementById('timeFilter90Days').value = config.timeFilters['90days'];
+    
+    // Update seller filter value
+    document.getElementById('sellerAmazon').value = config.sellerFilter;
+    
+    // Update reviews filter value
+    document.getElementById('reviewsFilter').value = config.reviewsFilter;
+}
     // Initialize the UI
     init();
     
     function init() {
-        // Update ZIP code display
-        updateZipCode();
-        
-        // Set up event listeners
-        setupEventListeners();
-        
-        // Initialize product type specific settings
-        updateProductTypeSettings();
-        
-        // Set up department/category box visibility and state
-        updateDepartmentCategoryState();
-        
-        // Set up price input constraints
-        setupPriceInputs();
-        
-        // Hide specific hidden keywords checkboxes
-        hideProductSpecificFilters();
-    }
+    // Update ZIP code display
+    updateZipCode();
     
-    function setupEventListeners() {
-        // Form submission
-        searchForm.addEventListener('submit', handleFormSubmit);
-        
-        // Copy URL button
-        copyUrlBtn.addEventListener('click', handleCopyUrl);
-        
-        // Copy ZIP code
-        copyZipBtn.addEventListener('click', handleCopyZip);
-        
-        // Marketplace change
-        marketplaceSelect.addEventListener('change', updateZipCode);
-        
-        // Product type change
-        productTypeSelect.addEventListener('change', function() {
-            updateProductTypeSettings();
-            updateDepartmentCategoryState();
-        });
-        
-        // Department change
-        departmentSelect.addEventListener('change', updateCategoryOptions);
-        
-        // Listen for changes on all form elements
-        const formElements = document.querySelectorAll('input, select');
-        formElements.forEach(element => {
-            element.addEventListener('change', updateUrlIfVisible);
-        });
-    }
+    // Update marketplace-specific filters
+    updateMarketplaceFilters();
+    
+    // Set up event listeners
+    setupEventListeners();
+    
+    // Initialize product type specific settings
+    updateProductTypeSettings();
+    
+    // Set up department/category box visibility and state
+    updateDepartmentCategoryState();
+    
+    // Set up price input constraints
+    setupPriceInputs();
+    
+    // Initialize hidden keywords checkboxes
+    updateProductTypeSpecificFilters();
+}
+
+function setupEventListeners() {
+    // Form submission
+    searchForm.addEventListener('submit', handleFormSubmit);
+    
+    // Copy URL button
+    copyUrlBtn.addEventListener('click', handleCopyUrl);
+    
+    // Copy ZIP code
+    copyZipBtn.addEventListener('click', handleCopyZip);
+    
+    // Marketplace change
+    marketplaceSelect.addEventListener('change', function() {
+        updateZipCode();
+        updateMarketplaceFilters();
+    });
+    
+    // Product type change
+    productTypeSelect.addEventListener('change', function() {
+        updateProductTypeSettings();
+        updateDepartmentCategoryState();
+    });
+    
+    // Department change
+    departmentSelect.addEventListener('change', updateCategoryOptions);
+    
+    // Listen for changes on all form elements
+    const formElements = document.querySelectorAll('input, select');
+    formElements.forEach(element => {
+        element.addEventListener('change', updateUrlIfVisible);
+    });
+}
     
     function hideProductSpecificFilters() {
         // Hide the Basic Tees and Cotton filter options
@@ -159,27 +248,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function handleFormSubmit(e) {
-        e.preventDefault();
-        
-        // Generate and display the URL
-        const amazonUrl = generateAmazonUrl();
-        generatedUrlEl.textContent = amazonUrl;
-        resultUrlContainer.style.display = 'block';
-        visitUrlBtn.href = amazonUrl;
-        
-        // Scroll to the result
-        resultUrlContainer.scrollIntoView({ behavior: 'smooth' });
-    }
+    e.preventDefault();
+    
+    // Generate the URL
+    const amazonUrl = generateAmazonUrl();
+    generatedUrlEl.textContent = amazonUrl;
+    resultUrlContainer.style.display = 'block';
+    
+    // Scroll to the result
+    resultUrlContainer.scrollIntoView({ behavior: 'smooth' });
+    
+    // Open the URL in a new tab
+    window.open(amazonUrl, '_blank');
+}
     
     function handleCopyUrl() {
-        const urlText = generatedUrlEl.textContent;
-        navigator.clipboard.writeText(urlText).then(function() {
-            copyUrlBtn.textContent = 'Copied!';
-            setTimeout(function() {
-                copyUrlBtn.textContent = 'Copy URL';
-            }, 2000);
-        });
-    }
+    const urlText = generatedUrlEl.textContent;
+    navigator.clipboard.writeText(urlText).then(function() {
+        // Visual feedback
+        copyUrlBtn.classList.add('copy-success');
+        setTimeout(function() {
+            copyUrlBtn.classList.remove('copy-success');
+        }, 1500);
+    });
+}
     
     function updateUrlIfVisible() {
         if (resultUrlContainer.style.display !== 'none') {
@@ -190,20 +282,15 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateDepartmentCategoryState() {
-        const isCustom = productTypeSelect.value === 'custom';
-        
-        // Make fields disabled but not hidden when "Custom" is not selected
-        departmentSelect.disabled = !isCustom;
-        categorySelect.disabled = !isCustom || departmentSelect.value === "";
-        
-        // Apply visual indication of disabled state
-        const departmentCategoryBox = document.getElementById('departmentCategoryBox');
-        if (isCustom) {
-            departmentCategoryBox.classList.remove('disabled-filter-box');
-        } else {
-            departmentCategoryBox.classList.add('disabled-filter-box');
-        }
-    }
+    const productType = productTypeSelect.value;
+    
+    // Keep fields enabled always, but clear category when department changes
+    categorySelect.disabled = departmentSelect.value === "";
+    
+    // Update visual state of the filter box (no longer adding disabled class)
+    const departmentCategoryBox = document.getElementById('departmentCategoryBox');
+    departmentCategoryBox.classList.remove('disabled-filter-box');
+}
     
     function updateCategoryOptions() {
         const department = departmentSelect.value;
@@ -253,120 +340,117 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function generateAmazonUrl() {
-        // Get base marketplace
-        const marketplace = marketplaceSelect.value;
-        let baseUrl = `https://amazon.${marketplace}`;
-        
-        // Get search query
-        const searchQuery = document.getElementById('searchInput').value.trim();
-        
-        // Initialize parameters array to join with & later
-        let paramParts = [];
-        
-        // Add search term if provided
-        if (searchQuery) {
-            paramParts.push(`k=${encodeURIComponent(searchQuery)}`);
-        }
-        
-        // Collection for rh parameters
-        let rhParams = [];
-        
-        // Add time filter
-        const timeFilter = document.querySelector('input[name="timeFilter"]:checked').value;
-        if (timeFilter) {
-            rhParams.push(timeFilter);
-        }
-        
-        // Add seller filter
-        const sellerAmazon = document.getElementById('sellerAmazon').checked;
-        if (sellerAmazon) {
-            rhParams.push(document.getElementById('sellerAmazon').value);
-        }
-        
-        // Add reviews filter
-        const reviewsFilter = document.getElementById('reviewsFilter').checked;
-        if (reviewsFilter) {
-            rhParams.push(document.getElementById('reviewsFilter').value);
-        }
-        
-        // Add price filter
-        const minPrice = document.getElementById('minPrice').value;
-        const maxPrice = document.getElementById('maxPrice').value;
-        if (minPrice && maxPrice) {
-            rhParams.push(`p_36%3A${minPrice}00-${maxPrice}00`);
-        }
-        
-        // Add category filter if Custom product type and category is selected
-        if (productTypeSelect.value === 'custom') {
-            const category = document.getElementById('category').value;
-            if (category) {
-                rhParams.push(`n%3A${category}`);
-            }
-        }
-        
-        // Add hidden keywords filters
-        let hiddenKeywords = [];
-        
-        // First add any custom user-specified hidden keywords (priority #1)
-        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
-        if (customKeywords) {
-            hiddenKeywords.push(customKeywords);
-        }
-        
-        // Product type specific keywords (applied based on product selection)
-        const productType = productTypeSelect.value;
-        if (productType !== 'custom' && productTypeKeywords[productType]) {
-            if (productType === 'tshirt' && basicTeesCheckbox.checked) {
-                hiddenKeywords.push(productTypeKeywords[productType]);
-            }
-        }
-        
-        // Add 100% Cotton filter if applicable
-        if (cottonCheckbox.checked) {
-            hiddenKeywords.push(cottonCheckbox.value);
-        }
-        
-        // Add exclude brands filter - always add this at the end if selected
-        const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
-        if (filterExcludeBrands) {
-            hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
-        }
-        
-        // Add hidden-keywords parameter if we have any
-        if (hiddenKeywords.length > 0) {
-            paramParts.push(`hidden-keywords=${hiddenKeywords.join('+')}`);
-        }
-        
-        // Add sort order
-        const sortOrder = document.getElementById('sortOrder').value;
-        if (sortOrder) {
-            paramParts.push(`s=${sortOrder}`);
-        }
-        
-        // Add department only if custom product type is selected
-        if (productTypeSelect.value === 'custom') {
-            const department = document.getElementById('department').value;
-            if (department) {
-                paramParts.push(`i=${department}`);
-            }
-        }
-        
-        // Combine all rh parameters with comma (%2C)
-        if (rhParams.length > 0) {
-            paramParts.push(`rh=${rhParams.join('%2C')}`);
-        }
-        
-        // Build the final URL
-        let url = baseUrl;
-        
-        // Always add /s for search
-        url += '/s';
-        
-        // Add parameters if we have any
-        if (paramParts.length > 0) {
-            url += '?' + paramParts.join('&');
-        }
-        
-        return url;
+    // Get base marketplace
+    const marketplace = marketplaceSelect.value;
+    let baseUrl = `https://amazon.${marketplace}`;
+    
+    // Get marketplace config
+    const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
+    
+    // Get search query
+    const searchQuery = document.getElementById('searchInput').value.trim();
+    
+    // Initialize parameters array to join with & later
+    let paramParts = [];
+    
+    // Add search term if provided
+    if (searchQuery) {
+        paramParts.push(`k=${encodeURIComponent(searchQuery)}`);
     }
+    
+    // Collection for rh parameters
+    let rhParams = [];
+    
+    // Add time filter
+    const timeFilter = document.querySelector('input[name="timeFilter"]:checked').value;
+    if (timeFilter) {
+        rhParams.push(timeFilter);
+    }
+    
+    // Add seller filter
+    const sellerAmazon = document.getElementById('sellerAmazon').checked;
+    if (sellerAmazon) {
+        rhParams.push(document.getElementById('sellerAmazon').value);
+    }
+    
+    // Add reviews filter
+    const reviewsFilter = document.getElementById('reviewsFilter').checked;
+    if (reviewsFilter) {
+        rhParams.push(document.getElementById('reviewsFilter').value);
+    }
+    
+    // Add price filter
+    const minPrice = document.getElementById('minPrice').value;
+    const maxPrice = document.getElementById('maxPrice').value;
+    if (minPrice && maxPrice) {
+        rhParams.push(`p_36%3A${minPrice}00-${maxPrice}00`);
+    }
+    
+    // Always add department and category if selected (regardless of product type)
+    const department = document.getElementById('department').value;
+    if (department) {
+        paramParts.push(`i=${department}`);
+        
+        // Add category filter if department and category are both selected
+        const category = document.getElementById('category').value;
+        if (category) {
+            rhParams.push(`n%3A${category}`);
+        }
+    }
+    
+    // Add hidden keywords filters
+    let hiddenKeywords = [];
+    
+    // First add any custom user-specified hidden keywords (priority #1)
+    const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
+    if (customKeywords) {
+        hiddenKeywords.push(customKeywords);
+    }
+    
+    // Product type specific keywords (only apply if not "custom")
+    const productType = productTypeSelect.value;
+    if (productType !== 'custom' && productTypeKeywords[productType]) {
+        hiddenKeywords.push(productTypeKeywords[productType]);
+    }
+    
+    // Add 100% Cotton filter if applicable and not "custom"
+    if (cottonCheckbox.checked && productType !== 'custom') {
+        hiddenKeywords.push(cottonCheckbox.value);
+    }
+    
+    // Add exclude brands filter - always add this at the end if selected
+    const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
+    if (filterExcludeBrands) {
+        hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
+    }
+    
+    // Add hidden-keywords parameter if we have any
+    if (hiddenKeywords.length > 0) {
+        paramParts.push(`hidden-keywords=${hiddenKeywords.join('+')}`);
+    }
+    
+    // Add sort order
+    const sortOrder = document.getElementById('sortOrder').value;
+    if (sortOrder) {
+        paramParts.push(`s=${sortOrder}`);
+    }
+    
+    // Combine all rh parameters with comma (%2C)
+    if (rhParams.length > 0) {
+        paramParts.push(`rh=${rhParams.join('%2C')}`);
+    }
+    
+    // Build the final URL
+    let url = baseUrl;
+    
+    // Always add /s for search
+    url += '/s';
+    
+    // Add parameters if we have any
+    if (paramParts.length > 0) {
+        url += '?' + paramParts.join('&');
+    }
+    
+    return url;
+}
 });
