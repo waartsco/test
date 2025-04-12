@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
         'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
         'case': 'Slim-Fitting+Protective+Case+for+Phone',
-        'totebag': 'Tote+Bag%2C+Double-sided+print'
+        'totebag': 'Tote+Bag%2C+Double-sided+print',
         'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
         'tumbler': 'tumbler+Cover%2C+Decorative'
     };
