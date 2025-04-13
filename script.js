@@ -88,14 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
             reviewsFilter: 'p_72%3A2661618011',
             // Add product type keywords specific to USA
             productTypeKeywords: {
-                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'premtshirt': 'This+premium+t-shirt+is+made+of+lightweight+fine+jersey+fabric+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'tanktop': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-premium',
+                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'Fit%3A+Men’s+fit+runs+small%2C+size+up+for+a+looser+fit.+Women’s+fit+is+true+to+size%2C+order+usual+size.+is+made+of+lightweight+fine+jersey+fabric+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'tanktop': '"tank top" Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-V-neck',
                 'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-Raglan+-Vneck+-sweathshirt+-tanktop',
-                'raglan': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-long+-vneck+-sweathshirt+-tanktop',
-                'sweatshirt': 'sweatshirt+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop',
-                'hoodie': '"pullover+hoodie"+hooded+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop+-sweatshirt+-"zip hoodie"',
-                'ziphoodie': '"zip+hoodie"+hooded+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop+-sweatshirt+-"pullover hoodie"',
+                'raglan': '"raglan" Lightweight, Classic fit, Double-needle sleeve and bottom hem+-Longsleeve+-Vneck+-Tanktop',
+                'sweatshirt': '"sweatshirt" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop+-hoodie',
+                'hoodie': '"pullover hoodie" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop+-zip',
+                'ziphoodie': '"zip hoodie" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop',
                 'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
                 'case': 'Slim-Fitting+Protective+Case+for+Phone',
                 'totebag': 'Tote+Bag%2C+Double-sided+print',
@@ -167,18 +167,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 'fashion-novelty': {
                     displayName: 'Fashion Novelty',
-                    categories: [
-                        {value: '7141123011', text: 'Men\'s Clothing'},
-                        {value: '1040660', text: 'Women\'s Clothing'},
-                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
-                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
-                        {value: '1040658', text: 'Boys\' Clothing'},
-                        {value: '1040664', text: 'Girls\' Clothing'}
-                    ]
+                    categories: []
+                }
+                'mobile': {
+                    displayName: 'Mobile',
+                    categories: []
                 }
             },
             // Brands to exclude for USA
-            excludeBrands: '+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+Zelda'
+            excludeBrands: '+-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+Zelda'
         },
         'co.uk': { // UK
             timeFilters: {
