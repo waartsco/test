@@ -145,7 +145,7 @@ body {
 	flex: 1;
 	border: none;
 	border-radius: 0;
-	padding-right: 50px;
+	padding-right: 85px;
 	/* Make room for the button */
 	height: 50px;
 	font-size: 1rem;
@@ -170,6 +170,21 @@ body {
 	background-color: var(--hover-color);
 	transform: none;
 	box-shadow: none;
+}
+.clear-search-btn {
+    position: absolute;
+    right: 60px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+    z-index: 10;
+    padding: 8px;
+    transition: color 0.2s ease;
+}
+
+.clear-search-btn:hover {
+    color: var(--primary-color);
 }
 
 .search-button i {
