@@ -35,10 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         updateCategoryOptions();
     }
-        
-        // Update the category dropdown based on the default department selection
-        updateCategoryOptions();
-    }
 
     // ZIP codes for different marketplaces
     const zipCodes = {
