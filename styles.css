@@ -173,7 +173,7 @@ body {
 }
 .clear-search-btn {
     position: absolute;
-    right: 60px;
+    right: 33%;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
