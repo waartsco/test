@@ -111,14 +111,15 @@ const productTypeToDepartment = {
   'popsocket': 'mobile',
   'case': 'mobile',
   'totebag': 'garden',
-  'throwpillow': 'garden'
+  'throwpillow': 'garden',
+    'tumbler':'garden'
 };
 
 const departmentToProductType = {
   'stripbooks': 'KDP',
   'fashion-novelty': 'tshirt',
   'mobile': 'case',
-  'garden': 'throwpillow'
+  'garden': 'totebag'
 };
 
     // Define marketplace-specific parameters
