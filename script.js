@@ -129,6 +129,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Top Rated (Review Rank)'
                 },
                 {
+                    value: 'review-count-rank',
+                    text: 'Most Reviews Count Rank'
+                },
+                {
                     value: 'price-desc-rank',
                     text: 'Price High to Low'
                 },
