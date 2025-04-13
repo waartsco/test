@@ -100,10 +100,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 'case': '"case" "Two-part protective case made from a premium scratch-resistant polycarbonate shell and shock absorbent TPU liner protects against drops"',
                 'totebag': '"Tote+Bag"+Made+of+a+lightweight%2C+spun+polyester+canvas-like+fabric.+All+seams+and+stress+points+are+double-stitched+for+durability%2C+and+the+reinforced+bottom+flattens+to+fit+more+items+and+hold+larger+objects.',
                 'throwpillow': '"Throw Pillow" Filled with 100% polyester and sewn closed',
-                'tumbler': '"Tumbler" "Merch on Demand"'
+                'tumbler': '"Tumbler" "Merch on Demand"',
+                'KDP': "independently+published"
             },
             // Add supported sort orders for USA
             sortOrders: [{
+                    value: '',
+                    text: 'Default (none)'
+                },
+                {
                     value: 'date-desc-rank',
                     text: 'Newest Arrivals'
                 },
@@ -154,28 +159,37 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             // Departments and categories for USA
             categories: {
-                'fashion': {
-                    displayName: 'Fashion',
-                    categories: [
-                        {value: '7141123011', text: 'Men\'s Clothing'},
-                        {value: '1040660', text: 'Women\'s Clothing'},
-                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
-                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
-                        {value: '1040658', text: 'Boys\' Clothing'},
-                        {value: '1040664', text: 'Girls\' Clothing'}
-                    ]
-                },
                 'fashion-novelty': {
                     displayName: 'Fashion Novelty',
                     categories: []
                 },
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7147441011', text: 'Men\'s Clothing'},
+                        {value: '7147440011', text: 'Women\'s Clothing'},
+                        {value: '9056921011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '9056985011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040666', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
                 'mobile': {
-                    displayName: 'Popsockets & Cases',
+                    displayName: 'Cell Phones & Accessories',
                     categories: []
                 },
                 'garden': {
-                    displayName: 'Throw Pillows',
+                    displayName: 'Home & Kitchen',
                     categories: []
+                },
+                // 'stripbooks-intl-ship' MRB uses this
+                'stripbooks': {
+                    displayName: 'Books (KDP)',
+                    categories: [
+                        {value: '3248857011', text: 'Calendars'},
+                        {value: '4', text: 'Children\'s Books'},
+                        {value: '48', text: 'Crafts, Home & Hobbies'}
+                    ]
                 }
             },
             // Brands to exclude for USA
