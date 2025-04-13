@@ -208,26 +208,26 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         'co.uk': { // UK
             timeFilters: {
-                '30days': 'p_n_date_first_available_absolute%3A15196852011',
-                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+                '30days': 'COUKp_n_date_first_available_absolute%3A15196852011',
+                '90days': 'COUKp_n_date_first_available_absolute%3A15196853011'
             },
-            sellerFilter: 'p_6%3AA3P5ROKL5A1OLE',
-            reviewsFilter: 'p_72%3A419153031',
+            sellerFilter: 'COUKp_6%3AA3P5ROKL5A1OLE',
+            reviewsFilter: 'COUKp_72%3A419153031',
             // UK-specific product keywords
             productTypeKeywords: {
-                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'premtshirt': 'Premium+shirt',
-                'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
-                'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
-                'raglan': 'Raglan+sleeve%2C+Classic+fit',
-                'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-                'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-                'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-                'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
-                'case': 'Slim-Fitting+Protective+Case+for+Phone',
-                'totebag': 'Tote+Bag%2C+Double-sided+print',
-                'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
-                'tumbler': 'tumbler+Cover%2C+Decorative'
+                'tshirt': 'COUKLightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'COUKPremium+shirt',
+                'tanktop': 'COUKTank+Top%2C+Lightweight%2C+Classic+fit',
+                'longsleeve': 'COUKLong+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+                'raglan': 'COUKRaglan+sleeve%2C+Classic+fit',
+                'sweatshirt': 'COUKSweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'hoodie': 'COUKHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'ziphoodie': 'COUKZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'popsocket': 'COUKPopSockets+grip+and+stand+for+phones+and+tablets',
+                'case': 'COUKSlim-Fitting+Protective+Case+for+Phone',
+                'totebag': 'COUKTote+Bag%2C+Double-sided+print',
+                'throwpillow': 'COUKThrow+Pillow+Cover%2C+Decorative',
+                'tumbler': 'COUKtumbler+Cover%2C+Decorative'
             },
             // UK-specific sort orders
             sortOrders: [{
@@ -235,34 +235,34 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Default'
                 },
                 {
-                    value: 'popularity-rank',
-                    text: 'Most Popular'
+                    value: 'COUKpopularity-rank',
+                    text: 'COUKMost Popular'
                 },
                 {
-                    value: 'date-desc-rank',
-                    text: 'Newest Arrivals'
+                    value: 'COUKdate-desc-rank',
+                    text: 'COUKNewest Arrivals'
                 },
                 {
-                    value: 'review-rank',
-                    text: 'Top Rated'
+                    value: 'COUKreview-rank',
+                    text: 'COUKTop Rated'
                 },
                 {
-                    value: 'price-desc-rank',
-                    text: 'Price High to Low'
+                    value: 'COUKprice-desc-rank',
+                    text: 'COUKPrice High to Low'
                 },
                 {
-                    value: 'price-asc-rank',
-                    text: 'Price Low to High'
+                    value: 'COUKprice-asc-rank',
+                    text: 'COUKPrice Low to High'
                 }
             ],
             // UK-specific categories
             categories: {
                 'fashion': [{
-                        value: '83450031',
+                        value: 'COUK83450031',
                         text: 'Men\'s Clothing'
                     },
                     {
-                        value: '1731296031',
+                        value: 'COUK1731296031',
                         text: 'Women\'s Clothing'
                     },
                     {
@@ -274,22 +274,22 @@ document.addEventListener('DOMContentLoaded', function() {
                         text: 'Girls\' Clothing'
                     }
                 ],
-                'fashion-novelty': []
+                'fashion-noveltyCOUK': []
             },
             // Brands to exclude for UK
-            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-SANRIO+-Barbie+-BATMAN+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-BBC+-ITV+-Channel 4'
+            excludeBrands: 'COUK-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-SANRIO+-Barbie+-BATMAN+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-BBC+-ITV+-Channel 4'
         },
         // Repeat for other marketplaces with their specific values
         'de': {
             timeFilters: {
-                '30days': 'p_n_date_first_available_absolute%3A15196852011',
-                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+                '30days': 'DEp_n_date_first_available_absolute%3A15196852011',
+                '90days': 'DEp_n_date_first_available_absolute%3A15196853011'
             },
-            sellerFilter: 'p_6%3AA3JWKAKR8XB7XF',
-            reviewsFilter: 'p_72%3A419117031',
+            sellerFilter: 'DEp_6%3AA3JWKAKR8XB7XF',
+            reviewsFilter: 'DEp_72%3A419117031',
             productTypeKeywords: {
-                'tshirt': 'Leichtes%2C+Klassisch+geschnitten%2C+Doppelt+genähter+Saum+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'premtshirt': 'Premium+shirt',
+                'tshirt': 'DELeichtes%2C+Klassisch+geschnitten%2C+Doppelt+genähter+Saum+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'DEPremium+shirt',
                 'tanktop': 'Tank+Top%2C+Leicht%2C+Klassische+Passform',
                 'longsleeve': 'Langarm%2C+Klassische+Passform',
                 'hoodie': 'Kapuzenpullover%2C+Fleece%2C+Klassische+Passform',
@@ -299,10 +299,10 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             sortOrders: [{
                     value: '',
-                    text: 'Standard'
+                    text: 'DEStandard'
                 },
                 {
-                    value: 'popularity-rank',
+                    value: 'DEpopularity-rank',
                     text: 'Beliebtheit'
                 },
                 {
@@ -324,17 +324,17 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             categories: {
                 'fashion': [{
-                        value: '1981604031',
-                        text: 'Herren Bekleidung'
+                        value: 'DE1981604031',
+                        text: 'DEHerren Bekleidung'
                     },
                     {
-                        value: '1981603031',
-                        text: 'Damen Bekleidung'
+                        value: 'DE1981603031',
+                        text: 'DEDamen Bekleidung'
                     }
                 ],
-                'fashion-novelty': []
+                'fashion-noveltyDE': []
             },
-            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-ARD+-ZDF+-RTL'
+            excludeBrands: 'DE-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-ARD+-ZDF+-RTL'
         },
         // Add the other marketplaces in the same format
         'fr': {
