@@ -19,6 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const minPriceInput = document.getElementById('minPrice');
     const maxPriceInput = document.getElementById('maxPrice');
 
+    //Search Clear
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    
+    if (searchInput.value.length > 0) {
+        clearSearchBtn.style.display = 'block';
+    }
+
     // Add this function to script.js
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
@@ -585,6 +593,28 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function setupClearSearchButton() {
+    const searchInput = document.getElementById('searchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    
+    // Show/hide clear button based on input content
+    searchInput.addEventListener('input', function() {
+                if (this.value.length > 0) {
+                    clearSearchBtn.style.display = 'block';
+                } else {
+                    clearSearchBtn.style.display = 'none';
+                }
+            });
+            
+            // Clear the input when X is clicked
+            clearSearchBtn.addEventListener('click', function() {
+                searchInput.value = '';
+                this.style.display = 'none';
+                searchInput.focus();
+                updateGeneratedUrl(); // Update the generated URL after clearing
+            });
+        }
+
     // Ensure the result URL container is visible
     resultUrlContainer.style.display = 'block';
 
@@ -611,6 +641,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set up event listeners
         setupEventListeners();
 
+        // Search Form Clear Button
+        setupClearSearchButton();
+
         // Set up department/category box visibility and state
         updateDepartmentCategoryState();
 
@@ -633,6 +666,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupEventListeners() {
         // Form submission
         searchForm.addEventListener('submit', handleFormSubmit);
+        searchForm.addEventListener('reset', function() {
+            document.getElementById('clearSearchBtn').style.display = 'none';
+            updateGeneratedUrl();
+        });
 
         // Copy URL button
         copyUrlBtn.addEventListener('click', handleCopyUrl);
