@@ -82,18 +82,18 @@ document.addEventListener('DOMContentLoaded', function() {
 const departmentConfig = {
   'stripbooks': {
     timeFilters: {
-      '30days': 'p_n_date_first_available_absolute%3A15196852011',
-      '90days': 'p_n_date_first_available_absolute%3A15196853011'
+      '30days': 'BOOKp_n_date_first_available_absolute%3A15196852011',
+      '90days': 'BOOKp_n_date_first_available_absolute%3A15196853011'
     },
-    sellerFilter: 'p_6%3AATVPDKIKX0DER',
-    reviewsFilter: 'p_72%3A419115011',
+    sellerFilter: 'BOOKp_6%3AATVPDKIKX0DER',
+    reviewsFilter: 'BOOKp_72%3A419115011',
     sortOrders: [
-      {value: '', text: 'Default (none)'},
-      {value: 'date-desc-rank', text: 'Newest Arrivals'},
-      {value: 'price-desc-rank', text: 'Price High to Low'},
-      {value: 'price-asc-rank', text: 'Price Low to High'},
-      {value: 'review-rank', text: 'Top Rated (Review Rank)'},
-      {value: 'salesrank', text: 'Best Sellers'}
+      {value: 'BOOK', text: 'Default (none)'},
+      {value: 'BOOKdate-desc-rank', text: 'Newest Arrivals'},
+      {value: 'BOOKprice-desc-rank', text: 'Price High to Low'},
+      {value: 'BOOKprice-asc-rank', text: 'Price Low to High'},
+      {value: 'BOOKreview-rank', text: 'Top Rated (Review Rank)'},
+      {value: 'BOOKsalesrank', text: 'Best Sellers'}
     ]
   }
 };
@@ -110,7 +110,7 @@ const productTypeToDepartment = {
   'ziphoodie': 'fashion-novelty',
   'popsocket': 'mobile',
   'case': 'mobile',
-  'totebag': 'fashion-novelty',
+  'totebag': 'garden',
   'throwpillow': 'garden'
 };
 
