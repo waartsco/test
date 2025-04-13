@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
             // Brands to exclude for USA
-            excludeBrands: '-LyricLyfe+-Disney+-Marvel+-Star Wars+-Mademark+-Harry Potter+-Pixar+-SANRIO+-Elite Authentics+-Barbie+-BATMAN+-Jeff Dunham+-CJ Grips+-BreakingT+-Spongebob SquarePants+-Ballpark MVP+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-STAR TREK+-Stranger Things+-Fallout+-MTV+-Beetlejuice+-South Park+-Peanuts+-Hello Kitty+-Miraculous+-Jeep+-Gypsy Queen+-The Rolling Stones+-Transformers+-NEW LINE CINEMA+-Sagittarius Gallery+-Scooby-Doo+-Official High School Fan Gear+-Pink Floyd+-Nickelodeon+-Care Bears'
+            excludeBrands: '-LyricLyfe+-Disney+-Marvel+-Star+Wars+-Mademark+-Harry+Potter+-Pixar+-SANRIO+-Elite+Authentics+-Barbie+-BATMAN+-Jeff+Dunham+-CJ+Grips+-BreakingT+-Spongebob+SquarePants+-Ballpark+MVP+-DC+Comics+-Looney+Tunes+-SUPER+MARIO+-Pokemon+-STAR+TREK+-Stranger+Things+-Fallout+-MTV+-Beetlejuice+-South+Park+-Peanuts+-Hello+Kitty+-Miraculous+-Jeep+-Gypsy+Queen+-The+Rolling+Stones+-Transformers+-NEW+LINE+CINEMA+-Sagittarius+Gallery+-Scooby-Doo+-Official+High+School+Fan+Gear+-Pink+Floyd+-Nickelodeon+-Care+Bears'
         },
         'co.uk': { // UK
             timeFilters: {
