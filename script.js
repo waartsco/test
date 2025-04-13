@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-        departmentSelect.innerHTML = '<option value="fashion-novelty">Novelty & More</option>';
+        departmentSelect.innerHTML = '<option value="fashion-novelty">Fashion Novelty & More</option>';
         
         if (config.categories) {
             Object.keys(config.categories).forEach(deptKey => {
@@ -163,10 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             // Departments and categories for USA
             categories: {
-                'fashion-novelty': {
-                    displayName: 'Fashion Novelty',
-                    categories: []
-                },
                 'fashion': {
                     displayName: 'Fashion',
                     categories: [
@@ -194,6 +190,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         {value: '4', text: 'Children\'s Books'},
                         {value: '48', text: 'Crafts, Home & Hobbies'}
                     ]
+                },
+                '': {
+                    displayName: 'No Department',
+                    categories: []
                 }
             },
             // Brands to exclude for USA
