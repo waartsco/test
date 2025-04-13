@@ -75,29 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
             location: 'Tokyo'
         }
     };
-
-// Add this to your existing marketplaceConfig
-// Inside the 'com' config object, add this new object for department-specific configurations
-// Add these right after the zipCodes constant declaration
-const departmentConfig = {
-  'stripbooks': {
-    timeFilters: {
-      '30days': 'BOOKp_n_date_first_available_absolute%3A15196852011',
-      '90days': 'BOOKp_n_date_first_available_absolute%3A15196853011'
-    },
-    sellerFilter: 'BOOKp_6%3AATVPDKIKX0DER',
-    reviewsFilter: 'BOOKp_72%3A419115011',
-    sortOrders: [
-      {value: 'BOOK', text: 'Default (none)'},
-      {value: 'BOOKdate-desc-rank', text: 'Newest Arrivals'},
-      {value: 'BOOKprice-desc-rank', text: 'Price High to Low'},
-      {value: 'BOOKprice-asc-rank', text: 'Price Low to High'},
-      {value: 'BOOKreview-rank', text: 'Top Rated (Review Rank)'},
-      {value: 'BOOKsalesrank', text: 'Best Sellers'}
-    ]
-  }
-};
-
+    
 const productTypeToDepartment = {
   'KDP': 'stripbooks',
   'tshirt': 'fashion-novelty',
@@ -126,12 +104,6 @@ const departmentToProductType = {
     // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
         'com': { // USA
-            timeFilters: {
-                '30days': 'p_n_date_first_available_absolute%3A15196852011',
-                '90days': 'p_n_date_first_available_absolute%3A15196853011'
-            },
-            sellerFilter: 'p_6%3AATVPDKIKX0DER',
-            reviewsFilter: 'p_72%3A2661618011',
             // Add product type keywords specific to USA
             productTypeKeywords: {
                 'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
@@ -243,7 +215,27 @@ const departmentToProductType = {
                 },
             },
             // Brands to exclude for USA
-            excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda'
+            excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda'},
+            departmentSettings: {
+              'stripbooks': {
+                timeFilters: {
+                  '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                  '90days': 'p_n_date_first_available_absolute%3A15196853011'
+                },
+                sellerFilter: 'p_6%3AATVPDKIKX0DER',
+                reviewsFilter: 'p_72%3A419115011',
+                sortOrders: [
+                  {value: '', text: 'Default (none)'},
+                  {value: 'date-desc-rank', text: 'Newest Arrivals'},
+                  {value: 'salesrank', text: 'Best Sellers'}
+                ]
+              }
+            },
+            productTypeMappings: {
+              'stripbooks': 'KDP',
+              'fashion-novelty': 'tshirt',
+              'mobile': 'case'
+            }
         },
         'co.uk': { // UK
             timeFilters: {
@@ -612,78 +604,52 @@ const departmentToProductType = {
     };
 
     // Update time filter radio values based on marketplace
-    function updateMarketplaceFilters() {
+    // Modified updateMarketplaceFilters function
+function updateMarketplaceFilters() {
   const marketplace = marketplaceSelect.value;
   const department = departmentSelect.value;
+  const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
   
-  let config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-  // Check if department-specific configuration exists
-  let deptConfig = null;
-  if (department && config.categories && config.categories[department]) {
-    // Try to get department-specific config (merge with marketplace config)
-    if (departmentConfig[department]) {
-      deptConfig = departmentConfig[department];
-    }
-  }
+  // Get department-specific config if available
+  const deptConfig = (department && config.departmentSettings && config.departmentSettings[department]) 
+    ? config.departmentSettings[department] 
+    : null;
+
+  // Update time filters
+  document.getElementById('timeFilter30Days').value = deptConfig?.timeFilters?.['30days'] || config.timeFilters['30days'];
+  document.getElementById('timeFilter90Days').value = deptConfig?.timeFilters?.['90days'] || config.timeFilters['90days'];
+
+  // Update seller filter
+  document.getElementById('sellerAmazon').value = deptConfig?.sellerFilter || config.sellerFilter;
   
-  // Apply filters from the most specific config available
-  const timeFilter30Days = document.getElementById('timeFilter30Days');
-  const timeFilter90Days = document.getElementById('timeFilter90Days');
-  const sellerAmazon = document.getElementById('sellerAmazon');
-  const reviewsFilter = document.getElementById('reviewsFilter');
-  
-  if (deptConfig && deptConfig.timeFilters) {
-    timeFilter30Days.value = deptConfig.timeFilters['30days'];
-    timeFilter90Days.value = deptConfig.timeFilters['90days'];
-  } else {
-    timeFilter30Days.value = config.timeFilters['30days'];
-    timeFilter90Days.value = config.timeFilters['90days'];
-  }
-  
-  if (deptConfig && deptConfig.sellerFilter) {
-    sellerAmazon.value = deptConfig.sellerFilter;
-  } else {
-    sellerAmazon.value = config.sellerFilter;
-  }
-  
-  if (deptConfig && deptConfig.reviewsFilter) {
-    reviewsFilter.value = deptConfig.reviewsFilter;
-  } else {
-    reviewsFilter.value = config.reviewsFilter;
-  }
-  
-  const filterExcludeBrands = document.getElementById('filterExcludeBrands');
-  if (filterExcludeBrands && config.excludeBrands) {
-    filterExcludeBrands.value = config.excludeBrands;
-  }
-  
+  // Update reviews filter
+  document.getElementById('reviewsFilter').value = deptConfig?.reviewsFilter || config.reviewsFilter;
+
+  // Update sort options
   updateSortOrderOptions();
   updateCategoryOptions();
 }
 
-    function updateSortOrderOptions() {
+    // Modified updateSortOrderOptions
+function updateSortOrderOptions() {
   const marketplace = marketplaceSelect.value;
   const department = departmentSelect.value;
+  const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
   
-  let config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-  let sortOptions = config.sortOrders;
-  
-  // Check if department-specific sort options exist
-  if (department && departmentConfig[department] && departmentConfig[department].sortOrders) {
-    sortOptions = departmentConfig[department].sortOrders;
-  }
-  
+  // Get department-specific sort options if available
+  const sortOptions = (department && config.departmentSettings?.[department]?.sortOrders)
+    ? config.departmentSettings[department].sortOrders
+    : config.sortOrders;
+
   const sortOrderSelect = document.getElementById('sortOrder');
   sortOrderSelect.innerHTML = '';
   
-  if (sortOptions) {
-    sortOptions.forEach(option => {
-      const optionEl = document.createElement('option');
-      optionEl.value = option.value;
-      optionEl.textContent = option.text;
-      sortOrderSelect.appendChild(optionEl);
-    });
-  }
+  sortOptions.forEach(option => {
+    const optionEl = document.createElement('option');
+    optionEl.value = option.value;
+    optionEl.textContent = option.text;
+    sortOrderSelect.appendChild(optionEl);
+  });
 }
 
     function updateDepartmentFromProductType() {
@@ -708,16 +674,19 @@ const departmentToProductType = {
   }
 }
 
-    // Add this new function to update product type when department changes
+// Replace departmentToProductType with marketplace-based handling
 function updateProductTypeFromDepartment() {
   const department = departmentSelect.value;
-  const currentProductType = productTypeSelect.value;
+  const marketplace = marketplaceSelect.value;
+  const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
   
-  // If product type mapping exists for this department and product type isn't set to something specific
-  if (departmentToProductType[department] && currentProductType === 'custom') {
-    productTypeSelect.value = departmentToProductType[department];
-    updateProductTypeSettings();
-    updateGeneratedUrl();
+  if (config.productTypeMappings && department in config.productTypeMappings) {
+    const suggestedProductType = config.productTypeMappings[department];
+    if (productTypeSelect.querySelector(`option[value="${suggestedProductType}"]`)) {
+      productTypeSelect.value = suggestedProductType;
+      updateProductTypeSettings();
+      updateGeneratedUrl();
+    }
   }
 }
 
@@ -821,11 +790,11 @@ function updateProductTypeFromDepartment() {
   });
 
   departmentSelect.addEventListener('change', function() {
-    updateCategoryOptions();
-    updateProductTypeFromDepartment();
-    updateMarketplaceFilters();
-    updateGeneratedUrl();
-  });
+      updateCategoryOptions();
+      updateMarketplaceFilters(); 
+      updateProductTypeFromDepartment();
+      updateGeneratedUrl();
+    });
 
   categorySelect.addEventListener('change', updateGeneratedUrl);
   document.getElementById('sortOrder').addEventListener('change', updateGeneratedUrl);
