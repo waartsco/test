@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'ziphoodie': '"zip hoodie" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop',
                 'popsocket': '"Popsocket" Printed top is swappable with other compatible PopGrip models. Just press flat, turn 90 degrees until you hear a click and remove to swap.',
                 'case': '"case" "Two-part protective case made from a premium scratch-resistant polycarbonate shell and shock absorbent TPU liner protects against drops"',
-                'totebag': 'Tote+Bag%2C+Double-sided+print',
+                'totebag': '"Tote+Bag"+Made+of+a+lightweight%2C+spun+polyester+canvas-like+fabric.+All+seams+and+stress+points+are+double-stitched+for+durability%2C+and+the+reinforced+bottom+flattens+to+fit+more+items+and+hold+larger+objects.',
                 'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
                 'tumbler': 'tumbler+Cover%2C+Decorative'
             },
