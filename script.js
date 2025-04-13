@@ -25,22 +25,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
         departmentSelect.innerHTML = '<option value="">All Departments</option>';
         
-        // Check if the config has categories defined
         if (config.categories) {
-            // Loop through all department keys in the categories object
             Object.keys(config.categories).forEach(deptKey => {
                 const option = document.createElement('option');
                 option.value = deptKey;
-                
-                // Convert key to display name (e.g., 'fashion-novelty' -> 'Fashion Novelty')
-                const displayName = deptKey.split('-')
-                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(' ');
-                    
-                option.textContent = displayName;
+                option.textContent = config.categories[deptKey].displayName || deptKey;
                 departmentSelect.appendChild(option);
             });
         }
+        updateCategoryOptions();
+    }
         
         // Update the category dropdown based on the default department selection
         updateCategoryOptions();
@@ -176,32 +170,21 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             // Departments and categories for USA
             categories: {
-                'fashion': [{
-                        value: '7141123011',
-                        text: 'Men\'s Clothing'
-                    },
-                    {
-                        value: '1040660',
-                        text: 'Women\'s Clothing'
-                    },
-                    {
-                        value: '9056922011',
-                        text: 'Women\'s Novelty Tops & Tees'
-                    },
-                    {
-                        value: '12035955011',
-                        text: 'Men\'s Novelty T-Shirts'
-                    },
-                    {
-                        value: '1040658',
-                        text: 'Boys\' Clothing'
-                    },
-                    {
-                        value: '1040664',
-                        text: 'Girls\' Clothing'
-                    }
-                ],
-                'fashion-novelty': []
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
             },
             // Brands to exclude for USA
             excludeBrands: '-LyricLyfe+-Disney+-Marvel+-Star Wars+-Mademark+-Harry Potter+-Pixar+-SANRIO+-Elite Authentics+-Barbie+-BATMAN+-Jeff Dunham+-CJ Grips+-BreakingT+-Spongebob SquarePants+-Ballpark MVP+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-STAR TREK+-Stranger Things+-Fallout+-MTV+-Beetlejuice+-South Park+-Peanuts+-Hello Kitty+-Miraculous+-Jeep+-Gypsy Queen+-The Rolling Stones+-Transformers+-NEW LINE CINEMA+-Sagittarius Gallery+-Scooby-Doo+-Official High School Fan Gear+-Pink Floyd+-Nickelodeon+-Care Bears'
@@ -787,27 +770,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const department = departmentSelect.value;
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-        const departmentCategoryBox = document.getElementById('departmentCategoryBox');
         
         if (!department) {
-            // No department selected
             categorySelect.disabled = true;
-            departmentCategoryBox.classList.add('disabled-filter-box');
         } else {
             const categories = config.categories && config.categories[department] ? config.categories[department] : [];
-            
             if (categories.length === 0) {
-                // Department with no categories
                 categorySelect.disabled = true;
                 categorySelect.value = "";
-                
-                // We don't want to add the disabled-filter-box class here
-                // as the department is still a valid selection
-                departmentCategoryBox.classList.remove('disabled-filter-box');
             } else {
-                // Department with categories
                 categorySelect.disabled = false;
-                departmentCategoryBox.classList.remove('disabled-filter-box');
             }
         }
     }
@@ -824,17 +796,14 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Get categories for the selected department
-        const categories = config.categories && config.categories[department] ? config.categories[department] : [];
+        const categories = config.categories && config.categories[department] && config.categories[department].categories ? 
+                           config.categories[department].categories : [];
         
         if (categories.length === 0) {
-            // Department has no categories, disable the dropdown
             categorySelect.disabled = true;
             categorySelect.value = "";
         } else {
-            // Department has categories, enable and populate the dropdown
             categorySelect.disabled = false;
-            
             categories.forEach(category => {
                 const option = document.createElement('option');
                 option.value = category.value;
@@ -842,7 +811,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 categorySelect.appendChild(option);
             });
         }
-        
         updateGeneratedUrl();
     }
 
