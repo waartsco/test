@@ -78,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Add this to your existing marketplaceConfig
 // Inside the 'com' config object, add this new object for department-specific configurations
+// Add these right after the zipCodes constant declaration
 const departmentConfig = {
   'stripbooks': {
     timeFilters: {
@@ -85,20 +86,18 @@ const departmentConfig = {
       '90days': 'p_n_date_first_available_absolute%3A15196853011'
     },
     sellerFilter: 'p_6%3AATVPDKIKX0DER',
-    reviewsFilter: 'p_72%3A419115011', // Different filter for books
+    reviewsFilter: 'p_72%3A419115011',
     sortOrders: [
       {value: '', text: 'Default (none)'},
       {value: 'date-desc-rank', text: 'Newest Arrivals'},
       {value: 'price-desc-rank', text: 'Price High to Low'},
       {value: 'price-asc-rank', text: 'Price Low to High'},
       {value: 'review-rank', text: 'Top Rated (Review Rank)'},
-      {value: 'salesrank', text: 'Best Sellers'} // Special sort for books
+      {value: 'salesrank', text: 'Best Sellers'}
     ]
-  },
-  // Add more department configs as needed
+  }
 };
 
-// Add product type to department mappings
 const productTypeToDepartment = {
   'KDP': 'stripbooks',
   'tshirt': 'fashion-novelty',
@@ -113,16 +112,13 @@ const productTypeToDepartment = {
   'case': 'mobile',
   'totebag': 'fashion-novelty',
   'throwpillow': 'garden'
-  // Add more mappings as needed
 };
 
-// Add department to product type suggestions
 const departmentToProductType = {
   'stripbooks': 'KDP',
   'fashion-novelty': 'tshirt',
   'mobile': 'case',
   'garden': 'throwpillow'
-  // Add more mappings as needed
 };
 
     // Define marketplace-specific parameters
@@ -816,19 +812,17 @@ function updateProductTypeFromDepartment() {
     updateGeneratedUrl();
   });
 
-  // Update the product type change handler
   productTypeSelect.addEventListener('change', function() {
     updateProductTypeSettings();
-    updateDepartmentFromProductType(); // Added this line
+    updateDepartmentFromProductType();
     updateDepartmentCategoryState();
     updateGeneratedUrl();
   });
 
-  // Update the department change handler
   departmentSelect.addEventListener('change', function() {
     updateCategoryOptions();
-    updateProductTypeFromDepartment(); // Added this line
-    updateMarketplaceFilters(); // Added this to update filters based on department
+    updateProductTypeFromDepartment();
+    updateMarketplaceFilters();
     updateGeneratedUrl();
   });
 
