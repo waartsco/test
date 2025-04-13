@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 'sweatshirt': '"sweatshirt" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop+-hoodie',
                 'hoodie': '"pullover hoodie" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop+-zip',
                 'ziphoodie': '"zip hoodie" 8.5 oz, Classic fit, Twill-taped neck+-Raglan+-Vneck+-Tanktop',
-                'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
-                'case': 'Slim-Fitting+Protective+Case+for+Phone',
+                'popsocket': '"Popsocket" Printed top is swappable with other compatible PopGrip models. Just press flat, turn 90 degrees until you hear a click and remove to swap.',
+                'case': '"case" "Two-part protective case made from a premium scratch-resistant polycarbonate shell and shock absorbent TPU liner protects against drops"',
                 'totebag': 'Tote+Bag%2C+Double-sided+print',
                 'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
                 'tumbler': 'tumbler+Cover%2C+Decorative'
@@ -170,7 +170,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     categories: []
                 },
                 'mobile': {
-                    displayName: 'Mobile',
+                    displayName: 'Popsockets & Cases',
+                    categories: []
+                },
+                'garden': {
+                    displayName: 'Tote Bags & Throw Pillows',
                     categories: []
                 }
             },
