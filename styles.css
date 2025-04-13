@@ -408,20 +408,25 @@ footer {
 }
 
 .disabled-filter-box {
-	opacity: 0.7;
-	background-color: #f8f9fa;
-	position: relative;
+    opacity: .7;
+    background-color: #f8f9fa;
+    position: relative;
 }
 
 .disabled-filter-box::after {
-	content: '';
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(240, 240, 240, 0.1);
-	pointer-events: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgb(240 240 240 / .1);
+    pointer-events: none;
+}
+
+.disabled-filter-box select,
+.disabled-filter-box input {
+    cursor: not-allowed;
 }
 
 .url-copy-container {
@@ -465,9 +470,4 @@ footer {
 /* For the copy animation */
 .copy-success {
 	background-color: #e8f5e9 !important;
-}
-
-.disabled-filter-box select,
-.disabled-filter-box input {
-	cursor: not-allowed;
 }
