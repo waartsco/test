@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'fashion-novelty': {
                     displayName: 'Fashion Novelty',
                     categories: []
-                }
+                },
                 'mobile': {
                     displayName: 'Mobile',
                     categories: []
