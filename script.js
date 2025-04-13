@@ -99,11 +99,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 'popsocket': '"Popsocket" Printed top is swappable with other compatible PopGrip models. Just press flat, turn 90 degrees until you hear a click and remove to swap.',
                 'case': '"case" "Two-part protective case made from a premium scratch-resistant polycarbonate shell and shock absorbent TPU liner protects against drops"',
                 'totebag': '"Tote+Bag"+Made+of+a+lightweight%2C+spun+polyester+canvas-like+fabric.+All+seams+and+stress+points+are+double-stitched+for+durability%2C+and+the+reinforced+bottom+flattens+to+fit+more+items+and+hold+larger+objects.',
-                'throwpillow': 'Throw+Pillow+Cover%2C+Decorative',
-                'tumbler': 'tumbler+Cover%2C+Decorative'
+                'throwpillow': '"Throw Pillow" Filled with 100% polyester and sewn closed',
+                'tumbler': '"Tumbler" "Merch on Demand"'
             },
             // Add supported sort orders for USA
             sortOrders: [{
+                    value: 'date-desc-rank',
+                    text: 'Newest Arrivals'
+                },
+                {
                     value: 'featured',
                     text: 'Featured'
                 },
@@ -116,16 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Best Selling Sort'
                 },
                 {
-                    value: 'date-desc-rank',
-                    text: 'Newest Arrivals'
-                },
-                {
-                    value: 'date-asc-rank',
-                    text: 'Oldest First'
-                },
-                {
                     value: 'review-rank',
-                    text: 'Top Rated'
+                    text: 'Top Rated (Review Rank)'
                 },
                 {
                     value: 'price-desc-rank',
@@ -136,8 +132,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     text: 'Price Low to High'
                 },
                 {
+                    value: 'date-asc-rank',
+                    text: 'Oldest First'
+                },
+                {
                     value: 'relevancerank',
-                    text: 'Relevance'
+                    text: 'Relevance Rank'
                 },
                 {
                     value: 'relevanceblender',
@@ -145,11 +145,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 {
                     value: 'featured-rank',
-                    text: 'Featured'
+                    text: 'Featured (featured-rank)'
                 },
                 {
                     value: 'most-wished-for-rank',
-                    text: 'Most Wished For'
+                    text: 'Most Wished For Rank'
                 }
             ],
             // Departments and categories for USA
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     categories: []
                 },
                 'garden': {
-                    displayName: 'Tote Bags & Throw Pillows',
+                    displayName: 'Throw Pillows',
                     categories: []
                 }
             },
