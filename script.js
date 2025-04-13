@@ -198,6 +198,49 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // Brands to exclude for USA
             excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda'
+            const departmentConfig = {
+              'stripbooks': {
+                timeFilters: {
+                  '30days': 'p_n_date_first_available_absolute%3A15196852011BOOK',
+                  '90days': 'p_n_date_first_available_absolute%3A15196853011BOOK'
+                },
+                sellerFilter: 'p_6%3ABOOKATVPDKIKX0DER',
+                reviewsFilter: 'p_72%3ABOOK419115011', // Different filter for books
+                sortOrders: [
+                  {value: '', text: 'BOOKDefault (none)'},
+                  {value: 'date-desc-rank', text: 'BOOKNewest Arrivals'},
+                  {value: 'price-desc-rank', text: 'BOOKPrice High to Low'},
+                  {value: 'price-asc-rank', text: 'BOOKPrice Low to High'},
+                  {value: 'review-rank', text: 'BOOKTop Rated (Review Rank)'},
+                  {value: 'salesrank', text: 'BOOKBest Sellers'} // Special sort for books
+                ]
+              },
+                                // Add product type to department mappings
+                const productTypeToDepartment = {
+                  'KDP': 'stripbooks',
+                  'tshirt': 'fashion-novelty',
+                  'premtshirt': 'fashion-novelty',
+                  'tanktop': 'fashion-novelty',
+                  'longsleeve': 'fashion-novelty',
+                  'raglan': 'fashion-novelty',
+                  'sweatshirt': 'fashion-novelty',
+                  'hoodie': 'fashion-novelty',
+                  'ziphoodie': 'fashion-novelty',
+                  'popsocket': 'mobile',
+                  'case': 'mobile',
+                  'totebag': 'fashion-novelty',
+                  'throwpillow': 'garden'
+                  // Add more mappings as needed
+                },
+                const departmentToProductType = {
+                  'stripbooks': 'KDP',
+                  'fashion-novelty': 'tshirt',
+                  'mobile': 'case',
+                  'garden': 'throwpillow'
+                  // Add more mappings as needed
+                }
+              // Add more department configs as needed
+            };
         },
         'co.uk': { // UK
             timeFilters: {
@@ -567,50 +610,113 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update time filter radio values based on marketplace
     function updateMarketplaceFilters() {
-        const marketplace = marketplaceSelect.value;
-        const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
-
-        // Update time filter values
-        document.getElementById('timeFilter30Days').value = config.timeFilters['30days'];
-        document.getElementById('timeFilter90Days').value = config.timeFilters['90days'];
-
-        // Update seller filter value
-        document.getElementById('sellerAmazon').value = config.sellerFilter;
-
-        // Update reviews filter value
-        document.getElementById('reviewsFilter').value = config.reviewsFilter;
-
-        // Update excluded brands filter value
-        const filterExcludeBrands = document.getElementById('filterExcludeBrands');
-        if (filterExcludeBrands && config.excludeBrands) {
-            filterExcludeBrands.value = config.excludeBrands;
-        }
-
-        // Update sort order options
-        updateSortOrderOptions();
-
-        // Update departments/categories
-        updateCategoryOptions();
+  const marketplace = marketplaceSelect.value;
+  const department = departmentSelect.value;
+  
+  let config = marketplaceConfig[marketplace] || marketplaceConfig.com;
+  // Check if department-specific configuration exists
+  let deptConfig = null;
+  if (department && config.categories && config.categories[department]) {
+    // Try to get department-specific config (merge with marketplace config)
+    if (departmentConfig[department]) {
+      deptConfig = departmentConfig[department];
     }
+  }
+  
+  // Apply filters from the most specific config available
+  const timeFilter30Days = document.getElementById('timeFilter30Days');
+  const timeFilter90Days = document.getElementById('timeFilter90Days');
+  const sellerAmazon = document.getElementById('sellerAmazon');
+  const reviewsFilter = document.getElementById('reviewsFilter');
+  
+  if (deptConfig && deptConfig.timeFilters) {
+    timeFilter30Days.value = deptConfig.timeFilters['30days'];
+    timeFilter90Days.value = deptConfig.timeFilters['90days'];
+  } else {
+    timeFilter30Days.value = config.timeFilters['30days'];
+    timeFilter90Days.value = config.timeFilters['90days'];
+  }
+  
+  if (deptConfig && deptConfig.sellerFilter) {
+    sellerAmazon.value = deptConfig.sellerFilter;
+  } else {
+    sellerAmazon.value = config.sellerFilter;
+  }
+  
+  if (deptConfig && deptConfig.reviewsFilter) {
+    reviewsFilter.value = deptConfig.reviewsFilter;
+  } else {
+    reviewsFilter.value = config.reviewsFilter;
+  }
+  
+  const filterExcludeBrands = document.getElementById('filterExcludeBrands');
+  if (filterExcludeBrands && config.excludeBrands) {
+    filterExcludeBrands.value = config.excludeBrands;
+  }
+  
+  updateSortOrderOptions();
+  updateCategoryOptions();
+}
 
     function updateSortOrderOptions() {
-        const marketplace = marketplaceSelect.value;
-        const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
-        const sortOrderSelect = document.getElementById('sortOrder');
+  const marketplace = marketplaceSelect.value;
+  const department = departmentSelect.value;
+  
+  let config = marketplaceConfig[marketplace] || marketplaceConfig.com;
+  let sortOptions = config.sortOrders;
+  
+  // Check if department-specific sort options exist
+  if (department && departmentConfig[department] && departmentConfig[department].sortOrders) {
+    sortOptions = departmentConfig[department].sortOrders;
+  }
+  
+  const sortOrderSelect = document.getElementById('sortOrder');
+  sortOrderSelect.innerHTML = '';
+  
+  if (sortOptions) {
+    sortOptions.forEach(option => {
+      const optionEl = document.createElement('option');
+      optionEl.value = option.value;
+      optionEl.textContent = option.text;
+      sortOrderSelect.appendChild(optionEl);
+    });
+  }
+}
 
-        // Clear existing options
-        sortOrderSelect.innerHTML = '';
-
-        // Add new options based on marketplace
-        if (config.sortOrders) {
-            config.sortOrders.forEach(option => {
-                const optionEl = document.createElement('option');
-                optionEl.value = option.value;
-                optionEl.textContent = option.text;
-                sortOrderSelect.appendChild(optionEl);
-            });
-        }
+    function updateDepartmentFromProductType() {
+  const productType = productTypeSelect.value;
+  const currentDept = departmentSelect.value;
+  
+  // If a department mapping exists for this product type, and department isn't already set
+  if (productTypeToDepartment[productType]) {
+    // Only suggest the department if it's available in the current marketplace
+    const marketplace = marketplaceSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
+    
+    if (config.categories && config.categories[productTypeToDepartment[productType]]) {
+      // Set the department select
+      departmentSelect.value = productTypeToDepartment[productType];
+      
+      // Update dependent UI elements
+      updateCategoryOptions();
+      updateGeneratedUrl();
+      updateMarketplaceFilters();
     }
+  }
+}
+
+    // Add this new function to update product type when department changes
+function updateProductTypeFromDepartment() {
+  const department = departmentSelect.value;
+  const currentProductType = productTypeSelect.value;
+  
+  // If product type mapping exists for this department and product type isn't set to something specific
+  if (departmentToProductType[department] && currentProductType === 'custom') {
+    productTypeSelect.value = departmentToProductType[department];
+    updateProductTypeSettings();
+    updateGeneratedUrl();
+  }
+}
 
     function setupClearSearchButton() {
     const searchInput = document.getElementById('searchInput');
@@ -683,63 +789,55 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Completely revised event listener setup
     function setupEventListeners() {
-        // Form submission
-        searchForm.addEventListener('submit', handleFormSubmit);
-        searchForm.addEventListener('reset', function() {
-            document.getElementById('clearSearchBtn').style.display = 'none';
-            updateGeneratedUrl();
-        });
+  // Keep all existing event listeners
+  searchForm.addEventListener('submit', handleFormSubmit);
+  searchForm.addEventListener('reset', function() {
+    document.getElementById('clearSearchBtn').style.display = 'none';
+    updateGeneratedUrl();
+  });
+  copyUrlBtn.addEventListener('click', handleCopyUrl);
+  copyZipBtn.addEventListener('click', handleCopyZip);
+  document.getElementById('searchInput').addEventListener('input', updateGeneratedUrl);
+  document.getElementById('customHiddenKeywords').addEventListener('input', updateGeneratedUrl);
+  document.getElementById('minPrice').addEventListener('input', updateGeneratedUrl);
+  document.getElementById('maxPrice').addEventListener('input', updateGeneratedUrl);
 
-        // Copy URL button
-        copyUrlBtn.addEventListener('click', handleCopyUrl);
+  marketplaceSelect.addEventListener('change', function() {
+    updateZipCode();
+    updateMarketplaceFilters();
+    populateDepartments();
+    updateSortOrderOptions();
+    updateGeneratedUrl();
+  });
 
-        // Copy ZIP code
-        copyZipBtn.addEventListener('click', handleCopyZip);
+  // Update the product type change handler
+  productTypeSelect.addEventListener('change', function() {
+    updateProductTypeSettings();
+    updateDepartmentFromProductType(); // Added this line
+    updateDepartmentCategoryState();
+    updateGeneratedUrl();
+  });
 
-        // Direct listeners for all form controls
+  // Update the department change handler
+  departmentSelect.addEventListener('change', function() {
+    updateCategoryOptions();
+    updateProductTypeFromDepartment(); // Added this line
+    updateMarketplaceFilters(); // Added this to update filters based on department
+    updateGeneratedUrl();
+  });
 
-        // Text inputs
-        document.getElementById('searchInput').addEventListener('input', updateGeneratedUrl);
-        document.getElementById('customHiddenKeywords').addEventListener('input', updateGeneratedUrl);
+  categorySelect.addEventListener('change', updateGeneratedUrl);
+  document.getElementById('sortOrder').addEventListener('change', updateGeneratedUrl);
 
-        // Price inputs
-        document.getElementById('minPrice').addEventListener('input', updateGeneratedUrl);
-        document.getElementById('maxPrice').addEventListener('input', updateGeneratedUrl);
+  const timeFilters = document.querySelectorAll('input[name="timeFilter"]');
+  timeFilters.forEach(radio => {
+    radio.addEventListener('click', updateGeneratedUrl);
+  });
 
-        // Selects
-        marketplaceSelect.addEventListener('change', function() {
-            updateZipCode();
-            updateMarketplaceFilters();
-            populateDepartments(); // Add this line
-            updateSortOrderOptions(); // Add this line
-            updateGeneratedUrl();
-        });
-
-        productTypeSelect.addEventListener('change', function() {
-            updateProductTypeSettings();
-            updateDepartmentCategoryState();
-            updateGeneratedUrl();
-        });
-
-        departmentSelect.addEventListener('change', function() {
-            updateCategoryOptions();
-            updateGeneratedUrl();
-        });
-
-        categorySelect.addEventListener('change', updateGeneratedUrl);
-        document.getElementById('sortOrder').addEventListener('change', updateGeneratedUrl);
-
-        // Radio buttons
-        const timeFilters = document.querySelectorAll('input[name="timeFilter"]');
-        timeFilters.forEach(radio => {
-            radio.addEventListener('click', updateGeneratedUrl);
-        });
-
-        // Checkboxes
-        document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
-        document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
-        document.getElementById('filterExcludeBrands').addEventListener('click', updateGeneratedUrl);
-    }
+  document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
+  document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
+  document.getElementById('filterExcludeBrands').addEventListener('click', updateGeneratedUrl);
+}
 
     function setupPriceInputs() {
         // Add input constraints for price fields
