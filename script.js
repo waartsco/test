@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-        departmentSelect.innerHTML = '<option value="">All Departments</option>';
+        departmentSelect.innerHTML = '<option value="fashion-novelty">Novelty & More</option>';
         
         if (config.categories) {
             Object.keys(config.categories).forEach(deptKey => {
