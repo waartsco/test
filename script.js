@@ -80,14 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
             reviewsFilter: 'p_72%3A2661618011',
             // Add product type keywords specific to USA
             productTypeKeywords: {
-                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
-                'premtshirt': 'Premium+shirt',
-                'tanktop': 'Tank+Top%2C+Lightweight%2C+Classic+fit',
-                'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
-                'raglan': 'Raglan+sleeve%2C+Classic+fit',
-                'sweatshirt': 'Sweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-                'hoodie': 'Hoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
-                'ziphoodie': 'ZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'This+premium+t-shirt+is+made+of+lightweight+fine+jersey+fabric+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'tanktop': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-premium',
+                'longsleeve': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-Raglan+-Vneck+-sweathshirt+-tanktop',
+                'raglan': 'Long+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-premium+-long+-vneck+-sweathshirt+-tanktop',
+                'sweatshirt': 'sweatshirt+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop',
+                'hoodie': '"pullover+hoodie"+hooded+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop+-sweatshirt+-"zip hoodie"',
+                'ziphoodie': '"zip+hoodie"+hooded+8.5+oz%2C+Classic+fit%2C+Twill-taped+neck+-longsleeve+-premium+-v-neck+-tanktop+-sweatshirt+-"pullover hoodie"',
                 'popsocket': 'PopSockets+grip+and+stand+for+phones+and+tablets',
                 'case': 'Slim-Fitting+Protective+Case+for+Phone',
                 'totebag': 'Tote+Bag%2C+Double-sided+print',
@@ -96,8 +96,8 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // Add supported sort orders for USA
             sortOrders: [{
-                    value: '',
-                    text: 'Default'
+                    value: 'featured',
+                    text: 'Featured'
                 },
                 {
                     value: 'most-purchased-rank',
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 {
                     value: 'exact-aware-popularity-rank',
-                    text: 'Best Seller Sort'
+                    text: 'Best Selling Sort'
                 },
                 {
                     value: 'date-desc-rank',
@@ -159,7 +159,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 },
                 'fashion-novelty': {
                     displayName: 'Fashion Novelty',
-                    categories: []
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
                 }
             },
             // Brands to exclude for USA
