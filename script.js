@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-        departmentSelect.innerHTML = '<option value="fashion-novelty">Fashion Novelty & More</option>';
+        departmentSelect.innerHTML = '<option value="">All (no department)</option>';
         
         if (config.categories) {
             Object.keys(config.categories).forEach(deptKey => {
@@ -209,6 +209,10 @@ const departmentToProductType = {
             ],
             // Departments and categories for USA
             categories: {
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty & More',
+                    categories: []
+                },
                 'fashion': {
                     displayName: 'Fashion',
                     categories: [
@@ -237,10 +241,6 @@ const departmentToProductType = {
                         {value: '48', text: 'Crafts, Home & Hobbies'}
                     ]
                 },
-                '': {
-                    displayName: 'No Department',
-                    categories: []
-                }
             },
             // Brands to exclude for USA
             excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda'
