@@ -76,6 +76,55 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
+// Add this to your existing marketplaceConfig
+// Inside the 'com' config object, add this new object for department-specific configurations
+const departmentConfig = {
+  'stripbooks': {
+    timeFilters: {
+      '30days': 'p_n_date_first_available_absolute%3A15196852011',
+      '90days': 'p_n_date_first_available_absolute%3A15196853011'
+    },
+    sellerFilter: 'p_6%3AATVPDKIKX0DER',
+    reviewsFilter: 'p_72%3A419115011', // Different filter for books
+    sortOrders: [
+      {value: '', text: 'Default (none)'},
+      {value: 'date-desc-rank', text: 'Newest Arrivals'},
+      {value: 'price-desc-rank', text: 'Price High to Low'},
+      {value: 'price-asc-rank', text: 'Price Low to High'},
+      {value: 'review-rank', text: 'Top Rated (Review Rank)'},
+      {value: 'salesrank', text: 'Best Sellers'} // Special sort for books
+    ]
+  },
+  // Add more department configs as needed
+};
+
+// Add product type to department mappings
+const productTypeToDepartment = {
+  'KDP': 'stripbooks',
+  'tshirt': 'fashion-novelty',
+  'premtshirt': 'fashion-novelty',
+  'tanktop': 'fashion-novelty',
+  'longsleeve': 'fashion-novelty',
+  'raglan': 'fashion-novelty',
+  'sweatshirt': 'fashion-novelty',
+  'hoodie': 'fashion-novelty',
+  'ziphoodie': 'fashion-novelty',
+  'popsocket': 'mobile',
+  'case': 'mobile',
+  'totebag': 'fashion-novelty',
+  'throwpillow': 'garden'
+  // Add more mappings as needed
+};
+
+// Add department to product type suggestions
+const departmentToProductType = {
+  'stripbooks': 'KDP',
+  'fashion-novelty': 'tshirt',
+  'mobile': 'case',
+  'garden': 'throwpillow'
+  // Add more mappings as needed
+};
+
     // Define marketplace-specific parameters
     // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
@@ -198,49 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // Brands to exclude for USA
             excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda'
-            const departmentConfig = {
-              'stripbooks': {
-                timeFilters: {
-                  '30days': 'p_n_date_first_available_absolute%3A15196852011BOOK',
-                  '90days': 'p_n_date_first_available_absolute%3A15196853011BOOK'
-                },
-                sellerFilter: 'p_6%3ABOOKATVPDKIKX0DER',
-                reviewsFilter: 'p_72%3ABOOK419115011', // Different filter for books
-                sortOrders: [
-                  {value: '', text: 'BOOKDefault (none)'},
-                  {value: 'date-desc-rank', text: 'BOOKNewest Arrivals'},
-                  {value: 'price-desc-rank', text: 'BOOKPrice High to Low'},
-                  {value: 'price-asc-rank', text: 'BOOKPrice Low to High'},
-                  {value: 'review-rank', text: 'BOOKTop Rated (Review Rank)'},
-                  {value: 'salesrank', text: 'BOOKBest Sellers'} // Special sort for books
-                ]
-              },
-                                // Add product type to department mappings
-                const productTypeToDepartment = {
-                  'KDP': 'stripbooks',
-                  'tshirt': 'fashion-novelty',
-                  'premtshirt': 'fashion-novelty',
-                  'tanktop': 'fashion-novelty',
-                  'longsleeve': 'fashion-novelty',
-                  'raglan': 'fashion-novelty',
-                  'sweatshirt': 'fashion-novelty',
-                  'hoodie': 'fashion-novelty',
-                  'ziphoodie': 'fashion-novelty',
-                  'popsocket': 'mobile',
-                  'case': 'mobile',
-                  'totebag': 'fashion-novelty',
-                  'throwpillow': 'garden'
-                  // Add more mappings as needed
-                },
-                const departmentToProductType = {
-                  'stripbooks': 'KDP',
-                  'fashion-novelty': 'tshirt',
-                  'mobile': 'case',
-                  'garden': 'throwpillow'
-                  // Add more mappings as needed
-                }
-              // Add more department configs as needed
-            };
         },
         'co.uk': { // UK
             timeFilters: {
