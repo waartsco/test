@@ -22,18 +22,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add this function to script.js
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
-        const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
-
-        // Clear current options
+        const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
         departmentSelect.innerHTML = '<option value="">All Departments</option>';
-
-        // Add 'fashion' department which is common across all marketplaces
-        const fashionOption = document.createElement('option');
-        fashionOption.value = 'fashion';
-        fashionOption.textContent = 'Fashion';
-        departmentSelect.appendChild(fashionOption);
-
-        // Other departments could be added similarly if needed
+        
+        // Check if the config has categories defined
+        if (config.categories) {
+            // Loop through all department keys in the categories object
+            Object.keys(config.categories).forEach(deptKey => {
+                const option = document.createElement('option');
+                option.value = deptKey;
+                
+                // Convert key to display name (e.g., 'fashion-novelty' -> 'Fashion Novelty')
+                const displayName = deptKey.split('-')
+                    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ');
+                    
+                option.textContent = displayName;
+                departmentSelect.appendChild(option);
+            });
+        }
+        
+        // Update the category dropdown based on the default department selection
+        updateCategoryOptions();
     }
 
     function updateProductTypeSpecificFilters() {
@@ -775,48 +785,64 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fix for Department & Category issue
     function updateDepartmentCategoryState() {
         const department = departmentSelect.value;
-
-        // Only disable category if no department is selected
-        categorySelect.disabled = department === "";
-
-        // If a department is selected, enable the category select
-        if (department) {
-            categorySelect.disabled = false;
-        }
-
-        // Update visual state of the filter box
+        const marketplace = marketplaceSelect.value;
+        const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
         const departmentCategoryBox = document.getElementById('departmentCategoryBox');
-        departmentCategoryBox.classList.remove('disabled-filter-box');
+        
+        if (!department) {
+            // No department selected
+            categorySelect.disabled = true;
+            departmentCategoryBox.classList.add('disabled-filter-box');
+        } else {
+            const categories = config.categories && config.categories[department] ? config.categories[department] : [];
+            
+            if (categories.length === 0) {
+                // Department with no categories
+                categorySelect.disabled = true;
+                categorySelect.value = "";
+                
+                // We don't want to add the disabled-filter-box class here
+                // as the department is still a valid selection
+                departmentCategoryBox.classList.remove('disabled-filter-box');
+            } else {
+                // Department with categories
+                categorySelect.disabled = false;
+                departmentCategoryBox.classList.remove('disabled-filter-box');
+            }
+        }
     }
 
     // Ensure category properly updates URL
     function updateCategoryOptions() {
         const marketplace = marketplaceSelect.value;
         const department = departmentSelect.value;
-        const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
-
-        // Clear current options
+        const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
         categorySelect.innerHTML = '<option value="">No Category Filter</option>';
-
-        // Disable category if "All Departments" is selected
+        
         if (!department) {
             categorySelect.disabled = true;
             return;
         }
-
-        // Enable category and add options based on department and marketplace
-        categorySelect.disabled = false;
-
+        
+        // Get categories for the selected department
         const categories = config.categories && config.categories[department] ? config.categories[department] : [];
-
-        categories.forEach(category => {
-            const option = document.createElement('option');
-            option.value = category.value;
-            option.textContent = category.text;
-            categorySelect.appendChild(option);
-        });
-
-        // Make sure URL updates
+        
+        if (categories.length === 0) {
+            // Department has no categories, disable the dropdown
+            categorySelect.disabled = true;
+            categorySelect.value = "";
+        } else {
+            // Department has categories, enable and populate the dropdown
+            categorySelect.disabled = false;
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.value;
+                option.textContent = category.text;
+                categorySelect.appendChild(option);
+            });
+        }
+        
         updateGeneratedUrl();
     }
 
