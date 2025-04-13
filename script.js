@@ -40,26 +40,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateCategoryOptions();
     }
 
-    function updateProductTypeSpecificFilters() {
-        const productType = productTypeSelect.value;
-        const marketplace = marketplaceSelect.value;
-
-        // Hide all product-specific filters initially
-        hideProductSpecificFilters();
-
-        // Only show relevant product-specific filters based on product type
-        if (['tshirt', 'premtshirt', 'longsleeve', 'raglan', 'tanktop'].includes(productType)) {
-            // Show t-shirt related filters
-            if (filterBasicTeesContainer) {
-                filterBasicTeesContainer.style.display = productType === 'tshirt' ? 'block' : 'none';
-            }
-
-            if (filterCottonContainer) {
-                filterCottonContainer.style.display = 'block';
-            }
-        }
-    }
-
     // ZIP codes for different marketplaces
     const zipCodes = {
         'com': {
@@ -606,17 +586,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // Set up event listeners
         setupEventListeners();
 
-        // Initialize product type specific settings
-        updateProductTypeSettings();
-
         // Set up department/category box visibility and state
         updateDepartmentCategoryState();
 
         // Set up price input constraints
         setupPriceInputs();
-
-        // Initialize hidden keywords checkboxes
-        updateProductTypeSpecificFilters();
 
         // Generate and display the initial URL
         updateGeneratedUrl();
@@ -683,20 +657,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Checkboxes
         document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
         document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
-        document.getElementById('filterBasicTees').addEventListener('click', updateGeneratedUrl);
-        document.getElementById('filterCotton').addEventListener('click', updateGeneratedUrl);
         document.getElementById('filterExcludeBrands').addEventListener('click', updateGeneratedUrl);
-    }
-
-    function hideProductSpecificFilters() {
-        // Hide the Basic Tees and Cotton filter options
-        if (filterBasicTeesContainer) {
-            filterBasicTeesContainer.style.display = 'none';
-        }
-
-        if (filterCottonContainer) {
-            filterCottonContainer.style.display = 'none';
-        }
     }
 
     function setupPriceInputs() {
@@ -814,27 +775,6 @@ document.addEventListener('DOMContentLoaded', function() {
         updateGeneratedUrl();
     }
 
-    function updateProductTypeSettings() {
-        const productType = productTypeSelect.value;
-
-        // Automatically handle product type specific settings based on selection
-        // These are now hidden from UI but still functional in the logic
-
-        // Basic Tees filter is auto-checked for t-shirts
-        if (productType === 'tshirt') {
-            basicTeesCheckbox.checked = true;
-        } else {
-            basicTeesCheckbox.checked = false;
-        }
-
-        // 100% Cotton filter is auto-checked for specific product types
-        if (['tshirt', 'longsleeve', 'vneck', 'raglan', 'tanktop'].includes(productType)) {
-            cottonCheckbox.checked = true;
-        } else {
-            cottonCheckbox.checked = false;
-        }
-    }
-
     function generateAmazonUrl() {
         // Get base marketplace
         const marketplace = marketplaceSelect.value;
@@ -894,31 +834,22 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
-        // Add hidden keywords filters
         let hiddenKeywords = [];
-
-        // First add any custom user-specified hidden keywords (priority #1)
-        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
-        if (customKeywords) {
-            hiddenKeywords.push(customKeywords);
-        }
-
-        // Product type specific keywords (only apply if not "custom")
-        const productType = productTypeSelect.value;
-        if (productType !== 'custom' && config.productTypeKeywords && config.productTypeKeywords[productType]) {
-            hiddenKeywords.push(config.productTypeKeywords[productType]);
-        }
-
-        // Add 100% Cotton filter if applicable and not "custom"
-        if (document.getElementById('filterCotton').checked && productType !== 'custom') {
-            hiddenKeywords.push(document.getElementById('filterCotton').value);
-        }
+    const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
+    if (customKeywords) {
+        hiddenKeywords.push(customKeywords);
+    }
+    
+    const productType = productTypeSelect.value;
+    if (productType !== 'custom' && config.productTypeKeywords && config.productTypeKeywords[productType]) {
+        hiddenKeywords.push(config.productTypeKeywords[productType]);
+    }
 
         // Add exclude brands filter - always add this at the end if selected
-        const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
-        if (filterExcludeBrands) {
-            hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
-        }
+const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
+    if (filterExcludeBrands) {
+        hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
+    }
 
         // Add hidden-keywords parameter if we have any
         if (hiddenKeywords.length > 0) {
