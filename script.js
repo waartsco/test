@@ -220,24 +220,21 @@ document.addEventListener('DOMContentLoaded', function() {
             ],
             // UK-specific categories
             categories: {
-                'fashion': [{
-                        value: 'COUK83450031',
-                        text: 'Men\'s Clothing'
-                    },
-                    {
-                        value: 'COUK1731296031',
-                        text: 'Women\'s Clothing'
-                    },
-                    {
-                        value: '1730986031',
-                        text: 'Boys\' Clothing'
-                    },
-                    {
-                        value: '1730985031',
-                        text: 'Girls\' Clothing'
-                    }
-                ],
-                'fashion-noveltyCOUK': []
+                'fashionUK': {
+                    displayName: 'FashionUK8',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyUK': {
+                    displayName: 'Fashion NoveltyUK8',
+                    categories: []
+                }
             },
             // Brands to exclude for UK
             excludeBrands: 'COUK-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-SANRIO+-Barbie+-BATMAN+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-BBC+-ITV+-Channel 4'
@@ -286,16 +283,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             categories: {
-                'fashion': [{
-                        value: 'DE1981604031',
-                        text: 'DEHerren Bekleidung'
-                    },
-                    {
-                        value: 'DE1981603031',
-                        text: 'DEDamen Bekleidung'
-                    }
-                ],
-                'fashion-noveltyDE': []
+                'fashionDE': {
+                    displayName: 'Fashion3DE',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyDE': {
+                    displayName: 'Fashion Novelty3DE',
+                    categories: []
+                }
             },
             excludeBrands: 'DE-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-ARD+-ZDF+-RTL'
         },
@@ -341,16 +343,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             categories: {
-                'fashion': [{
-                        value: '1765333031',
-                        text: 'Vêtements Homme'
-                    },
-                    {
-                        value: '1765334031',
-                        text: 'Vêtements Femme'
-                    }
-                ],
-                'fashion-novelty': []
+                'fashionFR': {
+                    displayName: 'Fashion4FR',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyFR': {
+                    displayName: 'Fashion Novelty4FR',
+                    categories: []
+                }
             },
             excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-TF1+-France Télévisions+-Canal+'
         },
@@ -394,16 +401,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             categories: {
-                'fashion': [{
-                        value: '5515768031',
-                        text: 'Abbigliamento uomo'
-                    },
-                    {
-                        value: '5515767031',
-                        text: 'Abbigliamento donna'
-                    }
-                ],
-                'fashion-novelty': []
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
             },
             excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Mediaset+-RAI'
         },
@@ -446,16 +458,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             categories: {
-                'fashion': [{
-                        value: '2846227031',
-                        text: 'Ropa de hombre'
-                    },
-                    {
-                        value: '2846226031',
-                        text: 'Ropa de mujer'
-                    }
-                ],
-                'fashion-novelty': []
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
             },
             excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Telecinco+-Antena 3'
         },
@@ -498,16 +515,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             ],
             categories: {
-                'fashion': [{
-                        value: '2230006051',
-                        text: 'メンズ衣類'
-                    },
-                    {
-                        value: '2230005051',
-                        text: 'レディース衣類'
-                    }
-                ],
-                'fashion-novelty': []
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
             },
             excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-ドラゴンボール+-ワンピース+-鬼滅の刃'
         }
