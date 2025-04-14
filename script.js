@@ -1120,9 +1120,14 @@ function updateProductTypeFromDepartment() {
         }
 
         let hiddenKeywords = [];
-    const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
+        const customKeywords = document.getElementById('customHiddenKeywords').value.trim();
     if (customKeywords) {
-        hiddenKeywords.push(customKeywords);
+        // Split by spaces and encode each keyword individually
+        const customKeywordsParts = customKeywords.split(' ').filter(k => k.length > 0);
+        const encodedKeywords = customKeywordsParts.map(k => encodeURIComponent(k));
+        if (encodedKeywords.length > 0) {
+            hiddenKeywords.push(encodedKeywords.join('+'));
+        }
     }
     
     const productType = productTypeSelect.value;
