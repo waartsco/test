@@ -238,9 +238,10 @@ document.addEventListener('DOMContentLoaded', function() {
               }
             },
             productTypeMappings: {
-              'stripbooks': 'KDP',
-              'fashion-novelty': 'tshirt',
-              'mobile': 'case'
+                      'stripbooks': 'KDP',
+                      'fashion-novelty': 'tshirt',
+                      'mobile': 'case',
+                      'garden': 'totebag'
             }
         },
         'co.uk': { // UK
