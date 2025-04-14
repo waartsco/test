@@ -121,19 +121,12 @@
                     <!-- Categories will be populated by JavaScript based on department selection -->
                 </select>
             </div>
-            
+
             <div class="filter-box">
-                <div class="filter-title">Seller Filters</div>
-                <div class="checkbox-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER" checked>
-                        <label class="form-check-label" for="sellerAmazon">Seller is Amazon</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="reviewsFilter" value="p_72%3A2661618011">
-                        <label class="form-check-label" for="reviewsFilter">Reviews 4+</label>
-                    </div>
-                </div>
+                <div class="filter-title">Sort Order</div>
+                <select id="sortOrder" class="form-control">
+                    <!-- Options will be dynamically populated based on marketplace -->
+                </select>
             </div>
 
             <div class="filter-box">
@@ -149,11 +142,19 @@
             </div>
 
             <div class="filter-box">
-                <div class="filter-title">Sort Order</div>
-                <select id="sortOrder" class="form-control">
-                    <!-- Options will be dynamically populated based on marketplace -->
-                </select>
+                <div class="filter-title">Seller Filters</div>
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="sellerAmazon" value="p_6%3AATVPDKIKX0DER" checked>
+                        <label class="form-check-label" for="sellerAmazon">Seller is Amazon</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="reviewsFilter" value="p_72%3A2661618011">
+                        <label class="form-check-label" for="reviewsFilter">Reviews 4+</label>
+                    </div>
+                </div>
             </div>
+            
             <div class="filter-box">
                 <div class="filter-title">Time Filters</div>
                 <div class="checkbox-group">
