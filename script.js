@@ -100,6 +100,76 @@ document.addEventListener('DOMContentLoaded', function() {
       'garden': 'totebag'
     };
 
+    // Add this to your marketplaceConfig object
+    const presetConfigs = {
+        'com': [
+            { value: 'last90-review-com', text: 'Last 90 Days Review-Rank', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'last30-newest-com', text: 'Last 30 Days Newest', 
+              settings: { timeFilter: 'timeFilter30Days', sortOrder: 'date-desc-rank' } },
+            { value: 'popular-basic-com', text: 'Popular Basic Settings', 
+              settings: { sortOrder: 'most-purchased-rank', excludeBrands: true, reviewsFilter: true } },
+            { value: 'bestseller-premium-com', text: 'Best Seller Premium', 
+              settings: { sortOrder: 'most-purchased-rank', excludeBrands: true, minPrice: '19', maxPrice: '25' } }
+        ],
+        'co.uk': [
+            { value: 'last90-review-uk', text: 'UK - Last 90 Days Review-Rank', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'COUKreview-rank', reviewsFilter: true } },
+            { value: 'last30-newest-uk', text: 'UK - Last 30 Days Newest', 
+              settings: { timeFilter: 'timeFilter30Days', sortOrder: 'COUKdate-desc-rank' } },
+            { value: 'popular-basic-uk', text: 'UK - Popular Basic', 
+              settings: { sortOrder: 'COUKpopularity-rank', excludeBrands: true } }
+        ],
+        'de': [
+            { value: 'last90-review-de', text: 'DE - Last 90 Days Review', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'popular-basic-de', text: 'DE - Beliebtheit', 
+              settings: { sortOrder: 'DEpopularity-rank', excludeBrands: true } }
+        ],
+        'fr': [
+            { value: 'last90-review-fr', text: 'FR - Last 90 Days Review', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'popular-basic-fr', text: 'FR - Popularité', 
+              settings: { sortOrder: 'popularity-rank', excludeBrands: true } }
+        ],
+        'it': [
+            { value: 'last90-review-it', text: 'IT - Last 90 Days Review', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'popular-basic-it', text: 'IT - Più popolari', 
+              settings: { sortOrder: 'popularity-rank', excludeBrands: true } }
+        ],
+        'es': [
+            { value: 'last90-review-es', text: 'ES - Last 90 Days Review', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'popular-basic-es', text: 'ES - Más populares', 
+              settings: { sortOrder: 'popularity-rank', excludeBrands: true } }
+        ],
+        'jp': [
+            { value: 'last90-review-jp', text: 'JP - Last 90 Days Review', 
+              settings: { timeFilter: 'timeFilter90Days', sortOrder: 'review-rank', reviewsFilter: true } },
+            { value: 'popular-basic-jp', text: 'JP - 人気順', 
+              settings: { sortOrder: 'popularity-rank', excludeBrands: true } }
+        ]
+    };
+    
+    // Add this function to update the presets dropdown based on marketplace
+    function updatePresetsDropdown() {
+        const marketplace = marketplaceSelect.value;
+        const presetsSelect = document.getElementById('presetsSelect');
+        
+        // Clear existing options
+        presetsSelect.innerHTML = '<option value="">No Preset</option>';
+        
+        // Add marketplace-specific presets
+        const presets = presetConfigs[marketplace] || presetConfigs.com;
+        presets.forEach(preset => {
+            const option = document.createElement('option');
+            option.value = preset.value;
+            option.textContent = preset.text;
+            presetsSelect.appendChild(option);
+        });
+    }
+
     // Define marketplace-specific parameters
     // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
@@ -742,6 +812,9 @@ function updateProductTypeFromDepartment() {
         // Update sort order options
         updateSortOrderOptions();
 
+        // Update Presets Dropdown
+        updatePresetsDropdown();
+
         // Set up event listeners
         setupEventListeners();
 
@@ -786,6 +859,7 @@ function updateProductTypeFromDepartment() {
     updateMarketplaceFilters();
     populateDepartments();
     updateSortOrderOptions();
+    updatePresetsDropdown();
     updateGeneratedUrl();
   });
 
@@ -811,64 +885,53 @@ function updateProductTypeFromDepartment() {
     radio.addEventListener('click', updateGeneratedUrl);
   });
 
-        document.getElementById('presetsSelect').addEventListener('change', applyPreset);
-
-// Add this function to handle preset selection
-function applyPreset() {
+  document.getElementById('presetsSelect').addEventListener('change', applyPreset);
+    // this function to handle preset selection
+    function applyPreset() {
     const selectedPreset = document.getElementById('presetsSelect').value;
-    
-    // Reset all filters to default first
-    if (selectedPreset) {
-        // Clear time filters
-        document.getElementById('timeFilterNone').checked = true;
-        
-        // Reset sort order
-        document.getElementById('sortOrder').value = '';
-        
-        // Uncheck filters
-        document.getElementById('sellerAmazon').checked = true;
-        document.getElementById('reviewsFilter').checked = false;
-        document.getElementById('filterExcludeBrands').checked = false;
-        
-        // Clear price inputs
-        document.getElementById('minPrice').value = '';
-        document.getElementById('maxPrice').value = '';
-        
-        // Apply specific preset settings
-        switch(selectedPreset) {
-            case 'last90-review':
-                // Last 90 Days Review-Rank
-                document.getElementById('timeFilter90Days').checked = true;
-                document.getElementById('sortOrder').value = 'review-rank';
-                document.getElementById('reviewsFilter').checked = true;
-                break;
-                
-            case 'last30-newest':
-                // Last 30 Days Newest
-                document.getElementById('timeFilter30Days').checked = true;
-                document.getElementById('sortOrder').value = 'date-desc-rank';
-                break;
-                
-            case 'popular-basic':
-                // Popular Basic Settings
-                document.getElementById('sortOrder').value = 'most-purchased-rank';
-                document.getElementById('filterExcludeBrands').checked = true;
-                document.getElementById('reviewsFilter').checked = true;
-                break;
-                
-            case 'bestseller-premium':
-                // Best Seller Premium
-                document.getElementById('sortOrder').value = 'most-purchased-rank';
-                document.getElementById('filterExcludeBrands').checked = true;
-                document.getElementById('minPrice').value = '19';
-                document.getElementById('maxPrice').value = '25';
-                break;
+    if (!selectedPreset) return; // No preset selected
+    // Reset filters to default first
+    document.getElementById('timeFilterNone').checked = true;
+    document.getElementById('sortOrder').value = '';
+    document.getElementById('sellerAmazon').checked = true;
+    document.getElementById('reviewsFilter').checked = false;
+    document.getElementById('filterExcludeBrands').checked = false;
+    document.getElementById('minPrice').value = '';
+    document.getElementById('maxPrice').value = '';
+    // Find the selected preset configuration
+    const marketplace = marketplaceSelect.value;
+    const presets = presetConfigs[marketplace] || presetConfigs.com;
+    const preset = presets.find(p => p.value === selectedPreset);
+    if (preset) {
+        const settings = preset.settings;
+        // Apply time filter
+        if (settings.timeFilter) {
+            document.getElementById(settings.timeFilter).checked = true;
         }
-        
-        // Update the generated URL to reflect the new filter settings
+        // Apply sort order
+        if (settings.sortOrder) {
+            document.getElementById('sortOrder').value = settings.sortOrder;
+        }
+        // Apply review filter
+        if (settings.reviewsFilter) {
+            document.getElementById('reviewsFilter').checked = settings.reviewsFilter;
+        }
+        // Apply exclude brands
+        if (settings.excludeBrands) {
+            document.getElementById('filterExcludeBrands').checked = settings.excludeBrands;
+        }
+        // Apply price range
+        if (settings.minPrice) {
+            document.getElementById('minPrice').value = settings.minPrice;
+        }
+        if (settings.maxPrice) {
+            document.getElementById('maxPrice').value = settings.maxPrice;
+        }
+        // Update the generated URL with new settings
         updateGeneratedUrl();
     }
 }
+        
 
   document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
   document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
