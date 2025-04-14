@@ -111,6 +111,16 @@
 
         <!-- All filters in a horizontal layout -->
         <div class="filters-container">
+            <div class="filter-box" id="departmentCategoryBox">
+                <div class="filter-title">Department & Category</div>
+                <select id="department" class="form-control mb-2">
+                    <!-- Additional departments will be populated dynamically -->
+                </select>
+                <select id="category" class="form-control" disabled>
+                    <option value="">No Category Filter</option>
+                    <!-- Categories will be populated by JavaScript based on department selection -->
+                </select>
+            </div>
             <div class="filter-box">
                 <div class="filter-title">Time Filters</div>
                 <div class="checkbox-group">
@@ -159,17 +169,6 @@
                 <div class="filter-title">Sort Order</div>
                 <select id="sortOrder" class="form-control">
                     <!-- Options will be dynamically populated based on marketplace -->
-                </select>
-            </div>
-
-            <div class="filter-box" id="departmentCategoryBox">
-                <div class="filter-title">Department & Category</div>
-                <select id="department" class="form-control mb-2">
-                    <!-- Additional departments will be populated dynamically -->
-                </select>
-                <select id="category" class="form-control" disabled>
-                    <option value="">No Category Filter</option>
-                    <!-- Categories will be populated by JavaScript based on department selection -->
                 </select>
             </div>
         </div>
