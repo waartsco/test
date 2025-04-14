@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'case': 'mobile',
       'totebag': 'garden',
       'throwpillow': 'garden',
-        'tumbler':'garden'
+      'tumbler':'garden'
     };
     
     const departmentToProductType = {
