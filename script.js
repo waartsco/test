@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-        departmentSelect.innerHTML = '<option value="">All (no department)</option>';
+        departmentSelect.innerHTML = '';
         
         if (config.categories) {
             Object.keys(config.categories).forEach(deptKey => {
@@ -209,16 +209,12 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // Add supported sort orders for USA
             sortOrders: [{
-                    value: '',
-                    text: 'Default (none)'
+                    value: 'featured',
+                    text: 'Featured'
                 },
                 {
                     value: 'date-desc-rank',
                     text: 'Newest Arrivals'
-                },
-                {
-                    value: 'featured',
-                    text: 'Featured'
                 },
                 {
                     value: 'most-purchased-rank',
@@ -263,6 +259,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 {
                     value: 'most-wished-for-rank',
                     text: 'Most Wished For Rank'
+                },
+                {
+                    value: '',
+                    text: 'None (Amazon\'s Default)'
                 }
             ],
             // Departments and categories for USA
@@ -298,6 +298,10 @@ document.addEventListener('DOMContentLoaded', function() {
                         {value: '4', text: 'Children\'s Books'},
                         {value: '48', text: 'Crafts, Home & Hobbies'}
                     ]
+                },
+                '': {
+                    displayName: 'All (No Department)',
+                    categories: []
                 }
             },
             // Brands to exclude for USA
