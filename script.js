@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 'totebag': '"Tote+Bag"+Made+of+a+lightweight%2C+spun+polyester+canvas-like+fabric.+All+seams+and+stress+points+are+double-stitched+for+durability%2C+and+the+reinforced+bottom+flattens+to+fit+more+items+and+hold+larger+objects.',
                 'throwpillow': '"Throw Pillow" Filled with 100% polyester and sewn closed',
                 'tumbler': '"Tumbler" "Merch on Demand"',
-                'KDP': "independently+published"
+                'KDP': '"independently+published"'
             },
             // Add supported sort orders for USA
             sortOrders: [{
