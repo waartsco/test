@@ -121,24 +121,7 @@
                     <!-- Categories will be populated by JavaScript based on department selection -->
                 </select>
             </div>
-            <div class="filter-box">
-                <div class="filter-title">Time Filters</div>
-                <div class="checkbox-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilterNone" value="" checked>
-                        <label class="form-check-label" for="timeFilterNone">None</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter30Days" value="p_n_date_first_available_absolute%3A15196852011">
-                        <label class="form-check-label" for="timeFilter30Days">Last 30 days</label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter90Days" value="p_n_date_first_available_absolute%3A15196853011">
-                        <label class="form-check-label" for="timeFilter90Days">Last 90 days</label>
-                    </div>
-                </div>
-            </div>
-
+            
             <div class="filter-box">
                 <div class="filter-title">Seller Filters</div>
                 <div class="checkbox-group">
@@ -170,6 +153,23 @@
                 <select id="sortOrder" class="form-control">
                     <!-- Options will be dynamically populated based on marketplace -->
                 </select>
+            </div>
+            <div class="filter-box">
+                <div class="filter-title">Time Filters</div>
+                <div class="checkbox-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilterNone" value="" checked>
+                        <label class="form-check-label" for="timeFilterNone">None</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter30Days" value="p_n_date_first_available_absolute%3A15196852011">
+                        <label class="form-check-label" for="timeFilter30Days">Last 30 days</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="timeFilter" id="timeFilter90Days" value="p_n_date_first_available_absolute%3A15196853011">
+                        <label class="form-check-label" for="timeFilter90Days">Last 90 days</label>
+                    </div>
+                </div>
             </div>
         </div>
 
