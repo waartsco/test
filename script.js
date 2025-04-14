@@ -1064,7 +1064,7 @@ function updateProductTypeFromDepartment() {
     function generateAmazonUrl() {
         // Get base marketplace
         const marketplace = marketplaceSelect.value;
-        let baseUrl = `https://amazon.${marketplace}`;
+        let baseUrl = `https://www.amazon.${marketplace}`;
 
         // Get marketplace config
         const config = marketplaceConfig[marketplace] || marketplaceConfig['com']; // Fallback to US
