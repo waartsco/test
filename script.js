@@ -753,18 +753,30 @@ function updateSortOrderOptions() {
 
 // Replace departmentToProductType with marketplace-based handling
 function updateProductTypeFromDepartment() {
-  const department = departmentSelect.value;
-  const marketplace = marketplaceSelect.value;
-  const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-  
-  if (config.productTypeMappings && department in config.productTypeMappings) {
-    const suggestedProductType = config.productTypeMappings[department];
-    if (productTypeSelect.querySelector(`option[value="${suggestedProductType}"]`)) {
-      productTypeSelect.value = suggestedProductType;
-      updateProductTypeSettings();
-      updateGeneratedUrl();
+    const department = departmentSelect.value;
+    const marketplace = marketplaceSelect.value;
+    const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
+    
+    // First check marketplace-specific mappings
+    if (config.productTypeMappings && department in config.productTypeMappings) {
+        const suggestedProductType = config.productTypeMappings[department];
+        if (productTypeSelect.querySelector(`option[value="${suggestedProductType}"]`)) {
+            productTypeSelect.value = suggestedProductType;
+            updateProductTypeSettings();
+            updateGeneratedUrl();
+            return; // Exit after successful mapping
+        }
     }
-  }
+    
+    // Fallback to global mapping if no marketplace-specific mapping found
+    if (departmentToProductType[department]) {
+        const fallbackType = departmentToProductType[department];
+        if (productTypeSelect.querySelector(`option[value="${fallbackType}"]`)) {
+            productTypeSelect.value = fallbackType;
+            updateProductTypeSettings();
+            updateGeneratedUrl();
+        }
+    }
 }
 
     function setupClearSearchButton() {
