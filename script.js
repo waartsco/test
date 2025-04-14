@@ -104,6 +104,12 @@ const departmentToProductType = {
     // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
         'com': { // USA
+            timeFilters: {
+                '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'p_6%3AA3P5ROKL5A1OLE',
+            reviewsFilter: 'p_72%3A419153031',
             // Add product type keywords specific to USA
             productTypeKeywords: {
                 'tshirt': 'Lightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
@@ -219,15 +225,15 @@ const departmentToProductType = {
             departmentSettings: {
               'stripbooks': {
                 timeFilters: {
-                  '30days': 'p_n_date_first_available_absolute%3A15196852011',
-                  '90days': 'p_n_date_first_available_absolute%3A15196853011'
+                  '30days': 'BOOKp_n_date_first_available_absolute%3A15196852011',
+                  '90days': 'BOOKp_n_date_first_available_absolute%3A15196853011'
                 },
-                sellerFilter: 'p_6%3AATVPDKIKX0DER',
-                reviewsFilter: 'p_72%3A419115011',
+                sellerFilter: 'BOOKp_6%3AATVPDKIKX0DER',
+                reviewsFilter: 'BOOKp_72%3A419115011',
                 sortOrders: [
                   {value: '', text: 'Default (none)'},
-                  {value: 'date-desc-rank', text: 'Newest Arrivals'},
-                  {value: 'salesrank', text: 'Best Sellers'}
+                  {value: 'BOOKdate-desc-rank', text: 'Newest Arrivals'},
+                  {value: 'BOOKsalesrank', text: 'Best Sellers'}
                 ]
               }
             },
@@ -237,7 +243,7 @@ const departmentToProductType = {
               'mobile': 'case'
             }
         },
-    'co.uk': { // UK
+        'co.uk': { // UK
             timeFilters: {
                 '30days': 'COUKp_n_date_first_available_absolute%3A15196852011',
                 '90days': 'COUKp_n_date_first_available_absolute%3A15196853011'
