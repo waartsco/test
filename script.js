@@ -918,7 +918,7 @@ function updateProductTypeFromDepartment() {
         }
         // Apply exclude brands
         if (settings.excludeBrands) {
-            document.getElementById('filterExcludeBrands').checked = settings.excludeBrands;
+            document.getElementById('filterExcludeBrands').checked = true;
         }
         // Apply price range
         if (settings.minPrice) {
