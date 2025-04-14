@@ -1057,7 +1057,6 @@ function updateProductTypeFromDepartment() {
   // This function should handle product type specific UI updates
   // For now we can implement a basic version
   const productType = productTypeSelect.value;
-  console.log('Product type updated:', productType);
   // Additional functionality can be added based on requirements
 }
 
