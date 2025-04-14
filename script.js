@@ -76,29 +76,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
     
-const productTypeToDepartment = {
-  'KDP': 'stripbooks',
-  'tshirt': 'fashion-novelty',
-  'premtshirt': 'fashion-novelty',
-  'tanktop': 'fashion-novelty',
-  'longsleeve': 'fashion-novelty',
-  'raglan': 'fashion-novelty',
-  'sweatshirt': 'fashion-novelty',
-  'hoodie': 'fashion-novelty',
-  'ziphoodie': 'fashion-novelty',
-  'popsocket': 'mobile',
-  'case': 'mobile',
-  'totebag': 'garden',
-  'throwpillow': 'garden',
-    'tumbler':'garden'
-};
-
-const departmentToProductType = {
-  'stripbooks': 'KDP',
-  'fashion-novelty': 'tshirt',
-  'mobile': 'case',
-  'garden': 'totebag'
-};
+    const productTypeToDepartment = {
+      'KDP': 'stripbooks',
+      'tshirt': 'fashion-novelty',
+      'premtshirt': 'fashion-novelty',
+      'tanktop': 'fashion-novelty',
+      'longsleeve': 'fashion-novelty',
+      'raglan': 'fashion-novelty',
+      'sweatshirt': 'fashion-novelty',
+      'hoodie': 'fashion-novelty',
+      'ziphoodie': 'fashion-novelty',
+      'popsocket': 'mobile',
+      'case': 'mobile',
+      'totebag': 'garden',
+      'throwpillow': 'garden',
+        'tumbler':'garden'
+    };
+    
+    const departmentToProductType = {
+      'stripbooks': 'KDP',
+      'fashion-novelty': 'tshirt',
+      'mobile': 'case',
+      'garden': 'totebag'
+    };
 
     // Define marketplace-specific parameters
     // Replace the current marketplaceConfig object with this expanded version
