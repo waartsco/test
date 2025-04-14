@@ -965,14 +965,24 @@ function updateProductTypeFromDepartment() {
     }
 
     function handleCopyZip() {
-        const zipCode = document.querySelector('.copy_me').textContent;
-        navigator.clipboard.writeText(zipCode).then(function() {
+    const zipCode = document.querySelector('.copy_me').textContent;
+    navigator.clipboard.writeText(zipCode)
+        .then(function() {
             copyMessage.style.display = 'inline';
             setTimeout(() => {
                 copyMessage.style.display = 'none';
             }, 2000);
+        })
+        .catch(function(err) {
+            console.error('Could not copy ZIP code: ', err);
+            copyMessage.textContent = 'Copy failed';
+            copyMessage.style.display = 'inline';
+            setTimeout(() => {
+                copyMessage.textContent = 'Copied!';
+                copyMessage.style.display = 'none';
+            }, 2000);
         });
-    }
+}
 
     // Update the form submit handler to only open the URL
     function handleFormSubmit(e) {
@@ -986,15 +996,24 @@ function updateProductTypeFromDepartment() {
     }
 
     function handleCopyUrl() {
-        const urlText = generatedUrlEl.textContent;
-        navigator.clipboard.writeText(urlText).then(function() {
+    const urlText = generatedUrlEl.textContent;
+    navigator.clipboard.writeText(urlText)
+        .then(function() {
             // Visual feedback
             copyUrlBtn.classList.add('copy-success');
             setTimeout(function() {
                 copyUrlBtn.classList.remove('copy-success');
             }, 1500);
+        })
+        .catch(function(err) {
+            console.error('Could not copy text: ', err);
+            // Visual feedback for error
+            copyUrlBtn.classList.add('copy-error');
+            setTimeout(function() {
+                copyUrlBtn.classList.remove('copy-error');
+            }, 1500);
         });
-    }
+}
 
     function updateUrlIfVisible() {
         // Always update the URL if the result container is visible
