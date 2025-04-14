@@ -236,8 +236,372 @@ const departmentToProductType = {
               'fashion-novelty': 'tshirt',
               'mobile': 'case'
             }
+        },
+    'co.uk': { // UK
+            timeFilters: {
+                '30days': 'COUKp_n_date_first_available_absolute%3A15196852011',
+                '90days': 'COUKp_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'COUKp_6%3AA3P5ROKL5A1OLE',
+            reviewsFilter: 'COUKp_72%3A419153031',
+            // UK-specific product keywords
+            productTypeKeywords: {
+                'tshirt': 'COUKLightweight%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'COUKPremium+shirt',
+                'tanktop': 'COUKTank+Top%2C+Lightweight%2C+Classic+fit',
+                'longsleeve': 'COUKLong+sleeve%2C+Classic+fit%2C+Double-needle+sleeve+and+bottom+hem',
+                'raglan': 'COUKRaglan+sleeve%2C+Classic+fit',
+                'sweatshirt': 'COUKSweatshirt+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'hoodie': 'COUKHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'ziphoodie': 'COUKZipHoodie+Fleece%2C+Classic+fit%2C+Twill-taped+neck',
+                'popsocket': 'COUKPopSockets+grip+and+stand+for+phones+and+tablets',
+                'case': 'COUKSlim-Fitting+Protective+Case+for+Phone',
+                'totebag': 'COUKTote+Bag%2C+Double-sided+print',
+                'throwpillow': 'COUKThrow+Pillow+Cover%2C+Decorative',
+                'tumbler': 'COUKtumbler+Cover%2C+Decorative'
+            },
+            // UK-specific sort orders
+            sortOrders: [{
+                    value: '',
+                    text: 'Default'
+                },
+                {
+                    value: 'COUKpopularity-rank',
+                    text: 'COUKMost Popular'
+                },
+                {
+                    value: 'COUKdate-desc-rank',
+                    text: 'COUKNewest Arrivals'
+                },
+                {
+                    value: 'COUKreview-rank',
+                    text: 'COUKTop Rated'
+                },
+                {
+                    value: 'COUKprice-desc-rank',
+                    text: 'COUKPrice High to Low'
+                },
+                {
+                    value: 'COUKprice-asc-rank',
+                    text: 'COUKPrice Low to High'
+                }
+            ],
+            // UK-specific categories
+            categories: {
+                'fashionUK': {
+                    displayName: 'FashionUK8',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyUK': {
+                    displayName: 'Fashion NoveltyUK8',
+                    categories: []
+                }
+            },
+            // Brands to exclude for UK
+            excludeBrands: 'COUK-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-SANRIO+-Barbie+-BATMAN+-DC Comics+-Looney Tunes+-SUPER MARIO+-Pokemon+-BBC+-ITV+-Channel 4'
+        },
+        // Repeat for other marketplaces with their specific values
+        'de': {
+            timeFilters: {
+                '30days': 'DEp_n_date_first_available_absolute%3A15196852011',
+                '90days': 'DEp_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'DEp_6%3AA3JWKAKR8XB7XF',
+            reviewsFilter: 'DEp_72%3A419117031',
+            productTypeKeywords: {
+                'tshirt': 'DELeichtes%2C+Klassisch+geschnitten%2C+Doppelt+genähter+Saum+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'DEPremium+shirt',
+                'tanktop': 'Tank+Top%2C+Leicht%2C+Klassische+Passform',
+                'longsleeve': 'Langarm%2C+Klassische+Passform',
+                'hoodie': 'Kapuzenpullover%2C+Fleece%2C+Klassische+Passform',
+                'sweatshirt': 'Sweatshirt%2C+Fleece%2C+Klassische+Passform',
+                'case': 'Schutzhülle+für+Handy',
+                'totebag': 'Tragetasche%2C+Beidseitiger+Druck'
+            },
+            sortOrders: [{
+                    value: '',
+                    text: 'DEStandard'
+                },
+                {
+                    value: 'DEpopularity-rank',
+                    text: 'Beliebtheit'
+                },
+                {
+                    value: 'date-desc-rank',
+                    text: 'Neueste Zuerst'
+                },
+                {
+                    value: 'review-rank',
+                    text: 'Durchschnittliche Kundenbewertung'
+                },
+                {
+                    value: 'price-desc-rank',
+                    text: 'Preis: Hoch zu Niedrig'
+                },
+                {
+                    value: 'price-asc-rank',
+                    text: 'Preis: Niedrig zu Hoch'
+                }
+            ],
+            categories: {
+                'fashionDE': {
+                    displayName: 'Fashion3DE',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyDE': {
+                    displayName: 'Fashion Novelty3DE',
+                    categories: []
+                }
+            },
+            excludeBrands: 'DE-Disney+-Marvel+-Star Wars+-Harry Potter+-Pixar+-ARD+-ZDF+-RTL'
+        },
+        // Add the other marketplaces in the same format
+        'fr': {
+            // French marketplace config with French-specific values
+            timeFilters: {
+                '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'p_6%3AA1X6FK5RDHNB96',
+            reviewsFilter: 'p_72%3A437873031',
+            productTypeKeywords: {
+                'tshirt': 'Léger%2C+Coupe+classique%2C+Manches+à+double+couture+et+ourlet+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'T-shirt+Premium',
+                'longsleeve': 'Manches+Longues%2C+Coupe+Classique',
+                'hoodie': 'Sweat+à+Capuche%2C+Coupe+Classique',
+                'case': 'Coque+de+Protection+pour+Téléphone'
+            },
+            sortOrders: [{
+                    value: '',
+                    text: 'Par défaut'
+                },
+                {
+                    value: 'popularity-rank',
+                    text: 'Popularité'
+                },
+                {
+                    value: 'date-desc-rank',
+                    text: 'Nouveautés'
+                },
+                {
+                    value: 'review-rank',
+                    text: 'Meilleures évaluations'
+                },
+                {
+                    value: 'price-desc-rank',
+                    text: 'Prix: décroissant'
+                },
+                {
+                    value: 'price-asc-rank',
+                    text: 'Prix: croissant'
+                }
+            ],
+            categories: {
+                'fashionFR': {
+                    displayName: 'Fashion4FR',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-noveltyFR': {
+                    displayName: 'Fashion Novelty4FR',
+                    categories: []
+                }
+            },
+            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-TF1+-France Télévisions+-Canal+'
+        },
+        // Complete the other marketplaces similarly
+        'it': {
+            timeFilters: {
+                '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'p_6%3AA11IL2PNWYJU7H',
+            reviewsFilter: 'p_72%3A490298031',
+            productTypeKeywords: {
+                'tshirt': 'Leggero%2C+Vestibilità+classica%2C+Manica+doppia+cucita+e+orlo+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'Premium+shirt',
+                'hoodie': 'Felpa+con+Cappuccio%2C+Vestibilità+Classica',
+                'case': 'Cover+Protettiva+per+Telefono'
+            },
+            sortOrders: [{
+                    value: '',
+                    text: 'Predefinito'
+                },
+                {
+                    value: 'popularity-rank',
+                    text: 'Più popolari'
+                },
+                {
+                    value: 'date-desc-rank',
+                    text: 'Novità'
+                },
+                {
+                    value: 'review-rank',
+                    text: 'Recensioni migliori'
+                },
+                {
+                    value: 'price-desc-rank',
+                    text: 'Prezzo: da alto a basso'
+                },
+                {
+                    value: 'price-asc-rank',
+                    text: 'Prezzo: da basso ad alto'
+                }
+            ],
+            categories: {
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
+            },
+            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Mediaset+-RAI'
+        },
+        'es': {
+            timeFilters: {
+                '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'p_6%3AA1AT7YVPFBWXBL',
+            reviewsFilter: 'p_72%3A831271031',
+            productTypeKeywords: {
+                'tshirt': 'Ligero%2C+Corte+clásico%2C+Manga+de+doble+costura+y+dobladillo+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'Camiseta+Premium',
+                'hoodie': 'Sudadera+con+Capucha%2C+Corte+Clásico',
+                'case': 'Funda+Protectora+para+Teléfono'
+            },
+            sortOrders: [{
+                    value: '',
+                    text: 'Predeterminado'
+                },
+                {
+                    value: 'popularity-rank',
+                    text: 'Más populares'
+                },
+                {
+                    value: 'date-desc-rank',
+                    text: 'Novedades'
+                },
+                {
+                    value: 'review-rank',
+                    text: 'Mejor valorados'
+                },
+                {
+                    value: 'price-desc-rank',
+                    text: 'Precio: de mayor a menor'
+                },
+                {
+                    value: 'price-asc-rank',
+                    text: 'Precio: de menor a mayor'
+                }
+            ],
+            categories: {
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
+            },
+            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-Telecinco+-Antena 3'
+        },
+        'jp': {
+            timeFilters: {
+                '30days': 'p_n_date_first_available_absolute%3A15196852011',
+                '90days': 'p_n_date_first_available_absolute%3A15196853011'
+            },
+            sellerFilter: 'p_6%3AAN1VRQENFRJN5',
+            reviewsFilter: 'p_72%3A2240292051',
+            productTypeKeywords: {
+                'tshirt': '軽量%2C+クラシックフィット%2C+ダブルニードル袖と裾+-Longsleeve+-Raglan+-Vneck+-Tanktop',
+                'premtshirt': 'プレミアムシャツ',
+                'hoodie': 'パーカー%2C+クラシックフィット',
+                'case': 'スマートフォン用保護ケース'
+            },
+            sortOrders: [{
+                    value: '',
+                    text: 'デフォルト'
+                },
+                {
+                    value: 'popularity-rank',
+                    text: '人気順'
+                },
+                {
+                    value: 'date-desc-rank',
+                    text: '新着順'
+                },
+                {
+                    value: 'review-rank',
+                    text: '評価の高い順'
+                },
+                {
+                    value: 'price-desc-rank',
+                    text: '価格が高い順'
+                },
+                {
+                    value: 'price-asc-rank',
+                    text: '価格が安い順'
+                }
+            ],
+            categories: {
+                'fashion': {
+                    displayName: 'Fashion',
+                    categories: [
+                        {value: '7141123011', text: 'Men\'s Clothing'},
+                        {value: '1040660', text: 'Women\'s Clothing'},
+                        {value: '9056922011', text: 'Women\'s Novelty Tops & Tees'},
+                        {value: '12035955011', text: 'Men\'s Novelty T-Shirts'},
+                        {value: '1040658', text: 'Boys\' Clothing'},
+                        {value: '1040664', text: 'Girls\' Clothing'}
+                    ]
+                },
+                'fashion-novelty': {
+                    displayName: 'Fashion Novelty',
+                    categories: []
+                }
+            },
+            excludeBrands: '-Disney+-Marvel+-Star Wars+-Harry Potter+-ドラゴンボール+-ワンピース+-鬼滅の刃'
         }
-    };
+};
 
     // Update time filter radio values based on marketplace
     // Modified updateMarketplaceFilters function
