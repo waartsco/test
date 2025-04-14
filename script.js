@@ -27,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
         clearSearchBtn.style.display = 'block';
     }
 
-    // Add this function to script.js
     function populateDepartments() {
         const marketplace = marketplaceSelect.value;
         const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
@@ -75,7 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
             location: 'Tokyo'
         }
     };
-    
+
+    // Link Product to Department
     const productTypeToDepartment = {
       'KDP': 'stripbooks',
       'tshirt': 'fashion-novelty',
@@ -92,7 +92,8 @@ document.addEventListener('DOMContentLoaded', function() {
       'throwpillow': 'garden',
       'tumbler':'garden'
     };
-    
+
+    // Link Department to Product
     const departmentToProductType = {
       'stripbooks': 'KDP',
       'fashion-novelty': 'tshirt',
@@ -152,14 +153,12 @@ document.addEventListener('DOMContentLoaded', function() {
         ]
     };
     
-    // Add this function to update the presets dropdown based on marketplace
+    // Update the presets dropdown based on marketplace
     function updatePresetsDropdown() {
         const marketplace = marketplaceSelect.value;
         const presetsSelect = document.getElementById('presetsSelect');
-        
         // Clear existing options
         presetsSelect.innerHTML = '<option value="">No Preset</option>';
-        
         // Add marketplace-specific presets
         const presets = presetConfigs[marketplace] || presetConfigs.com;
         presets.forEach(preset => {
@@ -170,7 +169,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    //  initialize the filterExcludeBrands value when the marketplace changes
+    // Initialize the filterExcludeBrands value when the marketplace changes
     function updateExcludeBrandsFilter() {
       const marketplace = marketplaceSelect.value;
       const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
@@ -183,7 +182,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Define marketplace-specific parameters
-    // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
         'com': { // USA
             timeFilters: {
@@ -304,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             },
             // Brands to exclude for USA
             excludeBrands: '-Officially+-Licensed+-LyricLyfe+-Disney+-Marvel+-StarWars+-Mademark+-HarryPotter+-Pixar+-SANRIO+-EliteAuthentics+-Barbie+-BATMAN+-JeffDunham+-CJGrips+-BreakingT+-SpongebobSquarePants+-BallparkMVP+-DCComics+-LooneyTunes+-SUPERMARIO+-Pokemon+-STARTREK+-StrangerThings+-Fallout+-MTV+-Beetlejuice+-SouthPark+-HelloKitty+-Jeep+-GypsyQueen+-TheRollingStones+-NEWLINECINEMA+-SagittariusGallery+-ScoobyDoo+-OfficialHighSchoolFanGear+-PinkFloyd+-Nickelodeon+-CareBears+-Popfunk+-FanPrint+-WarnerBros+-WWE+-DrSeuss+-NBC+-CuriousGeorge+-MeanGirls+-CartoonNetwork+-SesameStreet+-Hasbro+-CocaCola+-RickMorty+-Nintendo+-DespicableMe+-JurassicPark+-TMNT+-MyLittlePony+-AmericanKennelClub+-AnnoyingOrange+-BeerNuts+-BillNye+-Booba+-Buckedup+-CarlyMartina+-ComradeDetective+-Daria+-DippinDots+-DramaLlama+-Dunkin+-HannahHart+-IMOMSOHARD+-ImpracticalJokers+-JaneAusten+-JaneGoodall+-JennMcAllister+-JoJoSiwa+-Kabillion+-LoveIsland+-LyricVerse+-ModPodge+-NashGrier+-NeildeGrasseTyson+-RickyDillon+-ROBLOX+-ShibSibs+-SpongeBob+-TheDailyWire+-TheGrandTour+-Oddbods+-TheYoungTurks+-TheSoul+-TwinPeaks+-UglyDolls+-Mandalorian+-SpaceJam+-Aerosmith+-Bengals+-Rebelde+-BreakingBad+-FooFighters+-BlackSabbath+-SelenaQuintanilla+-CampusLab+-RobZombie+-Misfits+-Mattel+-Sheeran+-Zelda',
+            // Department Exclusive Settings (TimeFilters, Seller & Review Filters, sort Filters
             departmentSettings: {
               'stripbooks': {
                 timeFilters: {
@@ -319,6 +318,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ]
               }
             },
+            // Department to Product mappings
             productTypeMappings: {
                       'stripbooks': 'KDP',
                       'fashion-novelty': 'tshirt',
@@ -693,28 +693,22 @@ document.addEventListener('DOMContentLoaded', function() {
 };
 
     // Update time filter radio values based on marketplace
-    // Modified updateMarketplaceFilters function
 function updateMarketplaceFilters() {
   const marketplace = marketplaceSelect.value;
   const department = departmentSelect.value;
   const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-  
   // Get department-specific config if available
   const deptConfig = (department && config.departmentSettings && config.departmentSettings[department]) 
     ? config.departmentSettings[department] 
     : null;
-
   // Update time filters
   document.getElementById('timeFilter30Days').value = deptConfig?.timeFilters?.['30days'] || config.timeFilters['30days'];
   document.getElementById('timeFilter90Days').value = deptConfig?.timeFilters?.['90days'] || config.timeFilters['90days'];
-
   // Update seller filter
   document.getElementById('sellerAmazon').value = deptConfig?.sellerFilter || config.sellerFilter;
-  
   // Update reviews filter
   document.getElementById('reviewsFilter').value = deptConfig?.reviewsFilter || config.reviewsFilter;
-
-  // Update sort options
+  // Update sort options, category and excluding brand options
   updateExcludeBrandsFilter();
   updateSortOrderOptions();
   updateCategoryOptions();
@@ -751,11 +745,10 @@ function updateSortOrderOptions() {
     // Only suggest the department if it's available in the current marketplace
     const marketplace = marketplaceSelect.value;
     const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
-    
+      
     if (config.categories && config.categories[productTypeToDepartment[productType]]) {
       // Set the department select
       departmentSelect.value = productTypeToDepartment[productType];
-      
       // Update dependent UI elements
       updateCategoryOptions();
       updateGeneratedUrl();
@@ -823,7 +816,6 @@ function updateProductTypeFromDepartment() {
     // Initialize the UI
     init();
 
-    // Make sure the URL container is visible by default
     function init() {
         // Populate departments first
         populateDepartments();
@@ -855,7 +847,7 @@ function updateProductTypeFromDepartment() {
         // Generate and display the initial URL
         updateGeneratedUrl();
 
-        // Make sure the result URL container is visible
+        // Make sure the URL container is visible by default
         resultUrlContainer.style.display = 'block';
     }
     // Function to update the generated URL display
@@ -866,7 +858,6 @@ function updateProductTypeFromDepartment() {
 
     // Completely revised event listener setup
     function setupEventListeners() {
-  // Keep all existing event listeners
   searchForm.addEventListener('submit', handleFormSubmit);
   searchForm.addEventListener('reset', function() {
     document.getElementById('clearSearchBtn').style.display = 'none';
