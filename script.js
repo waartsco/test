@@ -170,6 +170,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    //  initialize the filterExcludeBrands value when the marketplace changes
+    function updateExcludeBrandsFilter() {
+      const marketplace = marketplaceSelect.value;
+      const config = marketplaceConfig[marketplace] || marketplaceConfig.com;
+      
+      // Update hidden fields based on marketplace
+      if (config.excludeBrands) {
+        // We don't set the value here, just use it from the config in generateAmazonUrl
+        document.getElementById('filterExcludeBrands').checked = false;
+      }
+    }
+
     // Define marketplace-specific parameters
     // Replace the current marketplaceConfig object with this expanded version
     const marketplaceConfig = {
@@ -703,6 +715,7 @@ function updateMarketplaceFilters() {
   document.getElementById('reviewsFilter').value = deptConfig?.reviewsFilter || config.reviewsFilter;
 
   // Update sort options
+  updateExcludeBrandsFilter();
   updateSortOrderOptions();
   updateCategoryOptions();
 }
@@ -1168,9 +1181,9 @@ function updateProductTypeFromDepartment() {
 
         // Add exclude brands filter - always add this at the end if selected
 const filterExcludeBrands = document.getElementById('filterExcludeBrands').checked;
-    if (filterExcludeBrands) {
-        hiddenKeywords.push(document.getElementById('filterExcludeBrands').value);
-    }
+if (filterExcludeBrands && config.excludeBrands) {
+  hiddenKeywords.push(config.excludeBrands);
+}
 
         // Add hidden-keywords parameter if we have any
         if (hiddenKeywords.length > 0) {
