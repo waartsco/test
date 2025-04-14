@@ -811,6 +811,65 @@ function updateProductTypeFromDepartment() {
     radio.addEventListener('click', updateGeneratedUrl);
   });
 
+        document.getElementById('presetsSelect').addEventListener('change', applyPreset);
+
+// Add this function to handle preset selection
+function applyPreset() {
+    const selectedPreset = document.getElementById('presetsSelect').value;
+    
+    // Reset all filters to default first
+    if (selectedPreset) {
+        // Clear time filters
+        document.getElementById('timeFilterNone').checked = true;
+        
+        // Reset sort order
+        document.getElementById('sortOrder').value = '';
+        
+        // Uncheck filters
+        document.getElementById('sellerAmazon').checked = true;
+        document.getElementById('reviewsFilter').checked = false;
+        document.getElementById('filterExcludeBrands').checked = false;
+        
+        // Clear price inputs
+        document.getElementById('minPrice').value = '';
+        document.getElementById('maxPrice').value = '';
+        
+        // Apply specific preset settings
+        switch(selectedPreset) {
+            case 'last90-review':
+                // Last 90 Days Review-Rank
+                document.getElementById('timeFilter90Days').checked = true;
+                document.getElementById('sortOrder').value = 'review-rank';
+                document.getElementById('reviewsFilter').checked = true;
+                break;
+                
+            case 'last30-newest':
+                // Last 30 Days Newest
+                document.getElementById('timeFilter30Days').checked = true;
+                document.getElementById('sortOrder').value = 'date-desc-rank';
+                break;
+                
+            case 'popular-basic':
+                // Popular Basic Settings
+                document.getElementById('sortOrder').value = 'most-purchased-rank';
+                document.getElementById('filterExcludeBrands').checked = true;
+                document.getElementById('reviewsFilter').checked = true;
+                break;
+                
+            case 'bestseller-premium':
+                // Best Seller Premium
+                document.getElementById('sortOrder').value = 'most-purchased-rank';
+                document.getElementById('filterExcludeBrands').checked = true;
+                document.getElementById('minPrice').value = '19';
+                document.getElementById('maxPrice').value = '25';
+                break;
+        }
+        
+        // Update the generated URL to reflect the new filter settings
+        updateGeneratedUrl();
+    }
+}
+
   document.getElementById('sellerAmazon').addEventListener('click', updateGeneratedUrl);
   document.getElementById('reviewsFilter').addEventListener('click', updateGeneratedUrl);
   document.getElementById('filterExcludeBrands').addEventListener('click', updateGeneratedUrl);
